@@ -4,137 +4,141 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Prime Concierge — Quiz Funnel</title>
-  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <!-- using unpkg for reliability -->
+  <script src="https://unpkg.com/d3@7.9.0/dist/d3.min.js"></script>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: #07070f; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; overflow: hidden; height: 100vh; width: 100vw; }
-    #toolbar { position: fixed; top: 16px; left: 50%; transform: translateX(-50%); z-index: 100; display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.04); backdrop-filter: blur(14px); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 8px 16px; }
-    #map-title { background: transparent; border: none; color: rgba(255,255,255,0.85); font-size: 13px; font-weight: 700; outline: none; width: 280px; }
-    .divider { width: 1px; height: 20px; background: rgba(255,255,255,0.1); }
-    button { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.6); padding: 5px 12px; border-radius: 8px; cursor: pointer; font-size: 11px; transition: all 0.15s; white-space: nowrap; }
-    button:hover { background: rgba(255,255,255,0.12); color: #fff; }
-    #legend { position: fixed; bottom: 20px; left: 20px; z-index: 100; background: rgba(10,10,20,0.88); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; padding: 12px 16px; display: flex; flex-direction: column; gap: 5px; }
-    .legend-head { font-size: 9px; color: rgba(255,255,255,0.25); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 3px; }
-    .legend-row { display: flex; align-items: center; gap: 8px; font-size: 11px; color: rgba(255,255,255,0.5); }
-    .ldot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
-    .hint { position: fixed; bottom: 20px; right: 20px; color: rgba(255,255,255,0.15); font-size: 11px; pointer-events: none; text-align: right; line-height: 1.8; }
-    #node-editor { position: fixed; display: none; background: #12122a; border: 1px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 14px; z-index: 200; box-shadow: 0 20px 60px rgba(0,0,0,0.7); min-width: 240px; }
-    #edit-label { font-size: 10px; color: rgba(255,255,255,0.28); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
-    #edit-input { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); color: #fff; padding: 7px 10px; border-radius: 7px; font-size: 13px; outline: none; width: 100%; margin-bottom: 10px; }
-    #edit-input:focus { border-color: rgba(139,92,246,0.5); }
-    .editor-actions { display: flex; gap: 5px; }
-    .editor-actions button { flex: 1; font-size: 11px; padding: 5px; }
-    .btn-p { background: rgba(139,92,246,0.2) !important; border-color: rgba(139,92,246,0.4) !important; color: #c4b5fd !important; }
-    .btn-a { background: rgba(34,197,94,0.12) !important; border-color: rgba(34,197,94,0.3) !important; color: #86efac !important; }
-    .btn-d { background: rgba(239,68,68,0.12) !important; border-color: rgba(239,68,68,0.3) !important; color: #fca5a5 !important; }
-    svg { cursor: grab; } svg:active { cursor: grabbing; }
-    .node circle { cursor: pointer; }
-    .node text { pointer-events: none; user-select: none; }
-    .link { fill: none; }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { background:#07070f; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; overflow:hidden; height:100vh; width:100vw; }
+    #toolbar { position:fixed; top:16px; left:50%; transform:translateX(-50%); z-index:100; display:flex; align-items:center; gap:8px; background:rgba(255,255,255,0.05); backdrop-filter:blur(14px); border:1px solid rgba(255,255,255,0.1); border-radius:14px; padding:8px 16px; white-space:nowrap; }
+    #map-title { background:transparent; border:none; color:rgba(255,255,255,0.85); font-size:13px; font-weight:700; outline:none; width:260px; }
+    .div { width:1px; height:20px; background:rgba(255,255,255,0.12); }
+    button { background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.12); color:rgba(255,255,255,0.65); padding:5px 13px; border-radius:8px; cursor:pointer; font-size:11px; transition:all 0.15s; }
+    button:hover { background:rgba(255,255,255,0.14); color:#fff; }
+    #legend { position:fixed; bottom:20px; left:20px; z-index:100; background:rgba(8,8,20,0.9); backdrop-filter:blur(12px); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:12px 16px; display:flex; flex-direction:column; gap:5px; }
+    .lh { font-size:9px; color:rgba(255,255,255,0.25); text-transform:uppercase; letter-spacing:.1em; margin-bottom:3px; }
+    .lr { display:flex; align-items:center; gap:8px; font-size:11px; color:rgba(255,255,255,0.5); }
+    .ld { width:9px; height:9px; border-radius:50%; flex-shrink:0; }
+    .hint { position:fixed; bottom:20px; right:20px; color:rgba(255,255,255,0.15); font-size:11px; pointer-events:none; text-align:right; line-height:1.9; }
+    #ed { position:fixed; display:none; background:#12122a; border:1px solid rgba(255,255,255,0.13); border-radius:12px; padding:14px; z-index:200; box-shadow:0 20px 60px rgba(0,0,0,0.7); min-width:235px; }
+    #elbl { font-size:10px; color:rgba(255,255,255,0.28); text-transform:uppercase; letter-spacing:.08em; margin-bottom:8px; }
+    #einp { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); color:#fff; padding:7px 10px; border-radius:7px; font-size:13px; outline:none; width:100%; margin-bottom:10px; }
+    #einp:focus { border-color:rgba(139,92,246,0.5); }
+    .ea { display:flex; gap:5px; }
+    .ea button { flex:1; font-size:11px; padding:5px; }
+    .bp { background:rgba(139,92,246,0.2)!important; border-color:rgba(139,92,246,0.4)!important; color:#c4b5fd!important; }
+    .ba { background:rgba(34,197,94,0.12)!important; border-color:rgba(34,197,94,0.3)!important; color:#86efac!important; }
+    .bd { background:rgba(239,68,68,0.12)!important; border-color:rgba(239,68,68,0.3)!important; color:#fca5a5!important; }
+    svg { cursor:grab; } svg:active { cursor:grabbing; }
+    .node circle { cursor:pointer; } .node text { pointer-events:none; user-select:none; } .link { fill:none; }
+    #err { position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#1a0a0a; border:1px solid #7f1d1d; color:#fca5a5; padding:20px 30px; border-radius:12px; font-size:14px; display:none; z-index:999; text-align:center; }
   </style>
 </head>
 <body>
 <div id="toolbar">
   <input id="map-title" value="Prime Concierge — Protocol Quiz Funnel" />
-  <div class="divider"></div>
+  <div class="div"></div>
   <button onclick="resetView()">⟳ Reset</button>
   <button onclick="expandAll()">⊞ Expand All</button>
   <button onclick="collapseAll()">⊟ Collapse All</button>
-  <div class="divider"></div>
+  <div class="div"></div>
   <button onclick="exportSVG()">↓ Export SVG</button>
 </div>
 <div id="legend">
-  <div class="legend-head">Avatar Paths</div>
-  <div class="legend-row"><div class="ldot" style="background:#8b5cf6"></div>Quiz Flow</div>
-  <div class="legend-row"><div class="ldot" style="background:#f97316"></div>Fat Loss</div>
-  <div class="legend-row"><div class="ldot" style="background:#22c55e"></div>Performance</div>
-  <div class="legend-row"><div class="ldot" style="background:#38bdf8"></div>Recovery</div>
-  <div class="legend-row"><div class="ldot" style="background:#818cf8"></div>Sleep</div>
-  <div class="legend-row"><div class="ldot" style="background:#f472b6"></div>Skin</div>
-  <div class="legend-row"><div class="ldot" style="background:#2dd4bf"></div>Gut</div>
-  <div class="legend-row"><div class="ldot" style="background:#fb7185"></div>Hormonal</div>
-  <div class="legend-row"><div class="ldot" style="background:#fbbf24"></div>Sales Page</div>
-  <div class="legend-row"><div class="ldot" style="background:#94a3b8"></div>Checkout</div>
+  <div class="lh">Avatar Paths</div>
+  <div class="lr"><div class="ld" style="background:#8b5cf6"></div>Quiz Flow</div>
+  <div class="lr"><div class="ld" style="background:#f97316"></div>Fat Loss</div>
+  <div class="lr"><div class="ld" style="background:#22c55e"></div>Performance</div>
+  <div class="lr"><div class="ld" style="background:#38bdf8"></div>Recovery</div>
+  <div class="lr"><div class="ld" style="background:#818cf8"></div>Sleep</div>
+  <div class="lr"><div class="ld" style="background:#f472b6"></div>Skin</div>
+  <div class="lr"><div class="ld" style="background:#2dd4bf"></div>Gut</div>
+  <div class="lr"><div class="ld" style="background:#fb7185"></div>Hormonal</div>
+  <div class="lr"><div class="ld" style="background:#fbbf24"></div>Sales Page</div>
+  <div class="lr"><div class="ld" style="background:#94a3b8"></div>Checkout</div>
 </div>
 <div class="hint">Click to expand/collapse<br>Double-click to edit<br>Scroll to zoom · Drag to pan</div>
-<div id="node-editor">
-  <div id="edit-label">Edit Node</div>
-  <input id="edit-input" placeholder="Node label…" />
-  <div class="editor-actions">
-    <button class="btn-p" onclick="saveEdit()">✓ Save</button>
-    <button class="btn-a" onclick="addChild()">+ Child</button>
-    <button class="btn-d" id="btn-del" onclick="deleteNode()">✕ Del</button>
+<div id="ed">
+  <div id="elbl">Edit Node</div>
+  <input id="einp" placeholder="Node label…" />
+  <div class="ea">
+    <button class="bp" onclick="saveEdit()">✓ Save</button>
+    <button class="ba" onclick="addChild()">+ Child</button>
+    <button class="bd" id="bdel" onclick="deleteNode()">✕ Del</button>
     <button onclick="closeEditor()">Cancel</button>
   </div>
 </div>
+<div id="err">⚠️ Failed to load D3. Please check your internet connection and refresh.</div>
+
 <script>
-const keyToHex = {
+// ── Guard: ensure D3 loaded ─────────────────────────────────────────────────
+if (typeof d3 === 'undefined') {
+  document.getElementById('err').style.display = 'block';
+  throw new Error('D3 not loaded');
+}
+
+// ── Colour palette ──────────────────────────────────────────────────────────
+const HEX = {
   root:'#a78bfa', quiz:'#8b5cf6',
   fat:'#f97316', perf:'#22c55e', rec:'#38bdf8',
   sleep:'#818cf8', skin:'#f472b6', gut:'#2dd4bf',
   horm:'#fb7185', sales:'#fbbf24', checkout:'#94a3b8'
 };
 
-let treeData = {
-  id:1, name:'Prime Concierge\nProtocol Quiz', _colorKey:'root',
+// ── Tree data ───────────────────────────────────────────────────────────────
+const DATA = {
+  id:1, name:'Prime Concierge\nProtocol Quiz', _ck:'root',
   children:[
 
-  // ═══════════════════════════════════════════════
-  // QUIZ FLOW
-  // ═══════════════════════════════════════════════
-  { id:10, name:'QUIZ FLOW', _colorKey:'quiz', children:[
+  { id:10, name:'QUIZ FLOW', _ck:'quiz', children:[
     { id:11, name:'Intro Screen', children:[
       { id:111, name:'"Find Your Prime Protocol"' },
-      { id:112, name:'2-min promise — medically guided' },
+      { id:112, name:'2-min — medically guided' },
       { id:113, name:'7 goal areas previewed visually' },
       { id:114, name:'Begin → CTA' }
     ]},
-
     { id:12, name:'Section 1 — Current Situation', children:[
       { id:121, name:'Q1 — Age (Visual Identifier)', children:[
-        { id:1211, name:'Purpose: Opens situation, sets avatar age' },
-        { id:1212, name:'25–34 · 35–44 · 45–54 · 55+' },
+        { id:1211, name:'Opens situation, sets avatar age' },
+        { id:1212, name:'25–34  ·  35–44  ·  45–54  ·  55+' },
         { id:1213, name:'Show relatable photo per age group' }
       ]},
-      { id:122, name:'Q2 — Pain Location (ROUTING Q)', children:[
-        { id:1221, name:'My body composition / weight → Fat Loss' },
-        { id:1222, name:'My energy & athletic output → Performance' },
+      { id:122, name:'Q2 — Pain Location  ← ROUTING Q', children:[
+        { id:1221, name:'Body composition / weight → Fat Loss' },
+        { id:1222, name:'Energy & athletic output → Performance' },
         { id:1223, name:'Injury, pain or slow recovery → Recovery' },
-        { id:1224, name:'My sleep & overnight recovery → Sleep' },
-        { id:1225, name:'My skin & how I\'m aging → Skin' },
-        { id:1226, name:'My gut & digestion → Gut' },
-        { id:1227, name:'My hormones, libido or vitality → Hormonal' }
+        { id:1224, name:'Sleep & overnight recovery → Sleep' },
+        { id:1225, name:'Skin & how I\'m aging → Skin' },
+        { id:1226, name:'Gut & digestion → Gut' },
+        { id:1227, name:'Hormones, libido or vitality → Hormonal' }
       ]},
       { id:123, name:'Q3 — Pain Specification (Yes/No)', children:[
-        { id:1231, name:'Purpose: Confirms symptom match for their path' },
-        { id:1232, name:'Dynamically worded per Q2 answer' },
-        { id:1233, name:'Fat Loss: diet-resistant fat, low metabolism, energy crashes?' },
-        { id:1234, name:'Performance: output limited, strength plateaus, slow recovery?' },
-        { id:1235, name:'Recovery: chronic pain, slow healing, joint inflammation?' },
-        { id:1236, name:'Sleep: wake unrefreshed, struggle to stay asleep, brain fog?' },
-        { id:1237, name:'Skin: fine lines, loss of firmness, dull uneven tone?' },
-        { id:1238, name:'Gut: bloating, discomfort, irregular digestion, sensitivities?' },
-        { id:1239, name:'Hormonal: low drive, mood shifts, fatigue, weight changes?' }
+        { id:1231, name:'Confirms symptom match — worded per Q2' },
+        { id:1232, name:'Fat Loss: diet-resistant fat, low metabolism, energy crashes?' },
+        { id:1233, name:'Performance: output limited, strength plateaus, slow recovery?' },
+        { id:1234, name:'Recovery: chronic pain, slow healing, joint inflammation?' },
+        { id:1235, name:'Sleep: wake unrefreshed, brain fog, can\'t stay asleep?' },
+        { id:1236, name:'Skin: fine lines, loss of firmness, dull uneven tone?' },
+        { id:1237, name:'Gut: bloating, discomfort, irregular digestion, sensitivities?' },
+        { id:1238, name:'Hormonal: low drive, mood shifts, fatigue, weight changes?' }
       ]},
       { id:124, name:'Q4 — Pain Severity', children:[
-        { id:1241, name:'Purpose: Qualifies urgency — drives slider position on summary' },
+        { id:1241, name:'Drives slider position on summary screen' },
         { id:1242, name:'It\'s mildly frustrating' },
         { id:1243, name:'It\'s affecting my daily life' },
         { id:1244, name:'It\'s significantly holding me back' },
         { id:1245, name:'It\'s been a constant battle' }
       ]},
       { id:125, name:'Q5 — Pain Timeline', children:[
-        { id:1251, name:'Purpose: Triggers urgency — longer = more frustrated' },
+        { id:1251, name:'Longer = more urgency on summary screen' },
         { id:1252, name:'Just started noticing it' },
         { id:1253, name:'Past few months' },
         { id:1254, name:'6–12 months' },
         { id:1255, name:'Over a year — nothing has worked' }
       ]}
     ]},
-
     { id:13, name:'Section 2 — Desired Situation + Social Proof', children:[
       { id:131, name:'Q6 — Desired Outcome', children:[
-        { id:1311, name:'Purpose: Anchors them to the result before the pitch' },
+        { id:1311, name:'Anchors them to the result before the pitch' },
         { id:1312, name:'Fat Loss: lean, defined physique & sustained energy' },
         { id:1313, name:'Performance: PR-level output & faster recovery' },
         { id:1314, name:'Recovery: pain-free movement & full healing' },
@@ -149,24 +153,22 @@ let treeData = {
         { id:1323, name:'Concierge + medical oversight framing' }
       ]}
     ]},
-
     { id:14, name:'Section 3 — Individualization', children:[
       { id:141, name:'Q7 — Biological Sex', children:[
-        { id:1411, name:'Purpose: Refines protocol — affects hormonal & skin paths' },
-        { id:1412, name:'Male · Female · Prefer not to say' }
+        { id:1411, name:'Refines protocol — affects hormonal & skin paths' },
+        { id:1412, name:'Male  ·  Female  ·  Prefer not to say' }
       ]},
       { id:142, name:'Q8 — Lifestyle Profile', children:[
-        { id:1421, name:'Purpose: Makes protocol feel personal & specific' },
+        { id:1421, name:'Makes protocol feel personal & specific' },
         { id:1422, name:'Mostly sedentary — desk job' },
         { id:1423, name:'Lightly active — walk / casual exercise' },
-        { id:1424, name:'Regularly training 3–5x/week' },
+        { id:1424, name:'Regularly training 3–5x / week' },
         { id:1425, name:'Competitive athlete or daily training' }
       ]}
     ]},
-
     { id:15, name:'Section 4 — Pre-Objection Handling', children:[
       { id:151, name:'Q9 — Daily Protocol Time', children:[
-        { id:1511, name:'Purpose: Handles "too complicated" objection before sales page' },
+        { id:1511, name:'Handles "too complicated" before sales page' },
         { id:1512, name:'Under 2 minutes — keep it simple' },
         { id:1513, name:'5–10 minutes — I\'ll be consistent' },
         { id:1514, name:'Whatever it takes' }
@@ -176,10 +178,9 @@ let treeData = {
         { id:1522, name:'"Most clients see changes in 30–60 days"' }
       ]}
     ]},
-
     { id:16, name:'Section 5 — Causation Questions', children:[
       { id:161, name:'Q10 — Lifestyle Root Causes', children:[
-        { id:1611, name:'Purpose: Educates on why it\'s happening' },
+        { id:1611, name:'Educates on why it\'s happening' },
         { id:1612, name:'Poor sleep quality' },
         { id:1613, name:'High stress / cortisol' },
         { id:1614, name:'Hormonal changes with age' },
@@ -187,110 +188,91 @@ let treeData = {
         { id:1616, name:'Over-training / under-recovery' }
       ]},
       { id:162, name:'Q11 — Previous Solutions Tried', children:[
-        { id:1621, name:'Purpose: Positions peptides as the missing piece' },
+        { id:1621, name:'Positions peptides as the missing piece' },
         { id:1622, name:'Diet & exercise only' },
         { id:1623, name:'Supplements or vitamins' },
         { id:1624, name:'Prescription medications' },
         { id:1625, name:'"Tried everything — nothing worked"' }
       ]}
     ]},
-
     { id:17, name:'Summary Slides', children:[
-
       { id:171, name:'Screen 1 — Protocol Diagnosis Card', children:[
-        { id:1711, name:'PURPOSE: The "wow" moment — feels completely personal', children:[
-          { id:17110, name:'Every quiz answer is reflected back at them' },
-          { id:17111, name:'Makes the protocol feel custom-built, not generic' }
+        { id:1711, name:'PURPOSE: The "wow" moment — completely personal', children:[
+          { id:17110, name:'Every quiz answer reflected back at them' },
+          { id:17111, name:'Feels custom-built, not generic' }
         ]},
         { id:1712, name:'Header: "Summary of Your [Goal] Profile"', children:[
-          { id:17120, name:'e.g. "Summary of Your Fat Loss Profile"' },
-          { id:17121, name:'e.g. "Summary of Your Recovery Profile"' }
+          { id:17120, name:'e.g. "Summary of Your Fat Loss Profile"' }
         ]},
         { id:1713, name:'Severity Slider Card', children:[
-          { id:17130, name:'Label: "Level of [concern]" + severity badge (High/Med/Low)' },
+          { id:17130, name:'"Level of [concern]" + severity badge: High / Med / Low' },
           { id:17131, name:'Avatar photo — matches age group from Q1' },
           { id:17132, name:'Gradient bar: Low → Normal → Medium → High' },
-          { id:17133, name:'"Your level" marker — positioned by Q4 severity answer' },
+          { id:17133, name:'"Your level" marker — positioned by Q4 answer' },
           { id:17134, name:'Root cause callout box below slider', children:[
             { id:17135, name:'[HIGH] level — bold label' },
-            { id:17136, name:'1–2 sentence explanation pulling from Q10' },
-            { id:17137, name:'Fat Loss: "Suppressed metabolism. Key drivers: low GH, elevated cortisol, insulin resistance."' },
-            { id:17138, name:'Performance: "Output ceiling limited. Key drivers: blunted IGF-1, slow inter-session repair."' },
-            { id:17139, name:'Recovery: "Tissue repair significantly slowed. Key drivers: chronic inflammation, low healing peptides."' },
-            { id:17140, name:'Sleep: "Recovery cycle disrupted. Key drivers: poor slow-wave GH release, elevated nighttime cortisol."' },
-            { id:17141, name:'Skin: "Collagen production reduced. Key drivers: GH decline, oxidative stress, hormonal shift."' },
-            { id:17142, name:'Gut: "Gut lining integrity compromised. Key drivers: inflammation, poor mucosal repair signalling."' },
-            { id:17143, name:'Hormonal: "Endocrine signalling disrupted. Key drivers: pituitary downregulation, cortisol dominance."' }
+            { id:17136, name:'1–2 sentences pulling from Q10' },
+            { id:17137, name:'Fat Loss: "Suppressed metabolism. Low GH, elevated cortisol, insulin resistance."' },
+            { id:17138, name:'Performance: "Output ceiling limited. Blunted IGF-1, slow inter-session repair."' },
+            { id:17139, name:'Recovery: "Tissue repair slowed. Chronic inflammation, low healing peptides."' },
+            { id:17140, name:'Sleep: "Recovery cycle disrupted. Poor slow-wave GH release, high nighttime cortisol."' },
+            { id:17141, name:'Skin: "Collagen production reduced. GH decline, oxidative stress, hormonal shift."' },
+            { id:17142, name:'Gut: "Gut lining compromised. Inflammation, poor mucosal repair signalling."' },
+            { id:17143, name:'Hormonal: "Endocrine signalling disrupted. Pituitary downregulation, cortisol dominance."' }
           ]}
         ]},
-        { id:1714, name:'4 Metric Cards (2x2 Grid)', children:[
+        { id:1714, name:'4 Metric Cards (2×2 Grid)', children:[
           { id:17144, name:'Card 1 — Profile Type', children:[
-            { id:17145, name:'Fat Loss → "Metabolic"' },
-            { id:17146, name:'Performance → "Output-Limited"' },
-            { id:17147, name:'Recovery → "Inflammatory"' },
-            { id:17148, name:'Sleep → "Cortisol-Driven"' },
-            { id:17149, name:'Skin → "Collagen-Deficient"' },
-            { id:17150, name:'Gut → "Mucosal"' },
-            { id:17151, name:'Hormonal → "Endocrine"' }
+            { id:17145, name:'Fat Loss → "Metabolic"  ·  Performance → "Output-Limited"' },
+            { id:17146, name:'Recovery → "Inflammatory"  ·  Sleep → "Cortisol-Driven"' },
+            { id:17147, name:'Skin → "Collagen-Deficient"  ·  Gut → "Mucosal"  ·  Hormonal → "Endocrine"' }
           ]},
-          { id:17152, name:'Card 2 — Room For Improvement', children:[
-            { id:17153, name:'Pulled from Q4 severity answer' },
-            { id:17154, name:'High / Medium / Moderate' }
+          { id:17148, name:'Card 2 — Room For Improvement', children:[
+            { id:17149, name:'Pulled from Q4 severity answer' },
+            { id:17150, name:'High / Medium / Moderate' }
           ]},
-          { id:17155, name:'Card 3 — Primary Driver (Trigger)', children:[
-            { id:17156, name:'Pulled from Q10 root cause answer' },
-            { id:17157, name:'e.g. "GH Deficiency" / "Cortisol Dominance" / "IGF-1 Decline"' }
+          { id:17151, name:'Card 3 — Primary Driver (Trigger)', children:[
+            { id:17152, name:'Pulled from Q10 root cause answer' },
+            { id:17153, name:'e.g. "GH Deficiency" / "Cortisol Dominance" / "IGF-1 Decline"' }
           ]},
-          { id:17158, name:'Card 4 — Impact on [Goal]', children:[
-            { id:17159, name:'Pulled from Q4 + Q5 combined' },
-            { id:17160, name:'Significant / Noticeable / Mild' }
+          { id:17154, name:'Card 4 — Impact on [Goal]', children:[
+            { id:17155, name:'Pulled from Q4 + Q5 combined' },
+            { id:17156, name:'Significant / Noticeable / Mild' }
           ]}
         ]},
-        { id:1715, name:'CTA: "See My Protocol →"' }
+        { id:1715, name:'CTA Button: "See My Protocol →"' }
       ]},
-
       { id:172, name:'Screen 2 — The Promise', children:[
         { id:1720, name:'PURPOSE: Frames 6-month journey, anchors AOV', children:[
           { id:17200, name:'Makes them think long-term before they see price' },
-          { id:17201, name:'Pre-sells the 6-month bundle as THE plan' },
+          { id:17201, name:'Pre-sells 6-month bundle as THE plan' },
           { id:17202, name:'"The last protocol you\'ll ever need" = finality + confidence' }
         ]},
         { id:1721, name:'Bold Headline (avatar-specific)', children:[
           { id:17210, name:'Fat Loss: "The last fat loss protocol you\'ll ever need"' },
           { id:17211, name:'Performance: "The last performance protocol you\'ll ever need"' },
           { id:17212, name:'Recovery: "The protocol that finally lets you heal for good"' },
-          { id:17213, name:'Sleep: "The last sleep protocol you\'ll ever need"' },
-          { id:17214, name:'Hormonal: "The last protocol you\'ll need to feel like yourself again"' }
+          { id:17213, name:'Sleep / Skin / Gut / Hormonal versions' }
         ]},
         { id:1722, name:'Personalised Subtext', children:[
           { id:17220, name:'"Based on your answers, we expect you to [result] by [Month+6]"' },
-          { id:17221, name:'Month dynamically calculated from today\'s date' },
-          { id:17222, name:'Fat Loss: "visibly reduce body fat and restore metabolic energy"' },
-          { id:17223, name:'Performance: "break through your output plateau and recover faster"' },
-          { id:17224, name:'Recovery: "significantly reduce pain and restore full movement"' },
-          { id:17225, name:'Sleep: "reach deep, restorative sleep consistently"' },
-          { id:17226, name:'Skin: "measurably improve firmness, tone and collagen density"' },
-          { id:17227, name:'Gut: "restore gut integrity and eliminate chronic discomfort"' },
-          { id:17228, name:'Hormonal: "rebalance energy, drive and mood"' }
+          { id:17221, name:'Month dynamically calculated from today\'s date' }
         ]},
-        { id:1723, name:'Animated Bar Chart (6 Bars)', children:[
-          { id:17230, name:'One bar per month — current month to Month+6' },
-          { id:17231, name:'Bars grow progressively taller left to right' },
-          { id:17232, name:'Colour progression: blue → green → yellow → tan → tan → coral' },
-          { id:17233, name:'"Goal" pill + circle marker appears on Month 5 bar' },
-          { id:17234, name:'Current month label on left, target month on right' },
-          { id:17235, name:'Animation plays on load — builds anticipation' },
-          { id:17236, name:'Implies: need all 6 months to reach the Goal marker' }
+        { id:1723, name:'Animated Bar Chart — 6 Bars', children:[
+          { id:17230, name:'One bar per month — current month → Month+6' },
+          { id:17231, name:'Bars grow progressively taller left → right' },
+          { id:17232, name:'Colours: blue → green → yellow → tan → tan → coral' },
+          { id:17233, name:'"Goal" pill + circle marker on Month 5 bar' },
+          { id:17234, name:'Animation plays on load — builds anticipation' },
+          { id:17235, name:'Visual implication: need all 6 months to reach Goal' }
         ]},
-        { id:1724, name:'CTA: "Build My Protocol →" → Sales Page' }
+        { id:1724, name:'CTA Button: "Build My Protocol →" → Sales Page' }
       ]}
     ]},
-
     { id:18, name:'Section 6 — Yes Street', children:[
       { id:181, name:'Q12 — Commitment 1', children:[
         { id:1811, name:'"Are you ready to finally address [goal] for good?"' },
-        { id:1812, name:'Yes, I\'m done settling' },
-        { id:1813, name:'Purpose: First yes — builds internal commitment' }
+        { id:1812, name:'Builds internal commitment — first yes' }
       ]},
       { id:182, name:'Info Slide — Science Hook (avatar-specific)', children:[
         { id:1821, name:'Fat Loss: "GH decline after 30 is the #1 metabolic brake"' },
@@ -302,9 +284,8 @@ let treeData = {
         { id:1827, name:'Hormonal: "Peptides signal the pituitary — not hormones themselves"' }
       ]},
       { id:183, name:'Q13 — Commitment 2', children:[
-        { id:1831, name:'"Does a protocol built specifically for your profile sound like what you need?"' },
-        { id:1832, name:'Yes — show me my protocol' },
-        { id:1833, name:'Purpose: Final yes before submit' }
+        { id:1831, name:'"Does a protocol built for your profile sound like what you need?"' },
+        { id:1832, name:'Yes — show me my protocol  (final yes before submit)' }
       ]},
       { id:184, name:'Submit → Protocol Reveal', children:[
         { id:1841, name:'Loading animation: "Building your protocol…"' },
@@ -314,10 +295,7 @@ let treeData = {
     ]}
   ]},
 
-  // ═══════════════════════════════════════════════
-  // FAT LOSS AVATAR
-  // ═══════════════════════════════════════════════
-  { id:20, name:'FAT LOSS STACK\n"The Transformer"', _colorKey:'fat', children:[
+  { id:20, name:'FAT LOSS STACK\n"The Transformer"', _ck:'fat', children:[
     { id:21, name:'Avatar Profile', children:[
       { id:211, name:'Diet-resistant body fat' },
       { id:212, name:'Metabolic slowdown / low GH' },
@@ -327,8 +305,8 @@ let treeData = {
     { id:22, name:'Quiz Routing Triggers', children:[
       { id:221, name:'Q2 → Body composition / weight' },
       { id:222, name:'Q4 → Severity: high' },
-      { id:223, name:'Q5 → Timeline: 6 months–1+ year' },
-      { id:224, name:'Q11 → "Tried everything"' }
+      { id:223, name:'Q5 → Over a year, nothing worked' },
+      { id:224, name:'Q11 → Tried everything' }
     ]},
     { id:23, name:'Protocol Bundle', children:[
       { id:231, name:'Core Peptide 1 — [Add name]' },
@@ -339,8 +317,7 @@ let treeData = {
     { id:24, name:'Sales Page Angle', children:[
       { id:241, name:'"Restart your metabolism at the source"' },
       { id:242, name:'GH / GLP-1 axis education' },
-      { id:243, name:'Body recomp before & afters' },
-      { id:244, name:'6-month transformation timeline' }
+      { id:243, name:'Body recomp before & afters' }
     ]},
     { id:25, name:'Cross-Sell Add-On', children:[
       { id:251, name:'Performance Stack (muscle preservation)' },
@@ -348,10 +325,7 @@ let treeData = {
     ]}
   ]},
 
-  // ═══════════════════════════════════════════════
-  // PERFORMANCE AVATAR
-  // ═══════════════════════════════════════════════
-  { id:30, name:'PERFORMANCE STACK\n"The Optimizer"', _colorKey:'perf', children:[
+  { id:30, name:'PERFORMANCE STACK\n"The Optimizer"', _ck:'perf', children:[
     { id:31, name:'Avatar Profile', children:[
       { id:311, name:'Athlete or serious trainer' },
       { id:312, name:'Hitting output / strength plateaus' },
@@ -360,7 +334,7 @@ let treeData = {
     ]},
     { id:32, name:'Quiz Routing Triggers', children:[
       { id:321, name:'Q2 → Energy & athletic output' },
-      { id:322, name:'Q8 → Activity: 3–5x/week or athlete' },
+      { id:322, name:'Q8 → Activity: 3–5x / week or athlete' },
       { id:323, name:'Q3 → Output limited / strength plateaus' },
       { id:324, name:'Q10 → Over-training or under-recovery' }
     ]},
@@ -373,23 +347,19 @@ let treeData = {
     { id:34, name:'Sales Page Angle', children:[
       { id:341, name:'"Unlock performance your training can\'t reach alone"' },
       { id:342, name:'IGF-1 / GH secretagogue science' },
-      { id:343, name:'Athlete testimonials & metrics' },
-      { id:344, name:'PR timelines + recovery data' }
+      { id:343, name:'Athlete testimonials & metrics' }
     ]},
-    { id:35, name:'Cross-Sell Add-On', children:[
-      { id:351, name:'Recovery Stack (injury prevention)' },
-      { id:352, name:'Fat Loss Stack (body recomp)' }
+    { id:35, name:'Cross-Sell', children:[
+      { id:351, name:'Recovery Stack' },
+      { id:352, name:'Fat Loss Stack' }
     ]}
   ]},
 
-  // ═══════════════════════════════════════════════
-  // RECOVERY AVATAR
-  // ═══════════════════════════════════════════════
-  { id:40, name:'RECOVERY STACK\n"The Healer"', _colorKey:'rec', children:[
+  { id:40, name:'RECOVERY STACK\n"The Healer"', _ck:'rec', children:[
     { id:41, name:'Avatar Profile', children:[
       { id:411, name:'Chronic pain, joint inflammation' },
       { id:412, name:'Post-surgery or injury healing' },
-      { id:413, name:'Body worn down from years of training' },
+      { id:413, name:'Body worn down from training' },
       { id:414, name:'Slow tissue repair, tendon issues' }
     ]},
     { id:42, name:'Quiz Routing Triggers', children:[
@@ -407,19 +377,15 @@ let treeData = {
     { id:44, name:'Sales Page Angle', children:[
       { id:441, name:'"Heal what conventional treatment can\'t"' },
       { id:442, name:'Tissue repair / angiogenesis science' },
-      { id:443, name:'Comeback story testimonials' },
-      { id:444, name:'Month-by-month healing timeline' }
+      { id:443, name:'Comeback story testimonials' }
     ]},
-    { id:45, name:'Cross-Sell Add-On', children:[
-      { id:451, name:'Performance Stack (return to training)' },
-      { id:452, name:'Sleep Stack (pain disrupts sleep)' }
+    { id:45, name:'Cross-Sell', children:[
+      { id:451, name:'Performance Stack' },
+      { id:452, name:'Sleep Stack' }
     ]}
   ]},
 
-  // ═══════════════════════════════════════════════
-  // SLEEP AVATAR
-  // ═══════════════════════════════════════════════
-  { id:50, name:'SLEEP STACK\n"The Restorer"', _colorKey:'sleep', children:[
+  { id:50, name:'SLEEP STACK\n"The Restorer"', _ck:'sleep', children:[
     { id:51, name:'Avatar Profile', children:[
       { id:511, name:'Wakes unrefreshed, brain fog' },
       { id:512, name:'Stress-driven insomnia or light sleep' },
@@ -429,8 +395,7 @@ let treeData = {
     { id:52, name:'Quiz Routing Triggers', children:[
       { id:521, name:'Q2 → Sleep & overnight recovery' },
       { id:522, name:'Q10 → High stress / cortisol flagged' },
-      { id:523, name:'Q3 → Wakes unrefreshed / mental fog' },
-      { id:524, name:'Q4 → Affecting daily life' }
+      { id:523, name:'Q3 → Wakes unrefreshed / mental fog' }
     ]},
     { id:53, name:'Protocol Bundle', children:[
       { id:531, name:'Core Peptide 1 — [Add name]' },
@@ -441,30 +406,25 @@ let treeData = {
     { id:54, name:'Sales Page Angle', children:[
       { id:541, name:'"Deep sleep is where everything heals"' },
       { id:542, name:'GH release / slow-wave sleep science' },
-      { id:543, name:'Sleep tracker improvement screenshots' },
-      { id:544, name:'Cortisol → calm transformation story' }
+      { id:543, name:'Cortisol → calm transformation story' }
     ]},
-    { id:55, name:'Cross-Sell Add-On', children:[
-      { id:551, name:'Hormonal Stack (if cortisol-driven)' },
-      { id:552, name:'Recovery Stack (sleep + healing)' }
+    { id:55, name:'Cross-Sell', children:[
+      { id:551, name:'Hormonal Stack' },
+      { id:552, name:'Recovery Stack' }
     ]}
   ]},
 
-  // ═══════════════════════════════════════════════
-  // SKIN AVATAR
-  // ═══════════════════════════════════════════════
-  { id:60, name:'SKIN STACK\n"The Revivalist"', _colorKey:'skin', children:[
+  { id:60, name:'SKIN STACK\n"The Revivalist"', _ck:'skin', children:[
     { id:61, name:'Avatar Profile', children:[
       { id:611, name:'Fine lines, loss of firmness' },
       { id:612, name:'Collagen & elasticity decline' },
       { id:613, name:'Dull, uneven skin tone' },
-      { id:614, name:'Aesthetic-driven, 35–55 female-skew' }
+      { id:614, name:'Aesthetic-driven, 35–55, female-skew' }
     ]},
     { id:62, name:'Quiz Routing Triggers', children:[
       { id:621, name:'Q2 → Skin & how I\'m aging' },
-      { id:622, name:'Q1 → Age 35–54' },
-      { id:623, name:'Q7 → Female (primary)' },
-      { id:624, name:'Q6 → Desired: firmer, younger skin' }
+      { id:622, name:'Q1 → Age 35–54  ·  Q7 → Female' },
+      { id:623, name:'Q6 → Desired: firmer, younger skin' }
     ]},
     { id:63, name:'Protocol Bundle', children:[
       { id:631, name:'Core Peptide 1 — [Add name]' },
@@ -475,19 +435,15 @@ let treeData = {
     { id:64, name:'Sales Page Angle', children:[
       { id:641, name:'"Turn back the clock from within"' },
       { id:642, name:'Collagen synthesis science' },
-      { id:643, name:'Side-by-side skin transformation photos' },
-      { id:644, name:'Week-by-week texture improvement' }
+      { id:643, name:'Side-by-side skin transformation photos' }
     ]},
-    { id:65, name:'Cross-Sell Add-On', children:[
-      { id:651, name:'Hormonal Stack (hormones drive skin aging)' },
+    { id:65, name:'Cross-Sell', children:[
+      { id:651, name:'Hormonal Stack' },
       { id:652, name:'Gut Stack (gut-skin axis)' }
     ]}
   ]},
 
-  // ═══════════════════════════════════════════════
-  // GUT AVATAR
-  // ═══════════════════════════════════════════════
-  { id:70, name:'GUT STACK\n"The Foundation"', _colorKey:'gut', children:[
+  { id:70, name:'GUT STACK\n"The Foundation"', _ck:'gut', children:[
     { id:71, name:'Avatar Profile', children:[
       { id:711, name:'Bloating, cramping, irregular digestion' },
       { id:712, name:'IBS-type symptoms or food sensitivities' },
@@ -497,8 +453,7 @@ let treeData = {
     { id:72, name:'Quiz Routing Triggers', children:[
       { id:721, name:'Q2 → Gut & digestion' },
       { id:722, name:'Q3 → Bloating / discomfort confirmed' },
-      { id:723, name:'Q10 → Inflammatory diet flagged' },
-      { id:724, name:'Q11 → Tried supplements without results' }
+      { id:723, name:'Q10 → Inflammatory diet flagged' }
     ]},
     { id:73, name:'Protocol Bundle', children:[
       { id:731, name:'Core Peptide 1 — [Add name]' },
@@ -509,19 +464,15 @@ let treeData = {
     { id:74, name:'Sales Page Angle', children:[
       { id:741, name:'"Fix your gut — fix everything else"' },
       { id:742, name:'Gut lining repair science' },
-      { id:743, name:'GI distress → calm testimonials' },
-      { id:744, name:'Gut-brain / gut-skin axis angle' }
+      { id:743, name:'Gut-brain / gut-skin axis angle' }
     ]},
-    { id:75, name:'Cross-Sell Add-On', children:[
+    { id:75, name:'Cross-Sell', children:[
       { id:751, name:'Skin Stack (gut-skin axis)' },
-      { id:752, name:'Performance Stack (absorption = gains)' }
+      { id:752, name:'Performance Stack' }
     ]}
   ]},
 
-  // ═══════════════════════════════════════════════
-  // HORMONAL AVATAR
-  // ═══════════════════════════════════════════════
-  { id:80, name:'HORMONAL STACK\n"The Vitalizer"', _colorKey:'horm', children:[
+  { id:80, name:'HORMONAL STACK\n"The Vitalizer"', _ck:'horm', children:[
     { id:81, name:'Avatar Profile', children:[
       { id:811, name:'Low energy, drive & libido' },
       { id:812, name:'Mood swings, brain fog' },
@@ -531,8 +482,7 @@ let treeData = {
     { id:82, name:'Quiz Routing Triggers', children:[
       { id:821, name:'Q2 → Hormones, libido or vitality' },
       { id:822, name:'Q1 → Age 40+' },
-      { id:823, name:'Q3 → Low drive / fatigue / mood shifts' },
-      { id:824, name:'Q5 → Timeline: Over a year' }
+      { id:823, name:'Q5 → Timeline: over a year' }
     ]},
     { id:83, name:'Protocol Bundle', children:[
       { id:831, name:'Core Peptide 1 — [Add name]' },
@@ -543,19 +493,15 @@ let treeData = {
     { id:84, name:'Sales Page Angle', children:[
       { id:841, name:'"Reclaim the energy and drive you used to have"' },
       { id:842, name:'Pituitary signalling science (not hormone replacement)' },
-      { id:843, name:'Vitality & confidence transformation stories' },
-      { id:844, name:'Male vs female split testimonials' }
+      { id:843, name:'Male vs female split testimonials' }
     ]},
-    { id:85, name:'Cross-Sell Add-On', children:[
-      { id:851, name:'Fat Loss Stack (hormones drive weight)' },
-      { id:852, name:'Sleep Stack (hormones crash at night)' }
+    { id:85, name:'Cross-Sell', children:[
+      { id:851, name:'Fat Loss Stack' },
+      { id:852, name:'Sleep Stack' }
     ]}
   ]},
 
-  // ═══════════════════════════════════════════════
-  // SALES PAGE
-  // ═══════════════════════════════════════════════
-  { id:90, name:'SALES PAGE\n(All Avatar Paths)', _colorKey:'sales', children:[
+  { id:90, name:'SALES PAGE\n(All Paths)', _ck:'sales', children:[
     { id:91, name:'Above the Fold', children:[
       { id:911, name:'"Protocol Matched" — avatar name shown' },
       { id:912, name:'Primary driver & severity reflected back' },
@@ -564,7 +510,7 @@ let treeData = {
       { id:915, name:'Star rating + client count social proof' }
     ]},
     { id:92, name:'Offer Section', children:[
-      { id:921, name:'6-Month supply = BEST VALUE (centred, pre-selected)' },
+      { id:921, name:'6-Month = BEST VALUE — centred & pre-selected' },
       { id:922, name:'"Recommended for your protocol" label' },
       { id:923, name:'Subscribe & Save option shown' },
       { id:924, name:'1M / 3M shown but de-emphasised' },
@@ -573,21 +519,17 @@ let treeData = {
     { id:93, name:'Trust Section', children:[
       { id:931, name:'Before & after client results' },
       { id:932, name:'Medical advisor credentials' },
-      { id:933, name:'Research citations (brief)' },
-      { id:934, name:'Money-back guarantee' }
+      { id:933, name:'Money-back guarantee' }
     ]},
     { id:94, name:'Below the Fold', children:[
       { id:941, name:'Peptide deep-dive (mechanism + benefit)' },
       { id:942, name:'Month 1 → 3 → 6 results timeline' },
-      { id:943, name:'FAQ (addresses top checkout objections)' },
+      { id:943, name:'FAQ — addresses top checkout objections' },
       { id:944, name:'Second CTA block + urgency' }
     ]}
   ]},
 
-  // ═══════════════════════════════════════════════
-  // CHECKOUT
-  // ═══════════════════════════════════════════════
-  { id:100, name:'CHECKOUT', _colorKey:'checkout', children:[
+  { id:100, name:'CHECKOUT', _ck:'checkout', children:[
     { id:101, name:'Urgency Levers', children:[
       { id:1011, name:'Limited protocol spots this month' },
       { id:1012, name:'10-minute cart hold timer' },
@@ -596,7 +538,7 @@ let treeData = {
     { id:102, name:'Trust & Conversion', children:[
       { id:1021, name:'Guarantee upgraded: 90 → 180 days on this page' },
       { id:1022, name:'Exclusive discount for quiz completers' },
-      { id:1023, name:'Medical-grade / secure checkout framing' }
+      { id:1023, name:'Secure / medical-grade checkout framing' }
     ]},
     { id:103, name:'Pre-selected Options', children:[
       { id:1031, name:'6-Month bundle ticked' },
@@ -610,104 +552,107 @@ let treeData = {
     { id:105, name:'Post-Purchase Flow', children:[
       { id:1051, name:'Welcome + protocol usage guide email' },
       { id:1052, name:'30-day check-in from concierge' },
-      { id:1053, name:'90-day results prompt → reorder' },
-      { id:1054, name:'Subscription management portal' }
+      { id:1053, name:'90-day results prompt → reorder' }
     ]}
   ]}
 
 ]};
 
-let nextId = 5000;
-let selectedNode = null;
-
-// Propagate color keys down the tree
-function propagate(node, inheritKey) {
-  if (!node._colorKey) node._colorKey = inheritKey || 'root';
-  (node.children || []).forEach(c => propagate(c, node._colorKey));
+// ── Propagate color keys down tree ──────────────────────────────────────────
+function propagate(n, key) {
+  n._ck = n._ck || key || 'root';
+  (n.children || []).forEach(c => propagate(c, n._ck));
 }
-propagate(treeData, 'root');
+propagate(DATA, 'root');
 
-function nodeColor(d) { return keyToHex[d.data._colorKey] || '#a78bfa'; }
+function col(d) { return HEX[d.data._ck] || '#a78bfa'; }
 
-// SVG setup
-const svg = d3.select('body').append('svg')
-  .attr('width', window.innerWidth)
-  .attr('height', window.innerHeight);
-const g = svg.append('g');
-const zoom = d3.zoom().scaleExtent([0.03, 6])
+// ── Walk helper ─────────────────────────────────────────────────────────────
+function walk(n, fn) { fn(n); (n.children||[]).forEach(c => walk(c, fn)); }
+
+// ── SVG + Zoom setup ────────────────────────────────────────────────────────
+const W = window.innerWidth, H = window.innerHeight;
+
+const svg = d3.select('body').append('svg').attr('width', W).attr('height', H);
+const g   = svg.append('g');
+
+const zoom = d3.zoom()
+  .scaleExtent([0.04, 6])
   .on('zoom', e => g.attr('transform', e.transform));
+
 svg.call(zoom).on('dblclick.zoom', null);
 
-// Layout
-const tree = d3.tree()
+// ── CRITICAL FIX: set initial transform BEFORE first render ─────────────────
+const initT = d3.zoomIdentity.translate(W/2, H/2).scale(0.65);
+svg.call(zoom.transform, initT);   // fires zoom event → sets g transform NOW
+
+// ── Tree layout ─────────────────────────────────────────────────────────────
+const treeLayout = d3.tree()
   .size([2 * Math.PI, 400])
   .separation((a, b) => (a.parent === b.parent ? 1 : 2) / a.depth);
 
-const radial = (x, y) => [(y = +y) * Math.cos(x -= Math.PI / 2), y * Math.sin(x)];
-const linkGen = d3.linkRadial().angle(d => d.x).radius(d => d.y);
+const rad  = (x, y) => [(y = +y) * Math.cos(x -= Math.PI / 2), y * Math.sin(x)];
+const link = d3.linkRadial().angle(d => d.x).radius(d => d.y);
 
+// ── Render ──────────────────────────────────────────────────────────────────
 function render() {
   g.selectAll('*').remove();
-  const root = d3.hierarchy(treeData, d => d._collapsed ? null : d.children);
-  tree(root);
-  root.each(d => { d._col = nodeColor(d); });
+  const root = d3.hierarchy(DATA, d => d._collapsed ? null : d.children);
+  treeLayout(root);
+  root.each(d => { d._c = col(d); });
 
   // Links
   g.selectAll('.link').data(root.links()).join('path')
-    .attr('class', 'link')
-    .attr('d', linkGen)
-    .attr('stroke', d => d.target._col)
+    .attr('class','link')
+    .attr('d', link)
+    .attr('stroke', d => d.target._c)
     .attr('stroke-width', d => Math.max(0.6, 2 - d.target.depth * 0.28))
     .attr('stroke-opacity', 0.25);
 
+  // Nodes
   const node = g.selectAll('.node').data(root.descendants()).join('g')
-    .attr('class', 'node')
-    .attr('transform', d => `translate(${radial(d.x, d.y)})`);
+    .attr('class','node')
+    .attr('transform', d => `translate(${rad(d.x, d.y)})`);
 
   const r = d => d.depth===0 ? 32 : d.depth===1 ? 18 : d.depth===2 ? 11 : 6;
 
-  // Glow
   node.append('circle').attr('r', d => r(d)+8)
-    .attr('fill', d => d._col).attr('fill-opacity', 0.05).attr('stroke', 'none');
+    .attr('fill', d => d._c).attr('fill-opacity',0.05).attr('stroke','none');
 
-  // Main circle
   node.append('circle').attr('r', r)
-    .attr('fill', d => d._col)
-    .attr('fill-opacity', d => d.depth===0 ? 0.88 : d.depth===1 ? 0.17 : 0.09)
-    .attr('stroke', d => d._col)
-    .attr('stroke-width', d => d.depth===0 ? 0 : 1.5)
-    .attr('stroke-opacity', 0.55)
-    .on('click', (e, d) => { e.stopPropagation(); toggle(d.data); })
-    .on('dblclick', (e, d) => { e.stopPropagation(); openEditor(e, d.data); });
+    .attr('fill', d => d._c)
+    .attr('fill-opacity', d => d.depth===0?0.88:d.depth===1?0.17:0.09)
+    .attr('stroke', d => d._c)
+    .attr('stroke-width', d => d.depth===0?0:1.5)
+    .attr('stroke-opacity',0.55)
+    .on('click',  (e,d) => { e.stopPropagation(); toggle(d.data); })
+    .on('dblclick',(e,d) => { e.stopPropagation(); openEd(e,d.data); });
 
-  // Collapsed badge
   node.filter(d => d.data._collapsed && (d.data.children||[]).length)
     .append('text')
     .attr('text-anchor','middle').attr('dominant-baseline','central')
-    .attr('fill', d => d._col).attr('font-size','8px').attr('font-weight','700')
+    .attr('fill',d=>d._c).attr('font-size','8px').attr('font-weight','700')
     .attr('pointer-events','none')
     .text(d => d.data.children.length);
 
-  // Labels with multi-line support
   node.each(function(d) {
     const el = d3.select(this);
     const lines = d.data.name.split('\n');
-    const isRoot = d.depth === 0;
-    const [px] = radial(d.x, d.y);
-    const anchor = isRoot ? 'middle' : px >= 0 ? 'start' : 'end';
-    const xOff = isRoot ? 0 : px >= 0 ? r(d)+8 : -(r(d)+8);
-    const fs = d.depth===0 ? 14 : d.depth===1 ? 11.5 : d.depth===2 ? 10 : 9;
-    const fw = d.depth<=1 ? '700' : d.depth===2 ? '500' : '400';
-    const lh = fs * 1.3;
-    const totalH = (lines.length - 1) * lh;
-    lines.forEach((line, i) => {
-      const dy = isRoot ? r(d)+17+i*lh : -totalH/2+i*lh;
+    const root0 = d.depth === 0;
+    const [px] = rad(d.x, d.y);
+    const anchor = root0 ? 'middle' : px >= 0 ? 'start' : 'end';
+    const xOff   = root0 ? 0 : px >= 0 ? r(d)+8 : -(r(d)+8);
+    const fs = d.depth===0?14 : d.depth===1?11.5 : d.depth===2?10 : 9;
+    const fw = d.depth<=1?'700' : d.depth===2?'500' : '400';
+    const lh = fs*1.3, totalH = (lines.length-1)*lh;
+    lines.forEach((line,i) => {
       el.append('text')
-        .attr('x', xOff).attr('dy', dy)
+        .attr('x', xOff)
+        .attr('dy', root0 ? r(d)+17+i*lh : -totalH/2+i*lh)
         .attr('text-anchor', anchor)
-        .attr('dominant-baseline', isRoot ? 'auto' : 'central')
-        .attr('fill', d._col)
-        .attr('fill-opacity', d.depth===0 ? 1 : d.depth===1 ? 0.95 : 0.78)
+        .attr('dominant-baseline', root0?'auto':'central')
+        .attr('fill', d._c)
+        .attr('fill-opacity', d.depth===0?1:d.depth===1?0.95:0.78)
         .attr('font-size', fs+'px').attr('font-weight', fw)
         .attr('pointer-events','none')
         .text(line);
@@ -715,81 +660,63 @@ function render() {
   });
 }
 
-function toggle(data) {
-  if (!(data.children||[]).length) return;
-  data._collapsed = !data._collapsed;
+// ── Toggle ──────────────────────────────────────────────────────────────────
+function toggle(d) {
+  if (!(d.children||[]).length) return;
+  d._collapsed = !d._collapsed;
   render();
 }
-function expandAll()  { walk(treeData, d => { d._collapsed = false; }); render(); }
-function collapseAll(){ walk(treeData, d => { if (d.id!==1 && (d.children||[]).length) d._collapsed = true; }); render(); }
-function walk(n, fn)  { fn(n); (n.children||[]).forEach(c => walk(c, fn)); }
+function expandAll()  { walk(DATA, d => { d._collapsed=false; }); render(); }
+function collapseAll(){ walk(DATA, d => { if(d.id!==1 && (d.children||[]).length) d._collapsed=true; }); render(); }
 
-// Editor
-const editor = document.getElementById('node-editor');
-const editInput = document.getElementById('edit-input');
-function openEditor(e, data) {
-  selectedNode = data;
-  editInput.value = data.name;
-  document.getElementById('edit-label').textContent = data.id===1 ? 'Edit Root' : 'Edit Node';
-  document.getElementById('btn-del').style.display = data.id===1 ? 'none' : '';
-  const ex = Math.min(e.clientX+12, window.innerWidth-260);
-  const ey = Math.min(e.clientY+12, window.innerHeight-180);
-  editor.style.left = ex+'px'; editor.style.top = ey+'px';
-  editor.style.display = 'block';
-  editInput.focus(); editInput.select();
+// ── Editor ──────────────────────────────────────────────────────────────────
+let sel = null;
+const edEl  = document.getElementById('ed');
+const einp  = document.getElementById('einp');
+function openEd(e,d) {
+  sel = d;
+  einp.value = d.name;
+  document.getElementById('elbl').textContent = d.id===1?'Edit Root':'Edit Node';
+  document.getElementById('bdel').style.display = d.id===1?'none':'';
+  edEl.style.left = Math.min(e.clientX+12, W-250)+'px';
+  edEl.style.top  = Math.min(e.clientY+12, H-180)+'px';
+  edEl.style.display='block'; einp.focus(); einp.select();
 }
-function closeEditor() { editor.style.display='none'; selectedNode=null; }
-function saveEdit() {
-  if (!selectedNode) return;
-  const v = editInput.value.trim();
-  if (v) selectedNode.name = v;
-  closeEditor(); render();
+function closeEditor(){ edEl.style.display='none'; sel=null; }
+function saveEdit(){ if(!sel)return; const v=einp.value.trim(); if(v)sel.name=v; closeEditor(); render(); }
+function addChild(){
+  if(!sel)return;
+  if(!sel.children)sel.children=[];
+  sel._collapsed=false;
+  sel.children.push({id:Date.now(),name:'New Node',_ck:sel._ck});
+  propagate(DATA,'root'); closeEditor(); render();
 }
-function addChild() {
-  if (!selectedNode) return;
-  if (!selectedNode.children) selectedNode.children = [];
-  selectedNode._collapsed = false;
-  selectedNode.children.push({ id: nextId++, name: 'New Node', _colorKey: selectedNode._colorKey });
-  closeEditor(); render();
+function deleteNode(){
+  if(!sel||sel.id===1)return;
+  function rm(p){ if(!p.children)return false; const i=p.children.findIndex(c=>c.id===sel.id); if(i!==-1){p.children.splice(i,1);return true;} return p.children.some(rm); }
+  rm(DATA); closeEditor(); render();
 }
-function deleteNode() {
-  if (!selectedNode || selectedNode.id===1) return;
-  function rm(p) {
-    if (!p.children) return false;
-    const i = p.children.findIndex(c => c.id===selectedNode.id);
-    if (i!==-1) { p.children.splice(i,1); return true; }
-    return p.children.some(rm);
-  }
-  rm(treeData); closeEditor(); render();
-}
-editInput.addEventListener('keydown', e => {
-  if (e.key==='Enter') saveEdit();
-  if (e.key==='Escape') closeEditor();
-});
+einp.addEventListener('keydown', e=>{ if(e.key==='Enter')saveEdit(); if(e.key==='Escape')closeEditor(); });
 svg.on('click', closeEditor);
 
-function resetView() {
-  svg.transition().duration(500).call(
-    zoom.transform,
-    d3.zoomIdentity.translate(window.innerWidth/2, window.innerHeight/2).scale(0.6)
-  );
+// ── Reset / Export ──────────────────────────────────────────────────────────
+function resetView(){
+  svg.transition().duration(500).call(zoom.transform, d3.zoomIdentity.translate(W/2,H/2).scale(0.65));
 }
-function exportSVG() {
-  const src = '<?xml version="1.0" standalone="no"?>\n' + new XMLSerializer().serializeToString(document.querySelector('svg'));
-  const a = document.createElement('a');
-  a.href = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(src);
-  a.download = 'prime-concierge-quiz-funnel.svg';
-  a.click();
+function exportSVG(){
+  const a=document.createElement('a');
+  a.href='data:image/svg+xml;charset=utf-8,'+encodeURIComponent('<?xml version="1.0" standalone="no"?>\n'+new XMLSerializer().serializeToString(document.querySelector('svg')));
+  a.download='prime-concierge-quiz-funnel.svg'; a.click();
 }
 
-// Init — collapse depth 2+ so it loads clean
-walk(treeData, d => {
-  if (d.id!==1 && (d.children||[]).length) d._collapsed = true;
-});
-render();
-resetView();
-window.addEventListener('resize', () => {
-  svg.attr('width', window.innerWidth).attr('height', window.innerHeight);
+// ── Init ────────────────────────────────────────────────────────────────────
+// Collapse all except root — keeps it clean on load
+walk(DATA, d => { if(d.id!==1 && (d.children||[]).length) d._collapsed=true; });
+
+render();   // transform is already set — nodes appear in correct position immediately
+
+window.addEventListener('resize', ()=>{
+  svg.attr('width',window.innerWidth).attr('height',window.innerHeight);
 });
 </script>
 </body>
