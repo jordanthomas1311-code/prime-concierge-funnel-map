@@ -3,20 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- ── SEO: Title front-loads primary keyword, under 60 chars ── -->
   <title>Prime Manufacturing | Peptide Manufacturing &amp; Private Label</title>
-  <meta name="description" content="Research-grade peptide manufacturing with Janoshik COA documentation on every batch. Private label, white label &amp; bulk supply. Sterility, endotoxin &amp; heavy metals tested." />
-  <meta name="keywords" content="peptide manufacturer, private label peptides, white label peptides, certificate of analysis peptides, COA peptides, Janoshik verified peptides, research peptides supplier, bulk peptide manufacturing" />
+  <meta name="description" content="The manufacturing arm of Prime Concierge. Research-grade peptide manufacturing with Janoshik COA documentation on every batch. Private label, white label &amp; bulk supply." />
+  <meta name="keywords" content="peptide manufacturer, private label peptides, white label peptides, COA peptides, Janoshik verified peptides, research peptides supplier, bulk peptide manufacturing" />
   <link rel="canonical" href="https://primemfg.com/" />
-
-  <!-- ── Open Graph ── -->
   <meta property="og:title" content="Prime Manufacturing | Peptide Manufacturing &amp; Private Label" />
   <meta property="og:description" content="Research-grade peptide manufacturing. Janoshik COA verified. Sterility, endotoxin &amp; heavy metals tested on every batch." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://primemfg.com/" />
 
-  <!-- ── Structured Data: Organization + LocalBusiness ── -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -24,438 +19,413 @@
     "@id": "https://primemfg.com/#organization",
     "name": "Prime Manufacturing",
     "url": "https://primemfg.com",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://primemfg.com/logo.png"
-    },
-    "description": "Premium research-grade peptide manufacturer offering private label, white label, and bulk supply with full Janoshik COA documentation on every batch.",
-    "knowsAbout": ["Peptide Manufacturing", "Private Label Peptides", "White Label Peptides", "Certificate of Analysis", "Janoshik Testing", "Research Grade Peptides"],
+    "description": "The manufacturing arm of Prime Concierge. Research-grade peptide manufacturer offering private label, white label, and bulk supply with full Janoshik COA documentation on every batch.",
+    "knowsAbout": ["Peptide Manufacturing", "Private Label Peptides", "Certificate of Analysis", "Janoshik Testing", "Research Grade Peptides"],
     "areaServed": ["GB", "US", "EU", "AU"],
     "contactPoint": {
       "@type": "ContactPoint",
       "contactType": "sales",
-      "email": "contact@primemfg.com",
+      "email": "hello@primeconcierge.com",
       "availableLanguage": "English"
     },
-    "sameAs": []
+    "parentOrganization": {
+      "@type": "Organization",
+      "name": "Prime Concierge",
+      "url": "https://primeconcierge.online"
+    }
   }
   </script>
 
-  <!-- ── Fonts ── -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
 
   <style>
     /* ── Reset ────────────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
-      background: #060610;
-      color: #edf0f8;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #f4efe3;
+      color: #1c2018;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       font-size: 16px;
       line-height: 1.65;
       -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
     }
 
     /* ── Tokens ───────────────────────────────────────────────────── */
     :root {
-      --bg:          #060610;
-      --bg2:         #09091a;
-      --bg3:         #0c0c22;
-      --card:        #0d0d20;
-      --card-hi:     #121230;
-      --border:      rgba(255,255,255,0.06);
-      --border-hi:   rgba(255,255,255,0.13);
-      --gold:        #bf8520;
-      --gold-bright: #d9a030;
-      --gold-dim:    rgba(191,133,32,0.1);
-      --gold-glow:   rgba(191,133,32,0.15);
-      --green:       #0faa64;
-      --green-dim:   rgba(15,170,100,0.08);
-      --blue:        #3d7fff;
-      --blue-dim:    rgba(61,127,255,0.1);
-      --red:         #e84040;
-      --red-dim:     rgba(232,64,64,0.08);
-      --t1:          #edf0f8;
-      --t2:          #6d7a94;
-      --t3:          #35394e;
-      --r:           12px;
-      --r-lg:        20px;
+      --cream:      #f4efe3;
+      --cream-dark: #ede7d8;
+      --cream-card: #faf7f0;
+      --green:      #1e3018;
+      --green-mid:  #2d4422;
+      --green-soft: #4a6338;
+      --green-dim:  rgba(30,48,24,0.07);
+      --green-dim2: rgba(30,48,24,0.12);
+      --sage:       #7a9168;
+      --gold:       #b8860b;
+      --border:     rgba(30,48,24,0.1);
+      --border-hi:  rgba(30,48,24,0.2);
+      --t1:         #1c2018;
+      --t2:         #4a5240;
+      --t3:         #8a9480;
+      --r:          10px;
+      --r-lg:       18px;
     }
 
-    /* ── Typography ───────────────────────────────────────────────── */
+    /* ── Type ─────────────────────────────────────────────────────── */
     h1, h2, h3, h4 {
-      font-family: 'Space Grotesk', sans-serif;
-      line-height: 1.15;
-      letter-spacing: -0.025em;
+      font-family: 'DM Serif Display', Georgia, serif;
+      line-height: 1.18;
+      letter-spacing: -0.01em;
       color: var(--t1);
+      font-weight: 400;
     }
-    h1 { font-size: clamp(2.1rem, 5vw, 3.4rem); font-weight: 700; }
-    h2 { font-size: clamp(1.6rem, 3.5vw, 2.3rem); font-weight: 700; }
-    h3 { font-size: 1.15rem; font-weight: 600; }
-    h4 { font-size: 0.95rem; font-weight: 600; }
+    h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); }
+    h2 { font-size: clamp(1.7rem, 3.5vw, 2.4rem); }
+    h3 { font-size: 1.25rem; }
+    h4 { font-size: 1rem; font-family: 'Inter', sans-serif; font-weight: 600; }
     p  { color: var(--t2); }
     a  { color: inherit; text-decoration: none; }
     strong { color: var(--t1); font-weight: 600; }
-    /* Space Mono — used for all technical/lab data to reinforce the documentation aesthetic */
     .mono { font-family: 'Space Mono', monospace; }
 
     /* ── Layout ───────────────────────────────────────────────────── */
-    .wrap  { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
-    .sec   { padding: 96px 0; }
-    .sec--alt { background: var(--bg2); }
-    .eye   {
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    .sec  { padding: 96px 0; }
+    .sec--cream { background: var(--cream); }
+    .sec--card  { background: var(--cream-card); }
+    .eye {
       display: inline-block;
+      font-family: 'Inter', sans-serif;
       font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--gold);
+      text-transform: uppercase; color: var(--sage);
       margin-bottom: 14px;
     }
-    .lead  { font-size: 1.05rem; color: var(--t2); line-height: 1.72; }
+    .lead { font-size: 1.05rem; color: var(--t2); line-height: 1.75; }
+    .text-center { text-align: center; }
+    .divider { height: 1px; background: var(--border); margin: 0; }
 
     /* ── Buttons ──────────────────────────────────────────────────── */
     .btn {
       display: inline-flex; align-items: center; gap: 8px;
-      padding: 13px 26px; border-radius: 8px;
+      padding: 13px 26px; border-radius: 6px;
+      font-family: 'Inter', sans-serif;
       font-weight: 600; font-size: 14.5px;
       cursor: pointer; border: none;
       transition: all .18s ease; white-space: nowrap;
-      text-decoration: none;
     }
-    .btn-gold  { background: var(--gold); color: #06060f; }
-    .btn-gold:hover { background: var(--gold-bright); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(191,133,32,0.3); }
-    .btn-ghost { background: transparent; color: var(--t1); border: 1px solid var(--border-hi); }
-    .btn-ghost:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.2); }
-    .btn-lg    { padding: 16px 34px; font-size: 15.5px; }
+    .btn-dark  { background: var(--green); color: #f4efe3; }
+    .btn-dark:hover { background: var(--green-mid); transform: translateY(-1px); }
+    .btn-outline { background: transparent; color: var(--green); border: 1.5px solid var(--green); }
+    .btn-outline:hover { background: var(--green-dim); }
+    .btn-lg { padding: 15px 32px; font-size: 15px; }
 
     /* ── Disclaimer ───────────────────────────────────────────────── */
     .disc-bar {
-      background: var(--red-dim);
-      border-bottom: 1px solid rgba(232,64,64,0.18);
-      padding: 8px 24px; text-align: center;
-      font-size: 11.5px; font-weight: 700; letter-spacing: 0.05em;
-      color: rgba(232,64,64,0.85);
+      background: var(--green);
+      padding: 9px 24px; text-align: center;
+      font-size: 11.5px; font-weight: 600; letter-spacing: 0.05em;
+      color: rgba(244,239,227,0.7);
     }
 
     /* ── Nav ──────────────────────────────────────────────────────── */
     .nav {
       position: sticky; top: 0; z-index: 1000;
-      background: rgba(6,6,16,0.88);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      background: rgba(244,239,227,0.95);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
       transition: box-shadow .2s;
     }
-    .nav.scrolled { box-shadow: 0 4px 40px rgba(0,0,0,0.7); }
+    .nav.scrolled { box-shadow: 0 2px 24px rgba(30,48,24,0.1); }
     .nav-row {
       display: flex; align-items: center;
       justify-content: space-between;
-      height: 66px; gap: 20px;
+      height: 64px; gap: 20px;
     }
     .logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
     .logo-mark {
-      width: 34px; height: 34px; border-radius: 8px;
-      background: var(--gold); display: flex; align-items: center;
-      justify-content: center; font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700; font-size: 17px; color: #06060f; flex-shrink: 0;
+      width: 32px; height: 32px; border-radius: 6px;
+      background: var(--green); display: flex; align-items: center;
+      justify-content: center;
+      font-family: 'DM Serif Display', serif;
+      font-size: 16px; color: #f4efe3; flex-shrink: 0;
     }
     .logo-text { line-height: 1.1; }
-    .logo-name { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 14.5px; color: var(--t1); letter-spacing: -0.01em; }
+    .logo-name { font-family: 'DM Serif Display', serif; font-size: 15px; color: var(--t1); letter-spacing: 0; font-weight: 400; }
     .logo-sub  { font-size: 9px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--t3); }
     .nav-links { display: flex; align-items: center; gap: 2px; list-style: none; }
-    .nav-links a { padding: 6px 11px; border-radius: 6px; font-size: 13.5px; font-weight: 500; color: var(--t2); transition: color .12s; }
+    .nav-links a { padding: 6px 12px; border-radius: 6px; font-size: 14px; font-weight: 500; color: var(--t2); transition: color .12s; }
     .nav-links a:hover { color: var(--t1); }
     .nav-actions { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
-    .nav-cta { padding: 8px 18px; font-size: 13px; }
+    .nav-cta { padding: 8px 18px; font-size: 13.5px; }
     .burger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
     .burger span { display: block; width: 21px; height: 2px; background: var(--t1); border-radius: 2px; transition: all .2s; }
-    .mob-menu { display: none; flex-direction: column; gap: 2px; padding: 12px 24px 18px; border-top: 1px solid var(--border); }
-    .mob-menu a { padding: 10px 2px; font-size: 15px; font-weight: 500; color: var(--t2); border-bottom: 1px solid var(--border); }
+    .mob-menu { display: none; flex-direction: column; gap: 2px; padding: 12px 24px 20px; border-top: 1px solid var(--border); background: var(--cream-card); }
+    .mob-menu a { padding: 11px 4px; font-size: 15px; font-weight: 500; color: var(--t2); border-bottom: 1px solid var(--border); }
     .mob-menu a:last-of-type { border-bottom: none; }
     .mob-menu .btn { margin-top: 10px; justify-content: center; }
     .mob-menu.open { display: flex; }
 
     /* ── Hero ─────────────────────────────────────────────────────── */
     .hero {
-      position: relative; padding: 90px 0 80px; overflow: hidden;
+      background: var(--green);
+      padding: 80px 0 72px;
+      position: relative;
+      overflow: hidden;
     }
-    /* noise texture overlay */
-    .hero::after {
+    .hero::before {
       content: '';
-      position: absolute; inset: 0; pointer-events: none;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
-      opacity: 0.025;
-    }
-    .hero-glow {
-      position: absolute; inset: 0; pointer-events: none;
-      background:
-        radial-gradient(ellipse 75% 55% at 25% -5%, rgba(191,133,32,0.09) 0%, transparent 60%),
-        radial-gradient(ellipse 50% 40% at 90% 60%, rgba(61,127,255,0.04) 0%, transparent 50%);
-    }
-    .hero-grid {
-      position: absolute; inset: 0; pointer-events: none;
-      background-image:
-        linear-gradient(var(--border) 1px, transparent 1px),
-        linear-gradient(90deg, var(--border) 1px, transparent 1px);
-      background-size: 64px 64px;
-      mask-image: radial-gradient(ellipse 90% 80% at 50% 0%, black 10%, transparent 75%);
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 80% at 80% 50%, rgba(255,255,255,0.03) 0%, transparent 60%);
+      pointer-events: none;
     }
     .hero-inner {
-      position: relative;
       display: grid;
-      grid-template-columns: 1fr 440px;
+      grid-template-columns: 1fr 420px;
       gap: 64px;
       align-items: center;
     }
     .hero-tag {
       display: inline-flex; align-items: center; gap: 8px;
-      background: var(--gold-dim);
-      border: 1px solid rgba(191,133,32,0.22);
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.18);
       border-radius: 100px; padding: 5px 14px;
-      font-size: 11.5px; font-weight: 700; letter-spacing: 0.05em;
-      color: var(--gold-bright); margin-bottom: 24px;
+      font-size: 11.5px; font-weight: 600; letter-spacing: 0.05em;
+      color: rgba(244,239,227,0.75); margin-bottom: 22px;
+      font-family: 'Inter', sans-serif;
     }
-    .hero-tag-dot {
-      width: 6px; height: 6px; border-radius: 50%;
-      background: var(--gold); animation: pulse 2.2s ease-in-out infinite;
-    }
-    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(1.4)} }
-    .hero h1 { margin-bottom: 22px; }
-    .hero h1 em {
-      font-style: normal;
-      background: linear-gradient(125deg, var(--gold-bright) 0%, var(--gold) 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-    }
-    .hero-sub { font-size: 1.06rem; line-height: 1.74; color: var(--t2); max-width: 520px; margin-bottom: 34px; }
-    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 52px; }
-    .hero-pills {
-      display: flex; flex-wrap: wrap; gap: 8px;
-    }
+    .hero h1 { color: #f4efe3; margin-bottom: 20px; }
+    .hero h1 em { font-style: italic; color: rgba(244,239,227,0.7); }
+    .hero-sub { font-size: 1.05rem; line-height: 1.75; color: rgba(244,239,227,0.65); max-width: 480px; margin-bottom: 34px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 48px; }
+    .btn-cream { background: #f4efe3; color: var(--green); font-weight: 700; }
+    .btn-cream:hover { background: #ede7d8; transform: translateY(-1px); }
+    .btn-cream-outline { background: transparent; color: #f4efe3; border: 1.5px solid rgba(244,239,227,0.4); }
+    .btn-cream-outline:hover { background: rgba(244,239,227,0.08); border-color: rgba(244,239,227,0.6); }
+
+    /* Proof pills in hero */
+    .hero-pills { display: flex; flex-wrap: wrap; gap: 8px; }
     .pill {
       display: inline-flex; align-items: center; gap: 6px;
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: 100px; padding: 6px 14px;
-      font-size: 12px; font-weight: 600; color: var(--t2);
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 100px; padding: 5px 13px;
+      font-size: 12px; font-weight: 500; color: rgba(244,239,227,0.65);
+      font-family: 'Inter', sans-serif;
     }
-    .pill-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
+    .pill-dot { width: 5px; height: 5px; border-radius: 50%; background: #7a9168; }
 
-    /* ── COA Mockup Card ──────────────────────────────────────────── */
+    /* ── COA Mockup ───────────────────────────────────────────────── */
     .coa-card {
-      background: var(--card);
-      border: 1px solid var(--border-hi);
+      background: #f4efe3;
       border-radius: var(--r-lg);
-      padding: 28px;
+      padding: 26px;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 24px 64px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.06);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.25);
     }
     .coa-card::before {
       content: '';
       position: absolute; top: 0; left: 0; right: 0; height: 3px;
-      background: linear-gradient(90deg, var(--gold), var(--gold-bright), transparent);
+      background: linear-gradient(90deg, var(--sage), var(--green-soft), transparent);
     }
     .coa-header {
       display: flex; justify-content: space-between; align-items: flex-start;
-      margin-bottom: 20px; padding-bottom: 16px;
+      margin-bottom: 18px; padding-bottom: 14px;
       border-bottom: 1px solid var(--border);
     }
-    .coa-lab {
-      font-family: 'Space Mono', monospace;
-      font-size: 12px; font-weight: 700; color: var(--t1); letter-spacing: 0.04em;
-    }
-    .coa-lab-sub { font-size: 10px; color: var(--t3); font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; }
+    .coa-lab { font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; color: var(--t1); letter-spacing: 0.04em; }
+    .coa-lab-sub { font-size: 9px; color: var(--t3); font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; margin-top: 2px; font-family: 'Inter', sans-serif; }
     .coa-title-badge {
-      background: var(--gold-dim); border: 1px solid rgba(191,133,32,0.25);
-      border-radius: 6px; padding: 4px 10px;
-      font-size: 10px; font-weight: 700; letter-spacing: 0.08em;
-      text-transform: uppercase; color: var(--gold-bright);
+      background: var(--green-dim);
+      border: 1px solid var(--green-dim2);
+      border-radius: 4px; padding: 4px 9px;
+      font-size: 9.5px; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--green-soft);
+      font-family: 'Inter', sans-serif;
     }
-    .coa-meta { margin-bottom: 18px; }
-    .coa-meta-row {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 5px 0; font-size: 12px;
-    }
-    .coa-meta-label { color: var(--t3); font-weight: 500; }
-    .coa-meta-value { color: var(--t2); font-weight: 400; font-family: 'Space Mono', monospace; font-size: 11.5px; }
-    .coa-divider { height: 1px; background: var(--border); margin: 14px 0; }
-    .coa-results { display: flex; flex-direction: column; gap: 0; }
+    .coa-meta { margin-bottom: 16px; }
+    .coa-meta-row { display: flex; justify-content: space-between; align-items: center; padding: 4px 0; font-size: 11.5px; }
+    .coa-meta-label { color: var(--t3); font-weight: 500; font-family: 'Inter', sans-serif; }
+    .coa-meta-value { color: var(--t2); font-family: 'Space Mono', monospace; font-size: 10.5px; }
+    .coa-divider { height: 1px; background: var(--border); margin: 12px 0; }
     .coa-row {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 9px 0; border-bottom: 1px solid var(--border);
-      font-size: 12.5px;
+      padding: 8px 0; border-bottom: 1px solid var(--border);
+      font-size: 12px;
     }
     .coa-row:last-child { border-bottom: none; }
-    .coa-test { color: var(--t2); font-weight: 500; }
-    .coa-result-right { display: flex; align-items: center; gap: 10px; }
-    .coa-value { font-family: 'Space Mono', monospace; font-weight: 700; color: var(--t1); font-size: 11.5px; }
+    .coa-test { color: var(--t2); font-weight: 500; font-family: 'Inter', sans-serif; }
+    .coa-result-right { display: flex; align-items: center; gap: 8px; }
+    .coa-value { font-family: 'Space Mono', monospace; font-weight: 700; color: var(--t1); font-size: 11px; }
     .coa-pass {
-      display: inline-flex; align-items: center; gap: 4px;
-      background: var(--green-dim); border: 1px solid rgba(15,170,100,0.2);
+      display: inline-flex; align-items: center; gap: 3px;
+      background: rgba(74,99,56,0.1); border: 1px solid rgba(74,99,56,0.2);
       border-radius: 100px; padding: 2px 8px;
-      font-size: 10px; font-weight: 700; color: var(--green);
+      font-size: 9.5px; font-weight: 700; color: var(--green-soft);
+      font-family: 'Inter', sans-serif;
       opacity: 0; transform: scale(0.7);
       transition: opacity .35s ease, transform .35s ease;
     }
     .coa-pass.revealed { opacity: 1; transform: scale(1); }
-    /* QR glow after all results shown */
-    .coa-card.qr-active .coa-qr {
-      box-shadow: 0 0 14px rgba(15,170,100,0.5);
-      transition: box-shadow .4s ease;
-    }
-    @keyframes qrPulse { 0%,100%{box-shadow:0 0 6px rgba(15,170,100,0.3)} 50%{box-shadow:0 0 20px rgba(15,170,100,0.7)} }
-    .coa-card.qr-active .coa-qr { animation: qrPulse 1.8s ease 3; }
+    .coa-card.qr-active .coa-qr { box-shadow: 0 0 12px rgba(74,99,56,0.35); }
     .coa-footer {
-      margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--border);
+      margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border);
       display: flex; align-items: center; justify-content: space-between;
     }
-    .coa-qr {
-      width: 42px; height: 42px; background: var(--t1);
-      border-radius: 4px; padding: 4px; flex-shrink: 0;
-    }
+    .coa-qr { width: 40px; height: 40px; background: var(--t1); border-radius: 4px; padding: 4px; flex-shrink: 0; transition: box-shadow .4s; }
     .coa-qr-inner {
       width: 100%; height: 100%;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Crect x='0' y='0' width='4' height='4' fill='%23111'/%3E%3Crect x='1' y='1' width='2' height='2' fill='white'/%3E%3Crect x='6' y='0' width='4' height='4' fill='%23111'/%3E%3Crect x='7' y='1' width='2' height='2' fill='white'/%3E%3Crect x='0' y='6' width='4' height='4' fill='%23111'/%3E%3Crect x='1' y='7' width='2' height='2' fill='white'/%3E%3Crect x='5' y='5' width='1' height='1' fill='%23111'/%3E%3Crect x='7' y='5' width='1' height='1' fill='%23111'/%3E%3Crect x='6' y='6' width='1' height='1' fill='%23111'/%3E%3Crect x='8' y='6' width='1' height='1' fill='%23111'/%3E%3Crect x='9' y='7' width='1' height='1' fill='%23111'/%3E%3Crect x='5' y='8' width='2' height='1' fill='%23111'/%3E%3Crect x='8' y='8' width='2' height='1' fill='%23111'/%3E%3Crect x='4' y='4' width='1' height='1' fill='%23111'/%3E%3Crect x='4' y='0' width='1' height='1' fill='%23111'/%3E%3Crect x='4' y='2' width='1' height='1' fill='%23111'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Crect x='0' y='0' width='4' height='4' fill='%23f4efe3'/%3E%3Crect x='1' y='1' width='2' height='2' fill='%231e3018'/%3E%3Crect x='6' y='0' width='4' height='4' fill='%23f4efe3'/%3E%3Crect x='7' y='1' width='2' height='2' fill='%231e3018'/%3E%3Crect x='0' y='6' width='4' height='4' fill='%23f4efe3'/%3E%3Crect x='1' y='7' width='2' height='2' fill='%231e3018'/%3E%3Crect x='5' y='5' width='1' height='1' fill='%231e3018'/%3E%3Crect x='7' y='5' width='1' height='1' fill='%231e3018'/%3E%3Crect x='6' y='6' width='1' height='1' fill='%231e3018'/%3E%3Crect x='8' y='6' width='1' height='1' fill='%231e3018'/%3E%3Crect x='9' y='7' width='1' height='1' fill='%231e3018'/%3E%3Crect x='5' y='8' width='2' height='1' fill='%231e3018'/%3E%3Crect x='8' y='8' width='2' height='1' fill='%231e3018'/%3E%3C/svg%3E");
       background-size: cover;
     }
-    .coa-verify-text { font-size: 10px; color: var(--t3); text-align: right; line-height: 1.5; }
-    .coa-verify-text strong { color: var(--green); display: block; font-size: 11px; }
+    .coa-verify-text { font-size: 10px; color: var(--t3); text-align: right; line-height: 1.5; font-family: 'Inter', sans-serif; }
+    .coa-verify-text strong { color: var(--green-soft); display: block; font-size: 10.5px; }
 
-    /* ── Animate-in ───────────────────────────────────────────────── */
-    .ai { opacity: 0; transform: translateY(22px); transition: opacity .5s ease, transform .5s ease; }
-    .ai.vis { opacity: 1; transform: none; }
-    .ai-d1 { transition-delay: .05s; }
-    .ai-d2 { transition-delay: .12s; }
-    .ai-d3 { transition-delay: .19s; }
-    .ai-d4 { transition-delay: .26s; }
+    /* ── Stats bar ────────────────────────────────────────────────── */
+    .stats-bar {
+      background: var(--cream-dark);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 0;
+    }
+    .stats-row { display: flex; }
+    .stat-item {
+      flex: 1; padding: 28px 20px; text-align: center;
+      border-right: 1px solid var(--border);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.9rem; color: var(--green); display: block; margin-bottom: 4px;
+    }
+    .stat-label { font-size: 11.5px; color: var(--t3); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
 
-    /* ── Problem ──────────────────────────────────────────────────── */
-    .prob-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
-    .prob-quote {
-      background: var(--card);
+    /* ── Narrative / Story section ────────────────────────────────── */
+    .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
+    .story-pull {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.4rem, 2.5vw, 1.85rem);
+      line-height: 1.4;
+      color: var(--green);
+      font-style: italic;
+      padding-left: 24px;
+      border-left: 3px solid var(--sage);
+      margin: 28px 0;
+    }
+    .story-body p { margin-bottom: 16px; font-size: 15px; line-height: 1.78; }
+    .story-body p:last-child { margin-bottom: 0; }
+
+    /* ── QR Rule ──────────────────────────────────────────────────── */
+    .qr-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; max-width: 720px; margin: 40px auto 0; }
+    .qr-card {
+      background: var(--cream-card);
       border: 1px solid var(--border);
-      border-left: 3px solid var(--gold);
-      border-radius: 0 var(--r) var(--r) 0;
-      padding: 24px; margin: 24px 0;
+      border-radius: var(--r); padding: 24px 20px; text-align: center;
+      transition: border-color .2s;
     }
-    .prob-quote p { font-size: 1rem; font-style: italic; color: var(--t1); line-height: 1.7; }
-    .prob-quote cite { display: block; margin-top: 10px; font-style: normal; font-size: 11px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: var(--t3); }
-    .reason-list { display: flex; flex-direction: column; gap: 20px; }
-    .reason-item { display: flex; gap: 14px; align-items: flex-start; }
-    .r-icon {
-      width: 42px; height: 42px; border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 18px; flex-shrink: 0;
-    }
-    .r-icon--red  { background: var(--red-dim); }
-    .r-icon--gold { background: var(--gold-dim); }
-    .r-icon--grn  { background: var(--green-dim); }
-    .r-text h4 { margin-bottom: 4px; }
-    .r-text p  { font-size: 13.5px; }
+    .qr-card:hover { border-color: var(--border-hi); }
+    .qr-ico { font-size: 1.8rem; margin-bottom: 12px; }
+    .qr-card h4 { margin-bottom: 8px; }
+    .qr-card p { font-size: 13px; }
+    .qr-card--bad  h4 { color: #a33; }
+    .qr-card--warn h4 { color: var(--gold); }
+    .qr-card--good h4 { color: var(--green-soft); }
+    .qr-card--good { border-color: rgba(74,99,56,0.2); }
 
     /* ── Standards ────────────────────────────────────────────────── */
     .std-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
     .std-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--r-lg); padding: 30px;
-      transition: border-color .2s, transform .2s, box-shadow .2s;
-    }
-    .std-card:hover {
-      border-color: var(--border-hi);
-      transform: translateY(-3px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(191,133,32,0.06);
-    }
-    .std-ico {
-      width: 50px; height: 50px; border-radius: 12px;
-      background: var(--gold-dim); border: 1px solid rgba(191,133,32,0.18);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 22px; margin-bottom: 18px;
-    }
-    .std-card h3 { margin-bottom: 10px; }
-    .std-card p  { font-size: 14px; line-height: 1.68; }
-    .std-badge {
-      display: inline-flex; align-items: center; gap: 5px;
-      margin-top: 16px; background: var(--green-dim);
-      border: 1px solid rgba(15,170,100,0.18); border-radius: 100px;
-      padding: 4px 11px; font-size: 11px; font-weight: 700; color: var(--green);
-    }
-    .std-badge::before { content: '✓'; font-weight: 800; }
-
-    /* ── Services ─────────────────────────────────────────────────── */
-    .svc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-    .svc-card {
-      background: var(--card);
+      background: var(--cream-card);
       border: 1px solid var(--border);
       border-radius: var(--r-lg); padding: 30px;
       transition: border-color .2s, transform .2s;
     }
+    .std-card:hover { border-color: var(--border-hi); transform: translateY(-2px); }
+    .std-ico {
+      width: 48px; height: 48px; border-radius: 10px;
+      background: var(--green-dim); border: 1px solid var(--green-dim2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; margin-bottom: 16px;
+    }
+    .std-card h3 { margin-bottom: 10px; }
+    .std-card p  { font-size: 14px; line-height: 1.7; }
+    .std-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      margin-top: 14px; background: rgba(74,99,56,0.08);
+      border: 1px solid rgba(74,99,56,0.18); border-radius: 100px;
+      padding: 4px 11px; font-size: 11px; font-weight: 700; color: var(--green-soft);
+      font-family: 'Inter', sans-serif;
+    }
+    .std-badge::before { content: '✓'; }
+
+    /* ── Services ─────────────────────────────────────────────────── */
+    .svc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .svc-card {
+      background: var(--cream-card); border: 1px solid var(--border);
+      border-radius: var(--r-lg); padding: 30px;
+      transition: border-color .2s, transform .2s;
+    }
     .svc-card:hover { border-color: var(--border-hi); transform: translateY(-2px); }
-    .svc-card.feat { border-color: rgba(191,133,32,0.28); background: linear-gradient(135deg, var(--card), rgba(191,133,32,0.03)); }
+    .svc-card.feat { border-color: rgba(30,48,24,0.25); background: var(--green); }
+    .svc-card.feat h3, .svc-card.feat p, .svc-card.feat li { color: rgba(244,239,227,0.85); }
+    .svc-card.feat h3 { color: #f4efe3; }
     .svc-tag {
       display: inline-block; font-size: 10px; font-weight: 700;
       letter-spacing: 0.1em; text-transform: uppercase;
       border-radius: 4px; padding: 3px 8px; margin-bottom: 14px;
+      font-family: 'Inter', sans-serif;
     }
-    .svc-tag--gold { background: var(--gold-dim); color: var(--gold-bright); }
-    .svc-tag--blue { background: var(--blue-dim); color: var(--blue); }
-    .svc-card h3 { font-size: 1.25rem; margin-bottom: 10px; }
+    .svc-tag--green { background: var(--green-dim); color: var(--green-soft); }
+    .svc-tag--cream { background: rgba(244,239,227,0.15); color: rgba(244,239,227,0.7); }
+    .svc-tag--sage  { background: rgba(122,145,104,0.12); color: var(--sage); }
+    .svc-card h3 { font-size: 1.2rem; margin-bottom: 10px; }
     .svc-card p  { font-size: 14px; }
-    .svc-list { margin-top: 16px; display: flex; flex-direction: column; gap: 7px; list-style: none; }
-    .svc-list li { display: flex; align-items: center; gap: 9px; font-size: 13.5px; color: var(--t2); }
-    .svc-list li::before { content: '→'; color: var(--gold); font-size: 11px; flex-shrink: 0; }
+    .svc-list { margin-top: 14px; display: flex; flex-direction: column; gap: 7px; list-style: none; }
+    .svc-list li { display: flex; align-items: center; gap: 9px; font-size: 13.5px; }
+    .svc-list li::before { content: '→'; font-size: 11px; flex-shrink: 0; }
+    .svc-card.feat .svc-list li::before { color: rgba(244,239,227,0.5); }
+    .svc-list li:not(.feat li) { color: var(--t2); }
     .svc-link {
-      display: inline-flex; align-items: center; gap: 6px; margin-top: 22px;
-      font-size: 13px; font-weight: 600; color: var(--gold);
-      transition: gap .15s;
+      display: inline-flex; align-items: center; gap: 6px; margin-top: 20px;
+      font-size: 13px; font-weight: 600; color: var(--green-soft);
+      transition: gap .15s; font-family: 'Inter', sans-serif;
     }
     .svc-link:hover { gap: 10px; }
+    .svc-card.feat .svc-link { color: rgba(244,239,227,0.7); }
 
     /* ── Process ──────────────────────────────────────────────────── */
     .proc-steps {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 2px; background: var(--border);
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 1px; background: var(--border);
+      border: 1px solid var(--border);
       border-radius: var(--r-lg); overflow: hidden;
     }
-    .proc-step {
-      background: var(--card); padding: 34px 26px; position: relative;
-      transition: background .2s;
-    }
-    .proc-step:hover { background: var(--card-hi); }
+    .proc-step { background: var(--cream-card); padding: 32px 26px; position: relative; transition: background .18s; }
+    .proc-step:hover { background: var(--cream-dark); }
     .proc-num {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 44px; font-weight: 700;
-      color: var(--t3); line-height: 1; margin-bottom: 14px;
+      font-family: 'DM Serif Display', serif;
+      font-size: 3rem; color: var(--cream-dark);
+      line-height: 1; margin-bottom: 12px;
+      -webkit-text-stroke: 1.5px var(--border-hi);
     }
-    .proc-step h3 { font-size: 1rem; margin-bottom: 8px; }
+    .proc-step h3 { font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 600; margin-bottom: 8px; color: var(--t1); }
     .proc-step p  { font-size: 13px; color: var(--t2); line-height: 1.6; }
-    .proc-step-ico { position: absolute; top: 26px; right: 24px; font-size: 20px; opacity: 0.35; }
+    .proc-ico { position: absolute; top: 24px; right: 22px; font-size: 18px; opacity: 0.4; }
 
-    /* ── Why Prime ────────────────────────────────────────────────── */
-    .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 48px; }
+    /* ── Why ──────────────────────────────────────────────────────── */
+    .why-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; margin-top: 48px; }
     .why-card {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: var(--r); padding: 26px;
-      transition: border-color .2s;
+      background: var(--cream-card); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 26px; transition: border-color .2s;
     }
     .why-card:hover { border-color: var(--border-hi); }
-    .why-ico { font-size: 26px; margin-bottom: 12px; }
-    .why-card h4 { margin-bottom: 7px; font-size: 0.95rem; }
+    .why-ico { font-size: 24px; margin-bottom: 12px; }
+    .why-card h4 { margin-bottom: 7px; }
     .why-card p  { font-size: 13.5px; }
-
-    /* ── Social Proof ─────────────────────────────────────────────── */
-    .proof-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 48px; }
-    .proof-card {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: var(--r); padding: 24px 20px; text-align: center;
-    }
-    .proof-num {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 2rem; font-weight: 700; color: var(--t1); display: block; margin-bottom: 4px;
-    }
-    .proof-label { font-size: 12px; color: var(--t3); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
 
     /* ── FAQ ──────────────────────────────────────────────────────── */
     .faq-list { display: flex; flex-direction: column; }
@@ -465,249 +435,210 @@
       width: 100%; text-align: left; background: none; border: none;
       cursor: pointer; display: flex; align-items: center; justify-content: space-between;
       gap: 16px; padding: 20px 0; color: var(--t1);
-      font-family: 'Space Grotesk', sans-serif; font-size: 1rem; font-weight: 600;
+      font-family: 'DM Serif Display', serif; font-size: 1.05rem; font-weight: 400;
       transition: color .15s;
     }
-    .faq-q:hover { color: var(--gold-bright); }
+    .faq-q:hover { color: var(--green); }
     .faq-chev {
       width: 22px; height: 22px; border: 1.5px solid var(--border-hi);
       border-radius: 50%; display: flex; align-items: center;
-      justify-content: center; font-size: 11px; color: var(--t2);
-      flex-shrink: 0; transition: transform .25s, border-color .15s, color .15s;
+      justify-content: center; font-size: 11px; color: var(--t3);
+      flex-shrink: 0; transition: transform .25s, border-color .15s;
+      font-family: 'Inter', sans-serif;
     }
-    .faq-item.open .faq-chev { transform: rotate(180deg); border-color: var(--gold); color: var(--gold); }
+    .faq-item.open .faq-chev { transform: rotate(180deg); border-color: var(--green); color: var(--green); }
     .faq-ans { max-height: 0; overflow: hidden; transition: max-height .3s ease; }
-    .faq-ans-in {
-      padding: 0 0 20px; font-size: 14.5px;
-      color: var(--t2); line-height: 1.75; max-width: 680px;
-    }
-    .faq-ans-in a { color: var(--gold); text-decoration: underline; text-underline-offset: 3px; }
+    .faq-ans-in { padding: 0 0 20px; font-size: 14.5px; color: var(--t2); line-height: 1.75; max-width: 680px; }
+    .faq-ans-in a { color: var(--green); text-decoration: underline; text-underline-offset: 3px; }
 
-    /* ── Enquiry Form ─────────────────────────────────────────────── */
+    /* ── Form ─────────────────────────────────────────────────────── */
     .form-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--r-lg);
-      padding: 48px;
-      max-width: 700px;
-      margin: 0 auto;
+      background: var(--cream-card); border: 1px solid var(--border);
+      border-radius: var(--r-lg); padding: 48px; max-width: 680px; margin: 0 auto;
     }
     .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .form-group { display: flex; flex-direction: column; gap: 7px; }
-    .form-group label { font-size: 12.5px; font-weight: 600; color: var(--t2); letter-spacing: 0.03em; }
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      background: var(--bg2);
+    .form-group label { font-size: 12.5px; font-weight: 600; color: var(--t2); letter-spacing: 0.03em; font-family: 'Inter', sans-serif; }
+    .form-group input, .form-group select, .form-group textarea {
+      background: var(--cream);
       border: 1px solid var(--border-hi);
-      border-radius: 8px; padding: 11px 14px;
+      border-radius: 7px; padding: 11px 14px;
       font-size: 14px; color: var(--t1);
-      font-family: inherit;
-      transition: border-color .15s;
-      outline: none;
+      font-family: 'Inter', sans-serif;
+      transition: border-color .15s; outline: none;
     }
-    .form-group input::placeholder,
-    .form-group textarea::placeholder { color: var(--t3); }
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus { border-color: var(--gold); }
-    .form-group select { cursor: pointer; appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236d7a94' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
-    .form-group select option { background: var(--card); color: var(--t1); }
+    .form-group input::placeholder, .form-group textarea::placeholder { color: var(--t3); }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--green); }
+    .form-group select { cursor: pointer; appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238a9480' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; background-size: 12px; padding-right: 36px; }
+    .form-group select option { background: #f4efe3; color: var(--t1); }
     .form-group textarea { resize: vertical; min-height: 110px; }
     .form-full { grid-column: 1 / -1; }
-    .form-note { font-size: 12px; color: var(--t3); text-align: center; margin-top: 14px; }
-    .form-success {
-      display: none; text-align: center; padding: 32px;
-      font-size: 1.1rem; color: var(--green); font-weight: 600;
-    }
+    .form-note { font-size: 12px; color: var(--t3); text-align: center; margin-top: 14px; font-family: 'Inter', sans-serif; }
+    .form-success { display: none; text-align: center; padding: 32px; font-size: 1.1rem; color: var(--green-soft); font-weight: 600; font-family: 'DM Serif Display', serif; }
 
-    /* ── CTA Section ──────────────────────────────────────────────── */
-    .cta-sec {
-      padding: 96px 0; background: var(--bg2);
-      position: relative; overflow: hidden;
-    }
-    .cta-sec::before {
-      content: ''; position: absolute; inset: 0;
-      background: radial-gradient(ellipse 60% 80% at 50% 50%, var(--gold-glow) 0%, transparent 65%);
-      pointer-events: none;
-    }
-    .cta-box {
-      position: relative;
-      background: var(--card);
-      border: 1px solid rgba(191,133,32,0.22);
-      border-radius: 24px; padding: 60px 48px;
-      text-align: center; max-width: 640px; margin: 0 auto;
-      box-shadow: 0 24px 80px rgba(0,0,0,0.5);
-    }
-    .cta-box h2 { margin-bottom: 14px; }
-    .cta-box p  { font-size: 1.05rem; max-width: 460px; margin: 0 auto 34px; }
+    /* ── CTA ──────────────────────────────────────────────────────── */
+    .cta-sec { padding: 96px 0; background: var(--green); }
+    .cta-box { text-align: center; max-width: 600px; margin: 0 auto; }
+    .cta-box .eye { color: rgba(244,239,227,0.5); }
+    .cta-box h2 { color: #f4efe3; margin-bottom: 14px; }
+    .cta-box p  { color: rgba(244,239,227,0.65); font-size: 1.05rem; max-width: 440px; margin: 0 auto 34px; }
     .cta-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-    .cta-note { margin-top: 18px; font-size: 11.5px; color: var(--t3); }
+    .cta-note { margin-top: 16px; font-size: 11.5px; color: rgba(244,239,227,0.35); font-family: 'Inter', sans-serif; }
+
+    /* ── Brand link bar ───────────────────────────────────────────── */
+    .brand-bar {
+      background: var(--cream-dark);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 24px; text-align: center;
+      font-size: 13px; color: var(--t3);
+      font-family: 'Inter', sans-serif;
+    }
+    .brand-bar a { color: var(--green); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
 
     /* ── Footer ───────────────────────────────────────────────────── */
-    .footer { background: #030308; border-top: 1px solid var(--border); padding: 60px 0 36px; }
-    .foot-grid {
-      display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr;
-      gap: 48px; margin-bottom: 48px;
-    }
-    .foot-brand p { font-size: 13.5px; line-height: 1.68; margin-top: 16px; max-width: 270px; }
-    .foot-col h5 { font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--t3); margin-bottom: 14px; }
+    .footer { background: var(--green); border-top: 1px solid rgba(255,255,255,0.06); padding: 60px 0 36px; }
+    .foot-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+    .foot-brand p { font-size: 13.5px; line-height: 1.68; margin-top: 14px; max-width: 260px; color: rgba(244,239,227,0.5); }
+    .foot-logo-name { font-family: 'DM Serif Display', serif; font-size: 15px; color: #f4efe3; }
+    .foot-logo-sub  { font-size: 9px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(244,239,227,0.35); font-family: 'Inter', sans-serif; }
+    .foot-col h5 { font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(244,239,227,0.35); margin-bottom: 14px; font-family: 'Inter', sans-serif; }
     .foot-links { display: flex; flex-direction: column; gap: 9px; }
-    .foot-links a { font-size: 13.5px; color: var(--t2); transition: color .12s; }
-    .foot-links a:hover { color: var(--t1); }
-    .foot-bottom { border-top: 1px solid var(--border); padding-top: 28px; display: flex; flex-direction: column; gap: 16px; }
-    .foot-disc {
-      background: var(--red-dim); border: 1px solid rgba(232,64,64,0.13);
-      border-radius: 8px; padding: 16px 20px;
-      font-size: 11.5px; color: rgba(232,64,64,0.75); line-height: 1.65;
-    }
-    .foot-disc strong { color: var(--red); }
-    .foot-copy {
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 10px; font-size: 12px; color: var(--t3);
-    }
+    .foot-links a { font-size: 13.5px; color: rgba(244,239,227,0.55); transition: color .12s; }
+    .foot-links a:hover { color: #f4efe3; }
+    .foot-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 28px; display: flex; flex-direction: column; gap: 14px; }
+    .foot-disc { font-size: 11.5px; color: rgba(244,239,227,0.3); line-height: 1.65; max-width: 800px; }
+    .foot-disc strong { color: rgba(244,239,227,0.5); }
+    .foot-copy { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; font-size: 12px; color: rgba(244,239,227,0.3); font-family: 'Inter', sans-serif; }
     .foot-legal { display: flex; gap: 20px; }
-    .foot-legal a { color: var(--t3); transition: color .12s; }
-    .foot-legal a:hover { color: var(--t2); }
+    .foot-legal a { color: rgba(244,239,227,0.3); transition: color .12s; }
+    .foot-legal a:hover { color: rgba(244,239,227,0.6); }
 
-    /* ── Mobile sticky CTA ────────────────────────────────────────── */
-    .mob-sticky {
-      display: none; position: fixed; bottom: 0; left: 0; right: 0;
-      z-index: 999; padding: 12px 16px;
-      background: rgba(6,6,16,0.96);
-      backdrop-filter: blur(12px);
-      border-top: 1px solid var(--border);
-    }
+    /* ── Mobile sticky ────────────────────────────────────────────── */
+    .mob-sticky { display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 999; padding: 12px 16px; background: rgba(244,239,227,0.97); backdrop-filter: blur(12px); border-top: 1px solid var(--border); }
     .mob-sticky .btn { width: 100%; justify-content: center; }
 
     /* ── Back to top ──────────────────────────────────────────────── */
-    #btt {
-      position: fixed; bottom: 28px; right: 24px; z-index: 998;
-      width: 40px; height: 40px; border-radius: 10px;
-      background: var(--card); border: 1px solid var(--border-hi);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 16px; cursor: pointer; color: var(--t2);
-      opacity: 0; pointer-events: none;
-      transition: opacity .2s, transform .2s, color .15s;
-    }
+    #btt { position: fixed; bottom: 28px; right: 24px; z-index: 998; width: 40px; height: 40px; border-radius: 10px; background: var(--cream-card); border: 1px solid var(--border-hi); display: flex; align-items: center; justify-content: center; font-size: 16px; cursor: pointer; color: var(--t2); opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; }
     #btt.show { opacity: 1; pointer-events: auto; }
     #btt:hover { color: var(--t1); transform: translateY(-2px); }
 
+    /* ── Animate in ───────────────────────────────────────────────── */
+    .ai { opacity: 0; transform: translateY(20px); transition: opacity .5s ease, transform .5s ease; }
+    .ai.vis { opacity: 1; transform: none; }
+    .ai-d1 { transition-delay: .07s; }
+    .ai-d2 { transition-delay: .14s; }
+    .ai-d3 { transition-delay: .21s; }
+
     /* ── Responsive ───────────────────────────────────────────────── */
     @media (max-width: 1024px) {
-      .hero-inner    { grid-template-columns: 1fr; }
-      .coa-card      { max-width: 500px; }
-      .proof-grid    { grid-template-columns: 1fr 1fr; }
-      .foot-grid     { grid-template-columns: 1fr 1fr; gap: 32px; }
-      .proc-steps    { grid-template-columns: 1fr 1fr; }
+      .hero-inner { grid-template-columns: 1fr; }
+      .coa-card   { max-width: 480px; }
+      .story-grid { grid-template-columns: 1fr; gap: 40px; }
+      .foot-grid  { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .proc-steps { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 768px) {
       .sec { padding: 60px 0; }
-      .nav-links, .nav-actions .btn-ghost { display: none; }
+      .nav-links, .nav-actions .btn-outline { display: none; }
       .burger { display: flex; }
-      .hero   { padding: 56px 0 64px; }
-      .prob-grid { grid-template-columns: 1fr; gap: 40px; }
+      .hero { padding: 56px 0 60px; }
+      .stats-row { flex-wrap: wrap; }
+      .stat-item { min-width: 50%; border-bottom: 1px solid var(--border); }
       .std-grid  { grid-template-columns: 1fr; }
       .svc-grid  { grid-template-columns: 1fr; }
       .proc-steps { grid-template-columns: 1fr; }
       .why-grid  { grid-template-columns: 1fr 1fr; }
       .form-grid { grid-template-columns: 1fr; }
       .foot-grid { grid-template-columns: 1fr; gap: 28px; }
-      .foot-brand p { max-width: 100%; }
-      .cta-box   { padding: 36px 22px; }
+      .foot-copy { flex-direction: column; }
       .cta-actions { flex-direction: column; }
       .cta-actions .btn { justify-content: center; }
-      .foot-copy { flex-direction: column; text-align: center; }
       .mob-sticky { display: block; }
+      .qr-grid { grid-template-columns: 1fr; max-width: 380px; }
     }
     @media (max-width: 480px) {
-      h1 { font-size: 1.9rem; }
+      h1 { font-size: 2rem; }
       .hero-actions { flex-direction: column; }
       .hero-actions .btn { justify-content: center; }
       .why-grid { grid-template-columns: 1fr; }
-      .proof-grid { grid-template-columns: 1fr 1fr; }
       .form-card { padding: 28px 20px; }
     }
   </style>
 </head>
 <body>
 
-<!-- ── Research Disclaimer ─────────────────────────────────────────────────── -->
-<div class="disc-bar">
-  ⚠ &nbsp;FOR RESEARCH PURPOSES ONLY — NOT FOR HUMAN CONSUMPTION
+<!-- ── Brand bar ─────────────────────────────────────────────────────────── -->
+<div class="brand-bar">
+  The manufacturing arm of <a href="https://primeconcierge.online" target="_blank" rel="noopener">Prime Concierge</a> — pharmaceutical-grade peptides, sourced by the people who use them.
 </div>
 
-<!-- ── Nav ────────────────────────────────────────────────────────────────── -->
+<!-- ── Disclaimer ────────────────────────────────────────────────────────── -->
+<div class="disc-bar">
+  For research purposes only &nbsp;·&nbsp; Not for human consumption
+</div>
+
+<!-- ── Nav ───────────────────────────────────────────────────────────────── -->
 <nav class="nav" id="nav">
   <div class="wrap">
     <div class="nav-row">
       <a href="#" class="logo" aria-label="Prime Manufacturing home">
         <div class="logo-mark">P</div>
         <div class="logo-text">
-          <span class="logo-name">PRIME</span>
-          <span class="logo-sub">Manufacturing</span>
+          <span class="logo-name">Prime Manufacturing</span>
+          <span class="logo-sub">by Prime Concierge</span>
         </div>
       </a>
       <ul class="nav-links">
+        <li><a href="#story">Our Story</a></li>
         <li><a href="#standards">Quality</a></li>
         <li><a href="#services">Services</a></li>
         <li><a href="#process">Process</a></li>
-        <li><a href="#why">Why Prime</a></li>
         <li><a href="#faq">FAQ</a></li>
       </ul>
       <div class="nav-actions">
-        <a href="#enquire" class="btn btn-ghost nav-cta">Contact</a>
-        <a href="#enquire" class="btn btn-gold nav-cta">Book a Call</a>
+        <a href="#enquire" class="btn btn-outline nav-cta">Contact</a>
+        <a href="#enquire" class="btn btn-dark nav-cta">Book a Call</a>
       </div>
       <button class="burger" id="burger" aria-label="Open menu">
         <span></span><span></span><span></span>
       </button>
     </div>
     <div class="mob-menu" id="mobMenu">
+      <a href="#story">Our Story</a>
       <a href="#standards">Quality Standards</a>
       <a href="#services">Services</a>
       <a href="#process">Process</a>
-      <a href="#why">Why Prime</a>
       <a href="#faq">FAQ</a>
-      <a href="#enquire" class="btn btn-gold">Book a Discovery Call</a>
+      <a href="#enquire" class="btn btn-dark">Book a Discovery Call</a>
     </div>
   </div>
 </nav>
 
-<!-- ── Hero ───────────────────────────────────────────────────────────────── -->
+<!-- ── Hero ──────────────────────────────────────────────────────────────── -->
 <main>
 <section class="hero" aria-label="Hero">
-  <div class="hero-grid"></div>
-  <div class="hero-glow"></div>
   <div class="wrap">
     <div class="hero-inner">
-
-      <!-- Left: Copy -->
       <div>
-        <div class="hero-tag">
-          <span class="hero-tag-dot"></span>
-          B2B Peptide Manufacturing &amp; Private Label
-        </div>
-        <!-- H1 contains primary keyword in first 100 words of page -->
-        <h1>Premium Peptide Manufacturing.<br/><em>Documented. Verified.</em> Trusted.</h1>
+        <div class="hero-tag">The manufacturing arm of Prime Concierge</div>
+        <h1>Pharmaceutical-grade peptide manufacturing. <em>Built by people who use them.</em></h1>
         <p class="hero-sub">
-          We supply research-grade peptides with complete Certificate of Analysis (COA) documentation, Janoshik third-party verification, and testing for purity, sterility, endotoxins, and heavy metals — on every single batch we manufacture.
+          We were tired of mystery vials and "trust me" sourcing — so we built the supply chain we wished existed. Prime Manufacturing is the B2B backbone: private label, white label, and bulk supply, with full Janoshik COA documentation on every single batch.
         </p>
         <div class="hero-actions">
-          <a href="#enquire" class="btn btn-gold btn-lg">Book a Discovery Call →</a>
-          <a href="#standards" class="btn btn-ghost btn-lg">Our Quality Standards</a>
+          <a href="#enquire" class="btn btn-cream btn-lg">Book a Discovery Call →</a>
+          <a href="#story" class="btn btn-cream-outline btn-lg">Why We Built This</a>
         </div>
         <div class="hero-pills">
-          <span class="pill"><span class="pill-dot"></span>99%+ Purity Verified</span>
-          <span class="pill"><span class="pill-dot"></span>Janoshik 3rd-Party Tested</span>
-          <span class="pill"><span class="pill-dot"></span>QR-Verified COA</span>
-          <span class="pill"><span class="pill-dot"></span>Sterility Tested</span>
-          <span class="pill"><span class="pill-dot"></span>Endotoxin Tested</span>
-          <span class="pill"><span class="pill-dot"></span>Heavy Metals Panel</span>
+          <span class="pill"><span class="pill-dot"></span>≥99% purity</span>
+          <span class="pill"><span class="pill-dot"></span>Janoshik COA verified</span>
+          <span class="pill"><span class="pill-dot"></span>Sterility tested</span>
+          <span class="pill"><span class="pill-dot"></span>Endotoxin tested</span>
+          <span class="pill"><span class="pill-dot"></span>Heavy metals panel</span>
         </div>
       </div>
 
-      <!-- Right: COA Mockup -->
+      <!-- COA Mockup -->
       <div class="coa-card">
         <div class="coa-header">
           <div>
@@ -717,205 +648,120 @@
           <div class="coa-title-badge">Certificate of Analysis</div>
         </div>
         <div class="coa-meta">
-          <div class="coa-meta-row">
-            <span class="coa-meta-label">Product</span>
-            <span class="coa-meta-value">BPC-157 (5mg)</span>
-          </div>
-          <div class="coa-meta-row">
-            <span class="coa-meta-label">Batch Ref.</span>
-            <span class="coa-meta-value">PM-2026-00144</span>
-          </div>
-          <div class="coa-meta-row">
-            <span class="coa-meta-label">Test Date</span>
-            <span class="coa-meta-value">June 2026</span>
-          </div>
-          <div class="coa-meta-row">
-            <span class="coa-meta-label">Client</span>
-            <span class="coa-meta-value">Prime Manufacturing</span>
-          </div>
+          <div class="coa-meta-row"><span class="coa-meta-label">Product</span><span class="coa-meta-value">BPC-157 (5mg)</span></div>
+          <div class="coa-meta-row"><span class="coa-meta-label">Batch Ref.</span><span class="coa-meta-value">PM-2026-00144</span></div>
+          <div class="coa-meta-row"><span class="coa-meta-label">Test Date</span><span class="coa-meta-value">June 2026</span></div>
+          <div class="coa-meta-row"><span class="coa-meta-label">Client</span><span class="coa-meta-value">Prime Manufacturing</span></div>
         </div>
         <div class="coa-divider"></div>
-        <div class="coa-results">
-          <div class="coa-row">
-            <span class="coa-test">HPLC Purity</span>
-            <div class="coa-result-right">
-              <span class="coa-value">99.4%</span>
-              <span class="coa-pass">✓ PASS</span>
-            </div>
-          </div>
-          <div class="coa-row">
-            <span class="coa-test">Identity (MS)</span>
-            <div class="coa-result-right">
-              <span class="coa-value">Confirmed</span>
-              <span class="coa-pass">✓ PASS</span>
-            </div>
-          </div>
-          <div class="coa-row">
-            <span class="coa-test">Sterility</span>
-            <div class="coa-result-right">
-              <span class="coa-value">No Growth</span>
-              <span class="coa-pass">✓ PASS</span>
-            </div>
-          </div>
-          <div class="coa-row">
-            <span class="coa-test">Endotoxins (LAL)</span>
-            <div class="coa-result-right">
-              <span class="coa-value">&lt;0.1 EU/mg</span>
-              <span class="coa-pass">✓ PASS</span>
-            </div>
-          </div>
-          <div class="coa-row">
-            <span class="coa-test">Heavy Metals (ICP-MS)</span>
-            <div class="coa-result-right">
-              <span class="coa-value">All ND</span>
-              <span class="coa-pass">✓ PASS</span>
-            </div>
-          </div>
+        <div>
+          <div class="coa-row"><span class="coa-test">HPLC Purity</span><div class="coa-result-right"><span class="coa-value">99.4%</span><span class="coa-pass">✓ PASS</span></div></div>
+          <div class="coa-row"><span class="coa-test">Identity (MS)</span><div class="coa-result-right"><span class="coa-value">Confirmed</span><span class="coa-pass">✓ PASS</span></div></div>
+          <div class="coa-row"><span class="coa-test">Sterility</span><div class="coa-result-right"><span class="coa-value">No Growth</span><span class="coa-pass">✓ PASS</span></div></div>
+          <div class="coa-row"><span class="coa-test">Endotoxins (LAL)</span><div class="coa-result-right"><span class="coa-value">&lt;0.1 EU/mg</span><span class="coa-pass">✓ PASS</span></div></div>
+          <div class="coa-row"><span class="coa-test">Heavy Metals (ICP-MS)</span><div class="coa-result-right"><span class="coa-value">All ND</span><span class="coa-pass">✓ PASS</span></div></div>
         </div>
         <div class="coa-footer">
           <div class="coa-qr"><div class="coa-qr-inner"></div></div>
-          <div class="coa-verify-text">
-            <strong>✓ QR Verified</strong>
-            Scan to confirm authenticity<br/>at janoshik.com
-          </div>
+          <div class="coa-verify-text"><strong>✓ QR Verified</strong>Scan to confirm on janoshik.com</div>
         </div>
-      </div>
-
-    </div><!-- /hero-inner -->
-  </div>
-</section>
-
-<!-- ── Stats ───────────────────────────────────────────────────────────────── -->
-<section class="sec section--alt" style="padding:56px 0;" aria-label="Key metrics">
-  <div class="wrap">
-    <div class="proof-grid">
-      <div class="proof-card ai">
-        <span class="proof-num" data-count="99" data-suffix="%+">0%</span>
-        <span class="proof-label">Purity on Every Batch</span>
-      </div>
-      <div class="proof-card ai ai-d1">
-        <span class="proof-num">5</span>
-        <span class="proof-label">Tests Per Batch</span>
-      </div>
-      <div class="proof-card ai ai-d2">
-        <span class="proof-num">100%</span>
-        <span class="proof-label">Batches with Full COA</span>
-      </div>
-      <div class="proof-card ai ai-d3">
-        <span class="proof-num">24h</span>
-        <span class="proof-label">Response Time</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── The Industry Problem ───────────────────────────────────────────────── -->
-<section class="sec" id="problem" aria-labelledby="prob-heading">
+<!-- ── Stats ──────────────────────────────────────────────────────────────── -->
+<div class="stats-bar">
   <div class="wrap">
-    <div class="prob-grid">
+    <div class="stats-row">
+      <div class="stat-item ai"><span class="stat-num">≥99%</span><span class="stat-label">Purity standard</span></div>
+      <div class="stat-item ai ai-d1"><span class="stat-num">5</span><span class="stat-label">Tests per batch</span></div>
+      <div class="stat-item ai ai-d2"><span class="stat-num">6+</span><span class="stat-label">Months sourcing research</span></div>
+      <div class="stat-item ai ai-d3"><span class="stat-num">24h</span><span class="stat-label">Response time</span></div>
+    </div>
+  </div>
+</div>
+<div class="divider"></div>
+
+<!-- ── Story ──────────────────────────────────────────────────────────────── -->
+<section class="sec sec--cream" id="story" aria-labelledby="story-heading">
+  <div class="wrap">
+    <div class="story-grid">
       <div>
-        <span class="eye">The Industry Problem</span>
-        <h2 id="prob-heading" class="ai">Most Suppliers Can't Prove What They're Selling</h2>
-        <p class="ai" style="margin-bottom:18px;">
-          We built Prime Manufacturing after spending eight months and thousands of supplier contacts — two full-time VAs working four hours a day each — just to find sources that could back their claims with genuine, verifiable documentation.
-        </p>
-        <p class="ai">
-          Every supplier promised a Certificate of Analysis. Almost none could deliver one that was authentic, complete, and QR-verified by Janoshik. If a manufacturer isn't running third-party testing, they don't know what they're producing — and neither does the buyer.
-        </p>
-        <blockquote class="prob-quote ai">
-          <p>"If a company chops off the QR code on the COA, they're using someone else's certificate. They either know they don't have good stuff, or they're cutting costs. Either way, they don't deserve a place in the market."</p>
-          <cite>— The lesson from 8 months of vetting thousands of suppliers</cite>
+        <span class="eye">Why We Built This</span>
+        <h2 id="story-heading" class="ai">We've been utilising peptides for years. We needed to know they were actually what they claimed to be.</h2>
+        <blockquote class="story-pull ai">
+          "We were tired of mystery vials and 'trust me' sourcing. So we built the supply chain we wished existed."
         </blockquote>
       </div>
-      <div class="reason-list">
-        <div class="reason-item ai">
-          <div class="r-icon r-icon--red">✗</div>
-          <div class="r-text">
-            <h4>No COA = No Accountability</h4>
-            <p>A supplier without a Certificate of Analysis has zero independent proof their product is what they claim. Full stop.</p>
-          </div>
-        </div>
-        <div class="reason-item ai ai-d1">
-          <div class="r-icon r-icon--red">⚠</div>
-          <div class="r-text">
-            <h4>Cropped QR = Borrowed Certificate</h4>
-            <p>Genuine Janoshik COAs include a QR code linking to the live certificate. No QR code — or a cropped one — means the document was taken from another supplier's batch.</p>
-          </div>
-        </div>
-        <div class="reason-item ai ai-d2">
-          <div class="r-icon r-icon--gold">⚗</div>
-          <div class="r-text">
-            <h4>Purity Testing Alone Isn't Enough</h4>
-            <p>HPLC purity won't detect microbial contamination, endotoxins, or heavy metals. These are the risks most suppliers skip testing for entirely.</p>
-          </div>
-        </div>
-        <div class="reason-item ai ai-d3">
-          <div class="r-icon r-icon--grn">✓</div>
-          <div class="r-text">
-            <h4>Prime Tests All Five. Every Batch.</h4>
-            <p>Purity, identity, sterility, endotoxins, and heavy metals — documented and QR-verified by Janoshik on every order we ship.</p>
-          </div>
+      <div class="story-body ai">
+        <p>Prime Manufacturing exists because Prime Concierge — our health, performance and longevity clinic — needed a supplier it could actually trust. Not just trust on paper. Trust with documentation, third-party verification, and proof.</p>
+        <p>We engaged manufacturers directly, flew to facilities, audited labs, and ran our own testing programme in parallel with Janoshik. We tested for purity. Then sterility. Then endotoxins. Then heavy metals. Because if you're building a clinic around peptide therapies, you need to know — actually know — what's in the vials.</p>
+        <p>After six months and thousands of supplier contacts, we had a supply chain we could stand behind. The next logical step was opening that supply chain to other businesses — resellers, private label brands, and researchers who deserve the same standard.</p>
+        <p>That's Prime Manufacturing. The same sourcing rigour, the same documentation standard, extended to you.</p>
+        <div style="margin-top:28px;">
+          <a href="#enquire" class="btn btn-dark">Work with us →</a>
         </div>
       </div>
     </div>
   </div>
 </section>
+<div class="divider"></div>
 
-<!-- ── QR Code Rule ───────────────────────────────────────────────────────── -->
-<section style="background:var(--bg3);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:64px 0;" aria-label="The QR code rule">
+<!-- ── QR Rule ────────────────────────────────────────────────────────────── -->
+<section class="sec sec--card" style="padding:72px 0;" aria-label="The QR code rule">
   <div class="wrap">
-    <div style="text-align:center;margin-bottom:40px;">
+    <div class="text-center">
       <span class="eye">The QR Code Rule</span>
-      <h2 class="ai" style="max-width:640px;margin:0 auto;">If the COA doesn't have a QR code, walk away.</h2>
-      <p class="lead ai" style="max-width:520px;margin:12px auto 0;">Janoshik embeds a unique QR code in every certificate it issues. That code links to the live, unedited result on their own website. This is the only way to confirm a COA is real.</p>
+      <h2 class="ai">If the COA doesn't have a QR code, walk away.</h2>
+      <p class="lead ai" style="max-width:500px;margin:12px auto 0;">Janoshik embeds a unique QR code in every certificate it issues — the only way to confirm a COA is real and belongs to your batch.</p>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:760px;margin:0 auto;">
-      <div class="ai" style="background:var(--card);border:1px solid rgba(232,64,64,0.2);border-radius:var(--r);padding:24px;text-align:center;">
-        <div style="font-size:2rem;margin-bottom:12px;">🚫</div>
-        <h4 style="margin-bottom:8px;color:var(--red);">No COA at All</h4>
-        <p style="font-size:13px;">The supplier has zero independent proof of what they're selling. They — and you — are operating entirely on trust.</p>
+    <div class="qr-grid">
+      <div class="qr-card qr-card--bad ai">
+        <div class="qr-ico">🚫</div>
+        <h4>No COA at all</h4>
+        <p style="font-size:13px;">Zero independent proof. You're operating entirely on the supplier's word.</p>
       </div>
-      <div class="ai ai-d1" style="background:var(--card);border:1px solid rgba(232,64,64,0.18);border-radius:var(--r);padding:24px;text-align:center;">
-        <div style="font-size:2rem;margin-bottom:12px;">✂️</div>
-        <h4 style="margin-bottom:8px;color:var(--gold);">COA With Cropped QR</h4>
-        <p style="font-size:13px;">The certificate belongs to a different batch or supplier. It's been repurposed and the QR removed to hide it. A major red flag.</p>
+      <div class="qr-card qr-card--warn ai ai-d1">
+        <div class="qr-ico">✂️</div>
+        <h4>COA with cropped QR</h4>
+        <p style="font-size:13px;">That certificate belongs to someone else's batch. A major red flag.</p>
       </div>
-      <div class="ai ai-d2" style="background:var(--card);border:1px solid rgba(15,170,100,0.2);border-radius:var(--r);padding:24px;text-align:center;">
-        <div style="font-size:2rem;margin-bottom:12px;">✅</div>
-        <h4 style="margin-bottom:8px;color:var(--green);">COA With Live QR Link</h4>
-        <p style="font-size:13px;">Scan → lands on Janoshik's website → matches the batch exactly. This is what every Prime Manufacturing order ships with.</p>
+      <div class="qr-card qr-card--good ai ai-d2">
+        <div class="qr-ico">✅</div>
+        <h4>COA with live QR link</h4>
+        <p style="font-size:13px;">Scan → lands on Janoshik's site → matches your batch exactly. What Prime ships with, always.</p>
       </div>
     </div>
   </div>
 </section>
+<div class="divider"></div>
 
-<!-- ── Quality Standards ──────────────────────────────────────────────────── -->
-<section class="sec sec--alt" id="standards" aria-labelledby="std-heading">
+<!-- ── Standards ─────────────────────────────────────────────────────────── -->
+<section class="sec sec--cream" id="standards" aria-labelledby="std-heading">
   <div class="wrap">
-    <div class="text-center" style="margin-bottom:52px;">
+    <div class="text-center" style="margin-bottom:48px;">
       <span class="eye">Our Quality Standards</span>
-      <h2 id="std-heading" class="ai">Five Tests. Every Batch. No Exceptions.</h2>
-      <p class="lead ai" style="max-width:520px;margin:12px auto 0;">
-        We don't choose which tests are convenient. Every batch passes all five quality criteria before it leaves the lab — and you receive full documentation proving it.
-      </p>
+      <h2 id="std-heading" class="ai">Five tests. Every batch. No exceptions.</h2>
+      <p class="lead ai" style="max-width:480px;margin:12px auto 0;">We don't choose which tests are convenient. Every batch passes all five criteria — and you receive full documentation proving it.</p>
     </div>
     <div class="std-grid">
       <div class="std-card ai">
         <div class="std-ico">📄</div>
-        <h3>Certificate of Analysis (COA)</h3>
-        <p>Every batch ships with a complete, Janoshik-issued Certificate of Analysis covering all tested parameters. No COA, no shipment — that is a non-negotiable standard.</p>
+        <h3>Certificate of Analysis</h3>
+        <p>Every batch ships with a complete, Janoshik-issued Certificate of Analysis. No COA, no shipment — that is a non-negotiable standard at Prime Manufacturing.</p>
         <span class="std-badge">Janoshik Issued</span>
       </div>
       <div class="std-card ai ai-d1">
         <div class="std-ico">🔗</div>
         <h3>QR-Verified Third-Party Testing</h3>
-        <p>Each COA carries a unique QR code linking directly to the live certificate on Janoshik's website — confirming your test was conducted for your batch specifically, not repurposed from another supplier.</p>
-        <span class="std-badge">QR Code Verified</span>
+        <p>Each COA carries a unique QR code linking directly to the live certificate on Janoshik's website — confirming your test was conducted for your batch specifically.</p>
+        <span class="std-badge">QR Verified</span>
       </div>
       <div class="std-card ai ai-d2">
         <div class="std-ico">🧫</div>
         <h3>Sterility &amp; Endotoxin Testing</h3>
-        <p>Beyond purity, we test every batch for microbial sterility and endotoxin content via LAL assay. These are the tests most manufacturers skip — and the ones that matter most for research integrity.</p>
+        <p>Beyond purity, we test every batch for microbial sterility and endotoxin levels via LAL assay. These are the tests most suppliers skip. They aren't optional here.</p>
         <span class="std-badge">LAL Endotoxin Tested</span>
       </div>
       <div class="std-card ai ai-d3">
@@ -927,298 +773,208 @@
     </div>
   </div>
 </section>
+<div class="divider"></div>
 
 <!-- ── Services ───────────────────────────────────────────────────────────── -->
-<section class="sec" id="services" aria-labelledby="svc-heading">
+<section class="sec sec--card" id="services" aria-labelledby="svc-heading">
   <div class="wrap">
-    <div style="margin-bottom:48px;">
+    <div style="margin-bottom:44px;">
       <span class="eye">What We Offer</span>
-      <h2 id="svc-heading" class="ai">Manufacturing &amp; Supply Solutions</h2>
-      <p class="lead ai" style="max-width:500px;">
-        From private label to bulk manufacturing and bespoke formulations — we support businesses at every stage of building a peptide product line.
-      </p>
+      <h2 id="svc-heading" class="ai">Manufacturing &amp; supply solutions</h2>
+      <p class="lead ai" style="max-width:480px;">From private label to custom formulations — we support businesses at every stage of building a peptide product line.</p>
     </div>
     <div class="svc-grid">
       <div class="svc-card feat ai">
-        <span class="svc-tag svc-tag--gold">Most Popular</span>
+        <span class="svc-tag svc-tag--cream">Most Popular</span>
         <h3>Private Label Peptides</h3>
-        <p>Your brand on our proven, fully-documented peptide formulas. We handle manufacturing and quality control — you receive a premium, verified product ready to market under your brand.</p>
+        <p>Your brand on our proven, fully-documented formulas. We manufacture and quality-control every batch — you receive a verified product ready to market under your brand.</p>
         <ul class="svc-list">
           <li>Your branding, labels &amp; packaging</li>
           <li>Our tested formulas &amp; documentation</li>
           <li>Full Janoshik COA with every order</li>
           <li>Scalable order volumes</li>
         </ul>
-        <a href="#enquire" class="svc-link">Enquire about Private Label →</a>
+        <a href="#enquire" class="svc-link">Enquire →</a>
       </div>
       <div class="svc-card ai ai-d1">
-        <span class="svc-tag svc-tag--blue">White Label</span>
+        <span class="svc-tag svc-tag--sage">White Label</span>
         <h3>White Label Supply</h3>
-        <p>Ready-formulated peptide products for immediate labelling with your brand. Ideal for resellers and distributors who need a fast, reliable supply chain with documentation already in place.</p>
+        <p>Ready-formulated products for immediate labelling with your brand. Ideal for resellers who need a fast supply chain with documentation already in place.</p>
         <ul class="svc-list">
           <li>Pre-formulated, QC-passed batches</li>
-          <li>Fast turnaround for established SKUs</li>
+          <li>Quick turnaround on established SKUs</li>
           <li>Full COA documentation ready</li>
         </ul>
-        <a href="#enquire" class="svc-link">Enquire about White Label →</a>
+        <a href="#enquire" class="svc-link">Enquire →</a>
       </div>
       <div class="svc-card ai ai-d2">
-        <span class="svc-tag svc-tag--blue">Bulk</span>
+        <span class="svc-tag svc-tag--sage">Bulk</span>
         <h3>Bulk Manufacturing</h3>
-        <p>Large-volume peptide supply for established businesses and distributors. Consistent quality with comprehensive documentation across every order, regardless of size.</p>
+        <p>Large-volume peptide supply for established businesses and distributors. Consistent quality and full documentation at every order size.</p>
         <ul class="svc-list">
           <li>Flexible order quantities</li>
           <li>Volume pricing on request</li>
           <li>Batch documentation on every order</li>
-          <li>Reliable, repeatable lead times</li>
         </ul>
-        <a href="#enquire" class="svc-link">Enquire about Bulk Supply →</a>
+        <a href="#enquire" class="svc-link">Enquire →</a>
       </div>
       <div class="svc-card ai ai-d3">
-        <span class="svc-tag svc-tag--gold">Custom</span>
+        <span class="svc-tag svc-tag--green">Custom</span>
         <h3>Custom Formulations</h3>
-        <p>Need a bespoke peptide combination or specification not in our standard range? We source and manufacture custom formulas — with full documentation from day one.</p>
+        <p>Need a bespoke combination outside our standard range? We source and manufacture custom formulas — with full documentation from day one.</p>
         <ul class="svc-list">
           <li>Bespoke peptide combinations</li>
           <li>Specification-matched manufacturing</li>
           <li>R&amp;D consultation available</li>
-          <li>Custom documentation package</li>
         </ul>
-        <a href="#enquire" class="svc-link">Discuss Custom Formulations →</a>
+        <a href="#enquire" class="svc-link">Enquire →</a>
       </div>
     </div>
   </div>
 </section>
+<div class="divider"></div>
 
 <!-- ── Process ────────────────────────────────────────────────────────────── -->
-<section class="sec sec--alt" id="process" aria-labelledby="proc-heading">
+<section class="sec sec--cream" id="process" aria-labelledby="proc-heading">
   <div class="wrap">
-    <div style="text-align:center;margin-bottom:52px;">
+    <div class="text-center" style="margin-bottom:48px;">
       <span class="eye">How It Works</span>
-      <h2 id="proc-heading" class="ai">From Enquiry to Delivery in 6 Steps</h2>
-      <p class="lead ai" style="max-width:480px;margin:12px auto 0;">
-        A transparent process with documentation and quality checks at every stage — so you always know exactly where your order stands.
-      </p>
+      <h2 id="proc-heading" class="ai">From enquiry to delivery</h2>
     </div>
     <div class="proc-steps">
-      <div class="proc-step ai">
-        <span class="proc-num">01</span>
-        <span class="proc-step-ico">📞</span>
-        <h3>Book a Discovery Call</h3>
-        <p>A 30-minute consultation to understand your requirements, volumes, and timeline. No obligation — just a direct conversation.</p>
-      </div>
-      <div class="proc-step ai ai-d1">
-        <span class="proc-num">02</span>
-        <span class="proc-step-ico">🧪</span>
-        <h3>Product &amp; Formula Selection</h3>
-        <p>Choose from our established range or brief us on a custom formula. We confirm availability, specifications, and indicative pricing.</p>
-      </div>
-      <div class="proc-step ai ai-d2">
-        <span class="proc-num">03</span>
-        <span class="proc-step-ico">📋</span>
-        <h3>Review Sample Documentation</h3>
-        <p>We provide sample COAs and documentation upfront — so you can verify our standards before committing to an order.</p>
-      </div>
-      <div class="proc-step ai">
-        <span class="proc-num">04</span>
-        <span class="proc-step-ico">✅</span>
-        <h3>Confirm Order &amp; Agreement</h3>
-        <p>Finalise quantities, labelling specifications, and timelines. We agree on the documentation package that ships with your order.</p>
-      </div>
-      <div class="proc-step ai ai-d1">
-        <span class="proc-num">05</span>
-        <span class="proc-step-ico">⚗</span>
-        <h3>Manufacturing &amp; QC</h3>
-        <p>Your order is produced and put through all five quality tests. Third-party COA documentation is generated before dispatch.</p>
-      </div>
-      <div class="proc-step ai ai-d2">
-        <span class="proc-num">06</span>
-        <span class="proc-step-ico">📦</span>
-        <h3>Delivery with Full Docs</h3>
-        <p>Your order ships with the complete documentation package — COA, QR-verified Janoshik certificates, and all test reports.</p>
-      </div>
+      <div class="proc-step ai"><span class="proc-num">01</span><span class="proc-ico">📞</span><h3>Book a Discovery Call</h3><p>30 minutes to understand your requirements, volumes, and timeline. No obligation.</p></div>
+      <div class="proc-step ai ai-d1"><span class="proc-num">02</span><span class="proc-ico">🧪</span><h3>Product Selection</h3><p>Choose from our range or brief us on a custom formula. We confirm availability and pricing.</p></div>
+      <div class="proc-step ai ai-d2"><span class="proc-num">03</span><span class="proc-ico">📋</span><h3>Review Documentation</h3><p>We provide sample COAs upfront so you can verify our standards before committing.</p></div>
+      <div class="proc-step ai"><span class="proc-num">04</span><span class="proc-ico">✅</span><h3>Confirm Order</h3><p>Finalise quantities, labelling specs, and timelines. We agree the documentation package.</p></div>
+      <div class="proc-step ai ai-d1"><span class="proc-num">05</span><span class="proc-ico">⚗</span><h3>Manufacturing &amp; QC</h3><p>Your order is produced and put through all five quality tests. COA generated before dispatch.</p></div>
+      <div class="proc-step ai ai-d2"><span class="proc-num">06</span><span class="proc-ico">📦</span><h3>Delivery with Full Docs</h3><p>Ships with the complete documentation package — COA, QR-verified Janoshik certificates, all reports.</p></div>
     </div>
   </div>
 </section>
+<div class="divider"></div>
 
-<!-- ── Why Prime ──────────────────────────────────────────────────────────── -->
-<section class="sec" id="why" aria-labelledby="why-heading">
-  <div class="wrap">
-    <div style="text-align:center;">
-      <span class="eye">Why Prime Manufacturing</span>
-      <h2 id="why-heading" class="ai">We Built This Because Most Suppliers Couldn't</h2>
-      <p class="lead ai" style="max-width:500px;margin:12px auto 0;">
-        Eight months. Thousands of supplier contacts. Two full-time VAs. That's what it took to build a supply chain that meets our standard — so we turned it into a business.
-      </p>
-    </div>
+<!-- ── Why ────────────────────────────────────────────────────────────────── -->
+<section class="sec sec--card" id="why" aria-labelledby="why-heading">
+  <div class="wrap text-center">
+    <span class="eye">Why Prime Manufacturing</span>
+    <h2 id="why-heading" class="ai">We built this for ourselves first.</h2>
+    <p class="lead ai" style="max-width:500px;margin:12px auto 0;">The sourcing rigour we built for Prime Concierge's own clinic is the same standard every manufacturing client receives. No compromise.</p>
     <div class="why-grid">
-      <div class="why-card ai">
-        <div class="why-ico">🔍</div>
-        <h4>8 Months of Supplier Research</h4>
-        <p>We tested thousands of suppliers to find the few who could provide genuine, QR-verified documentation across all five quality parameters — so you don't have to.</p>
-      </div>
-      <div class="why-card ai ai-d1">
-        <div class="why-ico">📄</div>
-        <h4>Full Documentation, Always</h4>
-        <p>Every order ships with a complete documentation package. You'll never chase us for paperwork — it's included without asking.</p>
-      </div>
-      <div class="why-card ai ai-d2">
-        <div class="why-ico">🔗</div>
-        <h4>QR-Linked, Live Certificates</h4>
-        <p>Every Janoshik COA we provide has a live QR code. Scan it and you land directly on Janoshik's website — confirming authenticity instantly.</p>
-      </div>
-      <div class="why-card ai">
-        <div class="why-ico">🏢</div>
-        <h4>B2B Focused Only</h4>
-        <p>We work exclusively with qualified researchers, licensed resellers, and businesses. Every enquiry is handled directly by our team.</p>
-      </div>
-      <div class="why-card ai ai-d1">
-        <div class="why-ico">⚡</div>
-        <h4>24-Hour Response Commitment</h4>
-        <p>All enquiries receive a direct response within 24 hours — usually much sooner. Sourcing decisions are time-sensitive and we treat them that way.</p>
-      </div>
-      <div class="why-card ai ai-d2">
-        <div class="why-ico">📈</div>
-        <h4>Scalable from Day One</h4>
-        <p>Whether you're launching a product line or scaling an existing one, our supply chain grows with your business without compromising on documentation quality.</p>
-      </div>
+      <div class="why-card ai"><div class="why-ico">🔍</div><h4>6+ Months of Sourcing Research</h4><p>We vetted thousands of suppliers to find the few who could provide genuine, QR-verified documentation across all five quality parameters.</p></div>
+      <div class="why-card ai ai-d1"><div class="why-ico">📄</div><h4>Full Documentation, Always</h4><p>Every order ships with a complete documentation package. You'll never need to chase us for paperwork — it's included without asking.</p></div>
+      <div class="why-card ai ai-d2"><div class="why-ico">🔗</div><h4>QR-Linked Live Certificates</h4><p>Every Janoshik COA has a live QR code. Scan it and you're taken directly to the certificate on Janoshik's website.</p></div>
+      <div class="why-card ai"><div class="why-ico">🏥</div><h4>Backed by Clinic Experience</h4><p>Prime Manufacturing is built on the same standards as a real health clinic that uses these products. We're not just sellers — we're users.</p></div>
+      <div class="why-card ai ai-d1"><div class="why-ico">⚡</div><h4>24-Hour Response</h4><p>All enquiries receive a direct response within 24 hours. Sourcing decisions are time-sensitive and we treat them that way.</p></div>
+      <div class="why-card ai ai-d2"><div class="why-ico">📈</div><h4>B2B Only</h4><p>We work exclusively with qualified researchers, licensed resellers, and businesses — keeping our supply chain accountable at every level.</p></div>
     </div>
   </div>
 </section>
+<div class="divider"></div>
 
 <!-- ── FAQ ────────────────────────────────────────────────────────────────── -->
-<section class="sec sec--alt" id="faq" aria-labelledby="faq-heading">
-  <div class="wrap" style="max-width:800px;">
-    <div style="text-align:center;margin-bottom:44px;">
+<section class="sec sec--cream" id="faq" aria-labelledby="faq-heading">
+  <div class="wrap" style="max-width:780px;">
+    <div class="text-center" style="margin-bottom:44px;">
       <span class="eye">FAQ</span>
-      <h2 id="faq-heading" class="ai">Common Questions</h2>
+      <h2 id="faq-heading" class="ai">Common questions</h2>
     </div>
     <div class="faq-list">
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">What is a Certificate of Analysis (COA)? <span class="faq-chev">↓</span></button>
-        <div class="faq-ans" role="region"><div class="faq-ans-in">A Certificate of Analysis (COA) is a document issued by an <strong>independent third-party laboratory</strong> that confirms the identity, purity, and safety profile of a compound. It is the fundamental, verifiable proof that a product has been tested and meets its stated specifications. Without a COA from an independent lab, you have only the manufacturer's own claims — which carry no external accountability. In the peptide industry, where quality and contamination risks vary enormously between suppliers, a COA is the minimum bar for any credible supply chain. Prime Manufacturing provides a Janoshik-issued COA with every single batch we ship — no exceptions, no substitutions, and never from a different supplier's batch.</div></div>
+        <div class="faq-ans" role="region"><div class="faq-ans-in">A Certificate of Analysis is a document from an <strong>independent third-party laboratory</strong> confirming the identity, purity, and safety of a compound. It is the fundamental proof that a product has been tested and meets its stated specifications. Without a COA from an independent lab, you have only the manufacturer's word — which carries no external accountability. Our COAs are issued by <strong>Janoshik</strong>, the most recognised peptide testing laboratory globally, and every certificate includes a live QR code linking directly to the result on their website.</div></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">How do I verify your COA is genuine?<span class="faq-chev">↓</span></button>
-        <div class="faq-ans" role="region"><div class="faq-ans-in">Every Janoshik COA we provide includes a <strong>unique QR code</strong> printed at the bottom of the certificate. Scanning that code takes you directly to the live, unedited certificate on Janoshik's own website — where you can confirm the batch reference, test date, and all results match the document in your hand. This is the only reliable way to verify a COA is authentic and was issued for your specific batch. If a supplier provides a COA without a QR code, or with the QR code cropped or obscured, it almost certainly means the certificate was taken from a different supplier's batch. This is a serious red flag. Every certificate Prime Manufacturing supplies has a full, live, scannable QR code — we encourage you to verify every one.</div></div>
+        <button class="faq-q" aria-expanded="false">How do I verify your COA is genuine? <span class="faq-chev">↓</span></button>
+        <div class="faq-ans" role="region"><div class="faq-ans-in">Every Janoshik COA includes a <strong>unique QR code</strong> that links to the live, unedited certificate on Janoshik's own website. Scan it and you'll confirm the batch reference and all results match. If a supplier's COA is missing a QR code — or it's been cropped — treat that as a serious red flag. It almost certainly means the certificate belongs to a different batch or supplier. Every certificate we supply has a full, scannable QR code. We encourage you to verify every one.</div></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">What testing is conducted on every batch?<span class="faq-chev">↓</span></button>
-        <div class="faq-ans" role="region"><div class="faq-ans-in">Every batch we supply is independently tested across five parameters by Janoshik laboratory: <strong>HPLC purity analysis</strong> (our standard is 99%+), <strong>identity confirmation by mass spectrometry</strong> (confirming the compound is what it claims to be), <strong>microbial sterility testing</strong> (detecting bacterial or fungal contamination), <strong>endotoxin testing via LAL assay</strong> (measuring pyrogenic endotoxin levels), and a <strong>full heavy metals panel via ICP-MS</strong> (screening for lead, arsenic, mercury, cadmium, and other metals). All five test results are reported on the single Janoshik COA that ships with your order. Most suppliers only test for purity — the remaining four tests are what separate a genuinely safe, well-characterised compound from one that merely reads well on paper.</div></div>
+        <button class="faq-q" aria-expanded="false">What testing is done on every batch? <span class="faq-chev">↓</span></button>
+        <div class="faq-ans" role="region"><div class="faq-ans-in">Five tests: <strong>HPLC purity</strong> (≥99% standard), <strong>identity by mass spectrometry</strong>, <strong>microbial sterility</strong>, <strong>endotoxin via LAL assay</strong>, and a <strong>full heavy metals panel via ICP-MS</strong>. All five are reported on the Janoshik COA that ships with your order. Most suppliers only test for purity — the remaining four are what separate a genuinely characterised compound from one that merely looks good on paper.</div></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">What is the minimum order quantity?<span class="faq-chev">↓</span></button>
-        <div class="faq-ans" role="region"><div class="faq-ans-in">Minimum order quantities vary depending on the specific peptide, formulation type, and service chosen — whether that is private label, white label, or bulk manufacturing. Rather than publishing a fixed threshold that may not reflect your actual situation, we prefer to discuss your requirements directly on a discovery call. We work with businesses at different stages, from those launching a first product line to established resellers scaling existing SKUs. Some compounds and formulations have lower minimums than others. <a href="#enquire">Book a discovery call</a> and we can give you a clear, honest picture of what's viable for your order size and budget, with no obligation to proceed.</div></div>
+        <button class="faq-q" aria-expanded="false">What is the minimum order quantity? <span class="faq-chev">↓</span></button>
+        <div class="faq-ans" role="region"><div class="faq-ans-in">It varies by product and service type. Rather than a fixed threshold, we prefer to discuss your requirements directly. <a href="#enquire">Book a discovery call</a> and we'll give you a clear, honest picture of what's viable for your scale and budget — no obligation to proceed.</div></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">Do you offer private label and white label?<span class="faq-chev">↓</span></button>
-        <div class="faq-ans" role="region"><div class="faq-ans-in">Yes. Prime Manufacturing offers three core supply services: <strong>private label</strong> (your brand identity applied to our proven, fully-documented formulas — we manufacture, you market), <strong>white label</strong> (pre-formulated, QC-passed products ready for immediate labelling with your branding), and <strong>bulk supply</strong> (large-volume peptide supply for distributors or businesses with high-volume needs). We also work with clients on <strong>custom formulations</strong>, where a specific peptide combination or concentration is required that isn't part of our standard range. Every service tier includes the full Janoshik COA documentation package — the documentation standards don't change based on order type or volume.</div></div>
+        <button class="faq-q" aria-expanded="false">Do you offer private label and white label? <span class="faq-chev">↓</span></button>
+        <div class="faq-ans" role="region"><div class="faq-ans-in">Yes — <strong>private label</strong> (your branding on our tested formulas), <strong>white label</strong> (ready-to-label products), <strong>bulk supply</strong>, and <strong>custom formulations</strong>. All services include the full Janoshik COA documentation package. The documentation standard doesn't change based on order type or volume.</div></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">What peptides do you manufacture and supply?<span class="faq-chev">↓</span></button>
-        <div class="faq-ans" role="region"><div class="faq-ans-in">We supply a broad range of research peptides across multiple categories. Rather than publishing a fixed catalogue that may not reflect current availability and documentation status, we prefer to handle compound enquiries directly — this ensures we can confirm availability, current batch documentation, and that we can meet your specific requirements. <a href="#enquire">Contact us</a> with the compounds you're interested in and we'll confirm availability, provide sample COA documentation, and outline pricing and lead times. We can also discuss custom formulations if the compound or combination you need falls outside our current range.</div></div>
+        <button class="faq-q" aria-expanded="false">What's the connection to Prime Concierge? <span class="faq-chev">↓</span></button>
+        <div class="faq-ans" role="region"><div class="faq-ans-in">Prime Manufacturing is the supply and manufacturing arm of <a href="https://primeconcierge.online" target="_blank" rel="noopener">Prime Concierge</a> — a health, performance and longevity optimisation clinic that has been utilising peptides for years. We built our own supply chain to meet the standards our clinic required, then opened that supply chain to other businesses. The sourcing rigour, documentation standards, and quality bar are identical to what we use for our own clinic supply.</div></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">Do you supply internationally?<span class="faq-chev">↓</span></button>
-        <div class="faq-ans" role="region"><div class="faq-ans-in">We supply to multiple countries and regions, but international shipping for research compounds involves jurisdiction-specific import regulations, customs documentation requirements, and compliance considerations that vary significantly by destination. Rather than making blanket statements, we handle every international enquiry individually to confirm what's possible for your specific region and business context. <a href="#enquire">Send us an enquiry</a> with your country and business details and we'll come back with a clear picture of logistics, documentation, and any requirements on your end. Our COA documentation package is designed to support customs and compliance processes in most major research markets.</div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">Why does being B2B only matter?<span class="faq-chev">↓</span></button>
-        <div class="faq-ans" role="region"><div class="faq-ans-in">Operating exclusively with qualified researchers, licensed resellers, and established businesses allows us to maintain consistent quality standards and documentation processes across our entire supply chain. Every client in our network is a professional with legitimate research or commercial requirements — which means the documentation, compliance expectations, and quality bar remain high at every level. It also means our team can engage directly and meaningfully with each enquiry, rather than handling high-volume consumer transactions. If you are a business, researcher, or reseller looking to source research-grade peptides with full documentation, <a href="#enquire">get in touch</a> — we work exclusively with clients in this category.</div></div>
+        <button class="faq-q" aria-expanded="false">Do you supply internationally? <span class="faq-chev">↓</span></button>
+        <div class="faq-ans" role="region"><div class="faq-ans-in">We handle each international enquiry individually to confirm logistics, import requirements, and compliance for your region. <a href="#enquire">Send us an enquiry</a> with your country and business details and we'll come back with a clear picture of what's possible.</div></div>
       </div>
     </div>
   </div>
 </section>
+<div class="divider"></div>
 
-<!-- ── Enquire / Contact Form ─────────────────────────────────────────────── -->
-<section class="sec" id="enquire" aria-labelledby="enquire-heading">
+<!-- ── Enquiry Form ───────────────────────────────────────────────────────── -->
+<section class="sec sec--card" id="enquire" aria-labelledby="enquire-heading">
   <div class="wrap">
-    <div style="text-align:center;margin-bottom:44px;">
+    <div class="text-center" style="margin-bottom:44px;">
       <span class="eye">Get Started</span>
-      <h2 id="enquire-heading" class="ai">Book a Discovery Call or Send an Enquiry</h2>
-      <p class="lead ai" style="max-width:480px;margin:12px auto 0;">
-        Tell us about your requirements and we'll be in touch within 24 hours to discuss your order, documentation, and next steps.
-      </p>
+      <h2 id="enquire-heading" class="ai">Book a call or send an enquiry</h2>
+      <p class="lead ai" style="max-width:460px;margin:12px auto 0;">Tell us about your requirements and we'll be in touch within 24 hours.</p>
     </div>
     <div class="form-card ai">
       <form id="enquiryForm" novalidate>
         <div class="form-grid">
-          <div class="form-group">
-            <label for="fname">Full Name *</label>
-            <input type="text" id="fname" name="name" placeholder="Your name" required />
-          </div>
-          <div class="form-group">
-            <label for="fcompany">Company / Business Name *</label>
-            <input type="text" id="fcompany" name="company" placeholder="Your company" required />
-          </div>
-          <div class="form-group">
-            <label for="femail">Email Address *</label>
-            <input type="email" id="femail" name="email" placeholder="you@company.com" required />
-          </div>
-          <div class="form-group">
-            <label for="fphone">Phone / WhatsApp</label>
-            <input type="tel" id="fphone" name="phone" placeholder="+44 …" />
-          </div>
-          <div class="form-group">
-            <label for="fservice">Service Interested In *</label>
+          <div class="form-group"><label for="fname">Full Name *</label><input type="text" id="fname" name="name" placeholder="Your name" required /></div>
+          <div class="form-group"><label for="fcompany">Company *</label><input type="text" id="fcompany" name="company" placeholder="Your company" required /></div>
+          <div class="form-group"><label for="femail">Email *</label><input type="email" id="femail" name="email" placeholder="you@company.com" required /></div>
+          <div class="form-group"><label for="fphone">Phone / WhatsApp</label><input type="tel" id="fphone" name="phone" placeholder="+44 …" /></div>
+          <div class="form-group"><label for="fservice">Service *</label>
             <select id="fservice" name="service" required>
-              <option value="" disabled selected>Select a service…</option>
+              <option value="" disabled selected>Select…</option>
               <option>Private Label Peptides</option>
               <option>White Label Supply</option>
               <option>Bulk Manufacturing</option>
               <option>Custom Formulation</option>
-              <option>Not sure yet — want to discuss</option>
+              <option>Not sure — want to discuss</option>
             </select>
           </div>
-          <div class="form-group">
-            <label for="fvolume">Approximate Monthly Volume</label>
+          <div class="form-group"><label for="fvolume">Monthly Volume</label>
             <select id="fvolume" name="volume">
-              <option value="" disabled selected>Select a range…</option>
-              <option>Under 500 units/vials</option>
-              <option>500 – 2,000 units/vials</option>
-              <option>2,000 – 10,000 units/vials</option>
-              <option>10,000+ units/vials</option>
-              <option>Unsure — to be discussed</option>
+              <option value="" disabled selected>Select…</option>
+              <option>Under 500 units</option>
+              <option>500 – 2,000 units</option>
+              <option>2,000 – 10,000 units</option>
+              <option>10,000+ units</option>
+              <option>To be discussed</option>
             </select>
           </div>
-          <div class="form-group form-full">
-            <label for="fmsg">What peptides are you interested in? Any other details?</label>
-            <textarea id="fmsg" name="message" placeholder="E.g. BPC-157, TB-500, Semaglutide — quantities, formulations, any specific requirements…"></textarea>
-          </div>
-          <div class="form-full" style="margin-top:6px;">
-            <!-- Replace action with your form endpoint (Formspree, Netlify Forms, etc.) -->
-            <button type="submit" class="btn btn-gold btn-lg" style="width:100%;justify-content:center;">
-              Send Enquiry →
-            </button>
-          </div>
+          <div class="form-group form-full"><label for="fmsg">Peptides you're interested in &amp; any details</label><textarea id="fmsg" name="message" placeholder="e.g. BPC-157, TB-500, Semaglutide — quantities, formulations, any requirements…"></textarea></div>
+          <div class="form-full" style="margin-top:6px;"><button type="submit" class="btn btn-dark btn-lg" style="width:100%;justify-content:center;">Send Enquiry →</button></div>
         </div>
       </form>
-      <div class="form-success" id="formSuccess">
-        ✓ Enquiry received — we'll be in touch within 24 hours.
-      </div>
+      <div class="form-success" id="formSuccess">Enquiry received — we'll be in touch within 24 hours.</div>
       <p class="form-note">We respond to all enquiries within 24 hours. Your details are kept strictly private.</p>
     </div>
   </div>
 </section>
 
-<!-- ── CTA Banner ─────────────────────────────────────────────────────────── -->
+<!-- ── CTA ────────────────────────────────────────────────────────────────── -->
 <section class="cta-sec" aria-label="Call to action">
   <div class="wrap">
     <div class="cta-box ai">
       <span class="eye">Ready?</span>
-      <h2>Source Peptides You Can Prove Are Good</h2>
-      <p>Book a 30-minute call or send an enquiry. No runaround, no middlemen — just a direct conversation about your requirements.</p>
+      <h2>Source peptides you can actually prove are good.</h2>
+      <p>Book a 30-minute call. No runaround — just a direct conversation about your requirements.</p>
       <div class="cta-actions">
-        <a href="#enquire" class="btn btn-gold btn-lg">Book a Discovery Call →</a>
-        <a href="mailto:contact@primemfg.com" class="btn btn-ghost btn-lg">Email Us Directly</a>
+        <a href="#enquire" class="btn btn-cream btn-lg">Book a Discovery Call →</a>
+        <a href="mailto:hello@primeconcierge.com" class="btn btn-cream-outline btn-lg">Email Us</a>
       </div>
-      <p class="cta-note">We respond to all enquiries within 24 hours.</p>
+      <p class="cta-note">hello@primeconcierge.com &nbsp;·&nbsp; Responds within 24 hours</p>
     </div>
   </div>
 </section>
 </main>
 
-<!-- ── Footer ──────────────────────────────────────────────────────────────── -->
+<!-- ── Footer ─────────────────────────────────────────────────────────────── -->
 <footer class="footer" role="contentinfo">
   <div class="wrap">
     <div class="foot-grid">
@@ -1226,11 +982,11 @@
         <a href="#" class="logo">
           <div class="logo-mark">P</div>
           <div class="logo-text">
-            <span class="logo-name">PRIME</span>
-            <span class="logo-sub">Manufacturing</span>
+            <span class="foot-logo-name">Prime Manufacturing</span>
+            <span class="foot-logo-sub">by Prime Concierge</span>
           </div>
         </a>
-        <p>Premium research-grade peptide manufacturer. Janoshik-verified, full COA documentation on every batch. Private label, white label &amp; bulk supply.</p>
+        <p>The manufacturing arm of Prime Concierge. Research-grade peptide manufacturing and private label supply — built by the people who use them.</p>
       </div>
       <div class="foot-col">
         <h5>Services</h5>
@@ -1244,131 +1000,93 @@
       <div class="foot-col">
         <h5>Company</h5>
         <div class="foot-links">
+          <a href="#story">Our Story</a>
           <a href="#standards">Quality Standards</a>
           <a href="#process">Our Process</a>
-          <a href="#why">Why Prime</a>
           <a href="#faq">FAQ</a>
+          <a href="https://primeconcierge.online" target="_blank" rel="noopener">Prime Concierge →</a>
         </div>
       </div>
       <div class="foot-col">
         <h5>Contact</h5>
         <div class="foot-links">
           <a href="#enquire">Book a Discovery Call</a>
-          <a href="mailto:contact@primemfg.com">contact@primemfg.com</a>
+          <a href="mailto:hello@primeconcierge.com">hello@primeconcierge.com</a>
         </div>
       </div>
     </div>
     <div class="foot-bottom">
-      <div class="foot-disc">
-        <strong>Research Purposes Only.</strong> All products supplied by Prime Manufacturing are strictly for in-vitro research purposes. They are not intended for human use, consumption, or therapeutic application. By enquiring about or purchasing from Prime Manufacturing, you confirm that you are a qualified researcher, licensed reseller, or business operating within a legitimate research context. Prime Manufacturing accepts no liability for any misuse of supplied compounds. Products are supplied in accordance with applicable regulations.
-      </div>
+      <p class="foot-disc"><strong>Research Purposes Only.</strong> All products supplied by Prime Manufacturing are strictly for in-vitro research purposes. They are not intended for human use, consumption, or therapeutic application. By enquiring about or purchasing from Prime Manufacturing, you confirm that you are a qualified researcher, licensed reseller, or business operating within a legitimate research context.</p>
       <div class="foot-copy">
-        <span>© 2026 Prime Manufacturing. All rights reserved.</span>
+        <span>© 2026 Prime Manufacturing · A Prime Concierge company</span>
         <div class="foot-legal">
           <a href="#">Privacy Policy</a>
           <a href="#">Terms &amp; Conditions</a>
-          <a href="#">Shipping &amp; Returns</a>
         </div>
       </div>
     </div>
   </div>
 </footer>
 
-<!-- ── Mobile sticky CTA ───────────────────────────────────────────────────── -->
-<div class="mob-sticky" role="complementary" aria-label="Book a call">
-  <a href="#enquire" class="btn btn-gold btn-lg">Book a Discovery Call →</a>
-</div>
-
-<!-- ── Back to top ────────────────────────────────────────────────────────── -->
+<div class="mob-sticky"><a href="#enquire" class="btn btn-dark btn-lg">Book a Discovery Call →</a></div>
 <button id="btt" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
-<!-- ── Scripts ────────────────────────────────────────────────────────────── -->
 <script>
-  // Nav shadow on scroll + back-to-top visibility
+  // Nav scroll
   const navEl = document.getElementById('nav');
   const bttEl = document.getElementById('btt');
   window.addEventListener('scroll', () => {
-    const y = window.scrollY;
-    navEl.classList.toggle('scrolled', y > 8);
-    bttEl.classList.toggle('show', y > 400);
+    navEl.classList.toggle('scrolled', window.scrollY > 8);
+    bttEl.classList.toggle('show', window.scrollY > 400);
   }, { passive: true });
 
-  // Mobile hamburger
+  // Burger
   const burgerBtn = document.getElementById('burger');
   const mobMenuEl = document.getElementById('mobMenu');
   burgerBtn.addEventListener('click', () => mobMenuEl.classList.toggle('open'));
   mobMenuEl.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobMenuEl.classList.remove('open')));
+  window.addEventListener('resize', () => { if (window.innerWidth > 768) mobMenuEl.classList.remove('open'); });
 
-  // Smooth-close mobile menu on resize
-  window.addEventListener('resize', () => {
-    if (window.innerWidth > 768) mobMenuEl.classList.remove('open');
-  });
-
-  // Scroll-triggered animations (IntersectionObserver)
-  const animObserver = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); animObserver.unobserve(e.target); } });
+  // Animate in
+  const animObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); animObs.unobserve(e.target); } });
   }, { threshold: 0.08 });
-  document.querySelectorAll('.ai').forEach(el => animObserver.observe(el));
+  document.querySelectorAll('.ai').forEach(el => animObs.observe(el));
 
-  // Animated number counter
-  function countUp(el) {
-    const target = parseInt(el.dataset.count, 10);
-    const suffix = el.dataset.suffix || '';
-    const duration = 1400;
-    const start = performance.now();
-    function tick(now) {
-      const p = Math.min((now - start) / duration, 1);
-      const ease = 1 - Math.pow(1 - p, 3);
-      el.textContent = Math.floor(ease * target) + suffix;
-      if (p < 1) requestAnimationFrame(tick);
-    }
-    requestAnimationFrame(tick);
-  }
-  const counterObserver = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting && e.target.dataset.count) { countUp(e.target); counterObserver.unobserve(e.target); } });
-  }, { threshold: 0.5 });
-  document.querySelectorAll('[data-count]').forEach(el => counterObserver.observe(el));
-
-  // COA card: stagger-reveal PASS badges on scroll into view, then pulse QR
-  const coaObserver = new IntersectionObserver((entries) => {
+  // COA badge stagger
+  const coaObs = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (!e.isIntersecting) return;
-      const card = e.target;
-      const badges = card.querySelectorAll('.coa-pass');
-      badges.forEach((badge, i) => {
-        setTimeout(() => badge.classList.add('revealed'), 700 + i * 200);
-      });
-      setTimeout(() => card.classList.add('qr-active'), 700 + badges.length * 200 + 200);
-      coaObserver.unobserve(card);
+      const badges = e.target.querySelectorAll('.coa-pass');
+      badges.forEach((b, i) => setTimeout(() => b.classList.add('revealed'), 700 + i * 200));
+      setTimeout(() => e.target.classList.add('qr-active'), 700 + badges.length * 200 + 200);
+      coaObs.unobserve(e.target);
     });
   }, { threshold: 0.4 });
-  document.querySelectorAll('.coa-card').forEach(el => coaObserver.observe(el));
+  document.querySelectorAll('.coa-card').forEach(el => coaObs.observe(el));
 
-  // FAQ accordion
+  // FAQ
   document.querySelectorAll('.faq-q').forEach(btn => {
     btn.addEventListener('click', () => {
       const item = btn.closest('.faq-item');
       const ans  = item.querySelector('.faq-ans');
       const isOpen = item.classList.contains('open');
-      // close all
-      document.querySelectorAll('.faq-item.open').forEach(openItem => {
-        openItem.classList.remove('open');
-        openItem.querySelector('.faq-ans').style.maxHeight = null;
-        openItem.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+      document.querySelectorAll('.faq-item.open').forEach(o => {
+        o.classList.remove('open');
+        o.querySelector('.faq-ans').style.maxHeight = null;
+        o.querySelector('.faq-q').setAttribute('aria-expanded','false');
       });
       if (!isOpen) {
         item.classList.add('open');
         ans.style.maxHeight = ans.scrollHeight + 'px';
-        btn.setAttribute('aria-expanded', 'true');
+        btn.setAttribute('aria-expanded','true');
       }
     });
   });
 
-  // Enquiry form — demo submission (replace with real endpoint)
+  // Form
   document.getElementById('enquiryForm').addEventListener('submit', function(e) {
     e.preventDefault();
-    // TODO: wire to Formspree, Netlify Forms, or your backend
-    // e.g.: fetch('https://formspree.io/f/YOUR_ID', { method:'POST', body: new FormData(this) })
     this.style.display = 'none';
     document.getElementById('formSuccess').style.display = 'block';
   });
