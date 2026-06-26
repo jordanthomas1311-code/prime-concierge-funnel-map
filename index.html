@@ -363,7 +363,7 @@
     .std-badge::before { content: '✓'; }
 
     /* ── Services ─────────────────────────────────────────────────── */
-    .svc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .svc-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
     .svc-card {
       background: var(--cream-card); border: 1px solid var(--border);
       border-radius: var(--r-lg); padding: 30px;
@@ -892,48 +892,39 @@
       <p class="lead ai" style="max-width:480px;">From private label to custom formulations — we support businesses at every stage of building a peptide product line. <strong>Minimum order: 100 units per product across all service types.</strong></p>
     </div>
     <div class="svc-grid">
-      <div class="svc-card feat ai">
-        <span class="svc-tag svc-tag--cream">Most Popular</span>
-        <h3>Private Label Peptides</h3>
-        <p>Your brand on our proven, fully-documented formulas. We manufacture and quality-control every batch — you receive a verified product ready to market under your brand.</p>
+      <div class="svc-card ai">
+        <span class="svc-tag svc-tag--sage">White Label</span>
+        <h3>White Label</h3>
+        <p>Standard, ready-formulated compounds from our tested range — you apply your own label and sell under your brand. The fastest route to your own peptide line, with documentation already in place.</p>
         <ul class="svc-list">
+          <li>Standard compounds from our tested range</li>
+          <li>Your label &amp; branding applied</li>
+          <li>Full Janoshik COA with every order</li>
+          <li>From 100 units per product</li>
+        </ul>
+        <a href="#enquire" class="svc-link">Enquire →</a>
+      </div>
+      <div class="svc-card feat ai ai-d1">
+        <span class="svc-tag svc-tag--cream">Most Popular</span>
+        <h3>Private Label</h3>
+        <p>Your brand on either a standard compound from our range or a custom formulation built to your brief. More control over compound, concentration, and packaging — with full documentation throughout.</p>
+        <ul class="svc-list">
+          <li>Standard or custom compound — your choice</li>
           <li>Your branding, labels &amp; packaging</li>
-          <li>Our tested formulas &amp; documentation</li>
           <li>Full Janoshik COA with every order</li>
           <li>From 100 units per product</li>
         </ul>
         <a href="#enquire" class="svc-link" style="color:rgba(244,239,227,0.9);font-weight:700;">Enquire →</a>
       </div>
-      <div class="svc-card ai ai-d1">
-        <span class="svc-tag svc-tag--sage">White Label</span>
-        <h3>White Label Supply</h3>
-        <p>Ready-formulated products for immediate labelling with your brand. Ideal for resellers who need a fast supply chain with documentation already in place.</p>
-        <ul class="svc-list">
-          <li>Pre-formulated, QC-passed batches</li>
-          <li>Quick turnaround on established SKUs</li>
-          <li>Full COA documentation ready</li>
-        </ul>
-        <a href="#enquire" class="svc-link">Enquire →</a>
-      </div>
       <div class="svc-card ai ai-d2">
-        <span class="svc-tag svc-tag--sage">Bulk</span>
-        <h3>Bulk Manufacturing</h3>
-        <p>Large-volume peptide supply for established businesses and distributors. Consistent quality and full documentation at every order size.</p>
-        <ul class="svc-list">
-          <li>100 unit minimum per product</li>
-          <li>Volume pricing on request</li>
-          <li>Batch documentation on every order</li>
-        </ul>
-        <a href="#enquire" class="svc-link">Enquire →</a>
-      </div>
-      <div class="svc-card ai ai-d3">
         <span class="svc-tag svc-tag--green">Custom</span>
         <h3>Custom Formulations</h3>
-        <p>Need a bespoke combination outside our standard range? We source and manufacture custom formulas — with full documentation from day one.</p>
+        <p>Bespoke peptide combinations built to your specification — outside our standard range. We source and manufacture to brief, with full COA documentation from day one.</p>
         <ul class="svc-list">
           <li>Bespoke peptide combinations</li>
           <li>Specification-matched manufacturing</li>
           <li>R&amp;D consultation available</li>
+          <li>Full documentation from day one</li>
         </ul>
         <a href="#enquire" class="svc-link">Enquire →</a>
       </div>
@@ -1002,7 +993,7 @@
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">Do you offer private label and white label? <span class="faq-chev">↓</span></button>
-        <div class="faq-ans" role="region"><div class="faq-ans-in">Yes — <strong>private label</strong> (your branding on our tested formulas), <strong>white label</strong> (ready-to-label products), <strong>bulk supply</strong>, and <strong>custom formulations</strong>. All services include the full Janoshik COA documentation package. The documentation standard doesn't change based on order type or volume.</div></div>
+        <div class="faq-ans" role="region"><div class="faq-ans-in">Yes — <strong>white label</strong> (standard compounds, your label applied — the fastest route to market), <strong>private label</strong> (standard or custom compound with full branding control), and <strong>custom formulations</strong> (bespoke peptide combinations built to your specification). All three include the full Janoshik COA documentation package, regardless of order type.</div></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">What's the connection to Prime Concierge? <span class="faq-chev">↓</span></button>
@@ -1035,9 +1026,8 @@
           <div class="form-group"><label for="fservice">Service *</label>
             <select id="fservice" name="service" required>
               <option value="" disabled selected>Select…</option>
-              <option>Private Label Peptides</option>
-              <option>White Label Supply</option>
-              <option>Bulk Manufacturing</option>
+              <option>White Label</option>
+              <option>Private Label</option>
               <option>Custom Formulation</option>
               <option>Not sure — want to discuss</option>
             </select>
@@ -1096,9 +1086,8 @@
       <div class="foot-col">
         <h5>Services</h5>
         <div class="foot-links">
-          <a href="#services">Private Label</a>
           <a href="#services">White Label</a>
-          <a href="#services">Bulk Supply</a>
+          <a href="#services">Private Label</a>
           <a href="#services">Custom Formulations</a>
         </div>
       </div>
