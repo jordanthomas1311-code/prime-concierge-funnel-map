@@ -21,17 +21,21 @@
   {
     "@context": "https://schema.org",
     "@type": ["Organization", "LocalBusiness"],
+    "@id": "https://primemfg.com/#organization",
     "name": "Prime Manufacturing",
     "url": "https://primemfg.com",
-    "logo": "https://primemfg.com/logo.png",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://primemfg.com/logo.png"
+    },
     "description": "Premium research-grade peptide manufacturer offering private label, white label, and bulk supply with full Janoshik COA documentation on every batch.",
     "knowsAbout": ["Peptide Manufacturing", "Private Label Peptides", "White Label Peptides", "Certificate of Analysis", "Janoshik Testing", "Research Grade Peptides"],
+    "areaServed": ["GB", "US", "EU", "AU"],
     "contactPoint": {
       "@type": "ContactPoint",
       "contactType": "sales",
       "email": "contact@primemfg.com",
-      "availableLanguage": "English",
-      "contactOption": "TollFree"
+      "availableLanguage": "English"
     },
     "sameAs": []
   }
@@ -40,8 +44,8 @@
   <!-- ── Fonts ── -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
 
   <style>
     /* ── Reset ────────────────────────────────────────────────────── */
@@ -97,6 +101,8 @@
     p  { color: var(--t2); }
     a  { color: inherit; text-decoration: none; }
     strong { color: var(--t1); font-weight: 600; }
+    /* Space Mono — used for all technical/lab data to reinforce the documentation aesthetic */
+    .mono { font-family: 'Space Mono', monospace; }
 
     /* ── Layout ───────────────────────────────────────────────────── */
     .wrap  { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
@@ -257,8 +263,8 @@
       border-bottom: 1px solid var(--border);
     }
     .coa-lab {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 13px; font-weight: 700; color: var(--t1); letter-spacing: 0.04em;
+      font-family: 'Space Mono', monospace;
+      font-size: 12px; font-weight: 700; color: var(--t1); letter-spacing: 0.04em;
     }
     .coa-lab-sub { font-size: 10px; color: var(--t3); font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; }
     .coa-title-badge {
@@ -273,7 +279,7 @@
       padding: 5px 0; font-size: 12px;
     }
     .coa-meta-label { color: var(--t3); font-weight: 500; }
-    .coa-meta-value { color: var(--t2); font-weight: 600; font-family: 'Space Grotesk', sans-serif; }
+    .coa-meta-value { color: var(--t2); font-weight: 400; font-family: 'Space Mono', monospace; font-size: 11.5px; }
     .coa-divider { height: 1px; background: var(--border); margin: 14px 0; }
     .coa-results { display: flex; flex-direction: column; gap: 0; }
     .coa-row {
@@ -284,13 +290,23 @@
     .coa-row:last-child { border-bottom: none; }
     .coa-test { color: var(--t2); font-weight: 500; }
     .coa-result-right { display: flex; align-items: center; gap: 10px; }
-    .coa-value { font-family: 'Space Grotesk', sans-serif; font-weight: 700; color: var(--t1); font-size: 12px; }
+    .coa-value { font-family: 'Space Mono', monospace; font-weight: 700; color: var(--t1); font-size: 11.5px; }
     .coa-pass {
       display: inline-flex; align-items: center; gap: 4px;
       background: var(--green-dim); border: 1px solid rgba(15,170,100,0.2);
       border-radius: 100px; padding: 2px 8px;
       font-size: 10px; font-weight: 700; color: var(--green);
+      opacity: 0; transform: scale(0.7);
+      transition: opacity .35s ease, transform .35s ease;
     }
+    .coa-pass.revealed { opacity: 1; transform: scale(1); }
+    /* QR glow after all results shown */
+    .coa-card.qr-active .coa-qr {
+      box-shadow: 0 0 14px rgba(15,170,100,0.5);
+      transition: box-shadow .4s ease;
+    }
+    @keyframes qrPulse { 0%,100%{box-shadow:0 0 6px rgba(15,170,100,0.3)} 50%{box-shadow:0 0 20px rgba(15,170,100,0.7)} }
+    .coa-card.qr-active .coa-qr { animation: qrPulse 1.8s ease 3; }
     .coa-footer {
       margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--border);
       display: flex; align-items: center; justify-content: space-between;
@@ -845,6 +861,34 @@
   </div>
 </section>
 
+<!-- ── QR Code Rule ───────────────────────────────────────────────────────── -->
+<section style="background:var(--bg3);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:64px 0;" aria-label="The QR code rule">
+  <div class="wrap">
+    <div style="text-align:center;margin-bottom:40px;">
+      <span class="eye">The QR Code Rule</span>
+      <h2 class="ai" style="max-width:640px;margin:0 auto;">If the COA doesn't have a QR code, walk away.</h2>
+      <p class="lead ai" style="max-width:520px;margin:12px auto 0;">Janoshik embeds a unique QR code in every certificate it issues. That code links to the live, unedited result on their own website. This is the only way to confirm a COA is real.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:760px;margin:0 auto;">
+      <div class="ai" style="background:var(--card);border:1px solid rgba(232,64,64,0.2);border-radius:var(--r);padding:24px;text-align:center;">
+        <div style="font-size:2rem;margin-bottom:12px;">🚫</div>
+        <h4 style="margin-bottom:8px;color:var(--red);">No COA at All</h4>
+        <p style="font-size:13px;">The supplier has zero independent proof of what they're selling. They — and you — are operating entirely on trust.</p>
+      </div>
+      <div class="ai ai-d1" style="background:var(--card);border:1px solid rgba(232,64,64,0.18);border-radius:var(--r);padding:24px;text-align:center;">
+        <div style="font-size:2rem;margin-bottom:12px;">✂️</div>
+        <h4 style="margin-bottom:8px;color:var(--gold);">COA With Cropped QR</h4>
+        <p style="font-size:13px;">The certificate belongs to a different batch or supplier. It's been repurposed and the QR removed to hide it. A major red flag.</p>
+      </div>
+      <div class="ai ai-d2" style="background:var(--card);border:1px solid rgba(15,170,100,0.2);border-radius:var(--r);padding:24px;text-align:center;">
+        <div style="font-size:2rem;margin-bottom:12px;">✅</div>
+        <h4 style="margin-bottom:8px;color:var(--green);">COA With Live QR Link</h4>
+        <p style="font-size:13px;">Scan → lands on Janoshik's website → matches the batch exactly. This is what every Prime Manufacturing order ships with.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ── Quality Standards ──────────────────────────────────────────────────── -->
 <section class="sec sec--alt" id="standards" aria-labelledby="std-heading">
   <div class="wrap">
@@ -1052,35 +1096,35 @@
     <div class="faq-list">
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">What is a Certificate of Analysis (COA)? <span class="faq-chev">↓</span></button>
-        <div class="faq-ans" role="region"><div class="faq-ans-in">A Certificate of Analysis is a document from an <strong>independent third-party laboratory</strong> confirming the identity, purity, and safety of a compound. Without a COA, you only have the supplier's word that their product is what they claim — and in the peptide industry, that is not good enough. Our COAs are issued by <strong>Janoshik</strong>, the most recognised peptide testing laboratory globally.</div></div>
+        <div class="faq-ans" role="region"><div class="faq-ans-in">A Certificate of Analysis (COA) is a document issued by an <strong>independent third-party laboratory</strong> that confirms the identity, purity, and safety profile of a compound. It is the fundamental, verifiable proof that a product has been tested and meets its stated specifications. Without a COA from an independent lab, you have only the manufacturer's own claims — which carry no external accountability. In the peptide industry, where quality and contamination risks vary enormously between suppliers, a COA is the minimum bar for any credible supply chain. Prime Manufacturing provides a Janoshik-issued COA with every single batch we ship — no exceptions, no substitutions, and never from a different supplier's batch.</div></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">How do I verify your COA is genuine?<span class="faq-chev">↓</span></button>
-        <div class="faq-ans" role="region"><div class="faq-ans-in">Every Janoshik COA we provide includes a <strong>unique QR code</strong> at the bottom that links directly to the live certificate on Janoshik's website. Scan it and you'll see the original certificate — confirming it was issued for our specific batch. If a supplier's COA is missing its QR code, or the code has been cropped out, treat that as a serious red flag: it almost certainly means the certificate belongs to a different batch or supplier.</div></div>
+        <div class="faq-ans" role="region"><div class="faq-ans-in">Every Janoshik COA we provide includes a <strong>unique QR code</strong> printed at the bottom of the certificate. Scanning that code takes you directly to the live, unedited certificate on Janoshik's own website — where you can confirm the batch reference, test date, and all results match the document in your hand. This is the only reliable way to verify a COA is authentic and was issued for your specific batch. If a supplier provides a COA without a QR code, or with the QR code cropped or obscured, it almost certainly means the certificate was taken from a different supplier's batch. This is a serious red flag. Every certificate Prime Manufacturing supplies has a full, live, scannable QR code — we encourage you to verify every one.</div></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">What testing is conducted on every batch?<span class="faq-chev">↓</span></button>
-        <div class="faq-ans" role="region"><div class="faq-ans-in">Every batch undergoes five quality tests: <strong>HPLC purity analysis</strong> (99%+ standard), <strong>identity confirmation by mass spectrometry</strong>, <strong>microbial sterility testing</strong>, <strong>endotoxin testing via LAL assay</strong>, and a <strong>full heavy metals panel via ICP-MS</strong>. All five results are documented in the COA that ships with your order.</div></div>
+        <div class="faq-ans" role="region"><div class="faq-ans-in">Every batch we supply is independently tested across five parameters by Janoshik laboratory: <strong>HPLC purity analysis</strong> (our standard is 99%+), <strong>identity confirmation by mass spectrometry</strong> (confirming the compound is what it claims to be), <strong>microbial sterility testing</strong> (detecting bacterial or fungal contamination), <strong>endotoxin testing via LAL assay</strong> (measuring pyrogenic endotoxin levels), and a <strong>full heavy metals panel via ICP-MS</strong> (screening for lead, arsenic, mercury, cadmium, and other metals). All five test results are reported on the single Janoshik COA that ships with your order. Most suppliers only test for purity — the remaining four tests are what separate a genuinely safe, well-characterised compound from one that merely reads well on paper.</div></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">What is the minimum order quantity?<span class="faq-chev">↓</span></button>
-        <div class="faq-ans" role="region"><div class="faq-ans-in">Minimum order quantities vary by product, formulation type, and service (private label, white label, or bulk). <a href="#enquire">Book a discovery call</a> to discuss your specific requirements — we work with businesses at various scales and can advise on what's realistic for your stage.</div></div>
+        <div class="faq-ans" role="region"><div class="faq-ans-in">Minimum order quantities vary depending on the specific peptide, formulation type, and service chosen — whether that is private label, white label, or bulk manufacturing. Rather than publishing a fixed threshold that may not reflect your actual situation, we prefer to discuss your requirements directly on a discovery call. We work with businesses at different stages, from those launching a first product line to established resellers scaling existing SKUs. Some compounds and formulations have lower minimums than others. <a href="#enquire">Book a discovery call</a> and we can give you a clear, honest picture of what's viable for your order size and budget, with no obligation to proceed.</div></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">Do you offer private label and white label?<span class="faq-chev">↓</span></button>
-        <div class="faq-ans" role="region"><div class="faq-ans-in">Yes. We offer <strong>private label</strong> (your branding on our proven, tested formulas), <strong>white label</strong> (ready-to-label products), and <strong>bulk supply</strong>. We also work with clients on <strong>custom formulations</strong> where specific peptide combinations are required. All services include the full documentation package.</div></div>
+        <div class="faq-ans" role="region"><div class="faq-ans-in">Yes. Prime Manufacturing offers three core supply services: <strong>private label</strong> (your brand identity applied to our proven, fully-documented formulas — we manufacture, you market), <strong>white label</strong> (pre-formulated, QC-passed products ready for immediate labelling with your branding), and <strong>bulk supply</strong> (large-volume peptide supply for distributors or businesses with high-volume needs). We also work with clients on <strong>custom formulations</strong>, where a specific peptide combination or concentration is required that isn't part of our standard range. Every service tier includes the full Janoshik COA documentation package — the documentation standards don't change based on order type or volume.</div></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">What peptides do you manufacture and supply?<span class="faq-chev">↓</span></button>
-        <div class="faq-ans" role="region"><div class="faq-ans-in">We supply a comprehensive range of research peptides. Please <a href="#enquire">contact us directly</a> to enquire about specific compounds, availability, and documentation. We prefer to handle each enquiry individually to confirm we can meet your exact specifications with full supporting documentation.</div></div>
+        <div class="faq-ans" role="region"><div class="faq-ans-in">We supply a broad range of research peptides across multiple categories. Rather than publishing a fixed catalogue that may not reflect current availability and documentation status, we prefer to handle compound enquiries directly — this ensures we can confirm availability, current batch documentation, and that we can meet your specific requirements. <a href="#enquire">Contact us</a> with the compounds you're interested in and we'll confirm availability, provide sample COA documentation, and outline pricing and lead times. We can also discuss custom formulations if the compound or combination you need falls outside our current range.</div></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">Do you supply internationally?<span class="faq-chev">↓</span></button>
-        <div class="faq-ans" role="region"><div class="faq-ans-in"><a href="#enquire">Get in touch</a> to discuss shipping logistics, import requirements, and compliance considerations for your region. We handle each international enquiry individually to ensure correct documentation and regulatory compliance for your destination country.</div></div>
+        <div class="faq-ans" role="region"><div class="faq-ans-in">We supply to multiple countries and regions, but international shipping for research compounds involves jurisdiction-specific import regulations, customs documentation requirements, and compliance considerations that vary significantly by destination. Rather than making blanket statements, we handle every international enquiry individually to confirm what's possible for your specific region and business context. <a href="#enquire">Send us an enquiry</a> with your country and business details and we'll come back with a clear picture of logistics, documentation, and any requirements on your end. Our COA documentation package is designed to support customs and compliance processes in most major research markets.</div></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">Why does being B2B only matter?<span class="faq-chev">↓</span></button>
-        <div class="faq-ans" role="region"><div class="faq-ans-in">Working exclusively with qualified researchers, resellers, and businesses means every client in our network is a professional with legitimate research or commercial requirements. This keeps our supply chain accountable at every level — and allows us to maintain consistent documentation and quality standards across everything we supply.</div></div>
+        <div class="faq-ans" role="region"><div class="faq-ans-in">Operating exclusively with qualified researchers, licensed resellers, and established businesses allows us to maintain consistent quality standards and documentation processes across our entire supply chain. Every client in our network is a professional with legitimate research or commercial requirements — which means the documentation, compliance expectations, and quality bar remain high at every level. It also means our team can engage directly and meaningfully with each enquiry, rather than handling high-volume consumer transactions. If you are a business, researcher, or reseller looking to source research-grade peptides with full documentation, <a href="#enquire">get in touch</a> — we work exclusively with clients in this category.</div></div>
       </div>
     </div>
   </div>
@@ -1284,6 +1328,21 @@
     entries.forEach(e => { if (e.isIntersecting && e.target.dataset.count) { countUp(e.target); counterObserver.unobserve(e.target); } });
   }, { threshold: 0.5 });
   document.querySelectorAll('[data-count]').forEach(el => counterObserver.observe(el));
+
+  // COA card: stagger-reveal PASS badges on scroll into view, then pulse QR
+  const coaObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const card = e.target;
+      const badges = card.querySelectorAll('.coa-pass');
+      badges.forEach((badge, i) => {
+        setTimeout(() => badge.classList.add('revealed'), 700 + i * 200);
+      });
+      setTimeout(() => card.classList.add('qr-active'), 700 + badges.length * 200 + 200);
+      coaObserver.unobserve(card);
+    });
+  }, { threshold: 0.4 });
+  document.querySelectorAll('.coa-card').forEach(el => coaObserver.observe(el));
 
   // FAQ accordion
   document.querySelectorAll('.faq-q').forEach(btn => {
