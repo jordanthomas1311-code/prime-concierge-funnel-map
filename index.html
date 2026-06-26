@@ -1,471 +1,1300 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Prime Concierge — Funnel Map</title>
-<script src="https://unpkg.com/d3@7.9.0/dist/d3.min.js"></script>
-<style>
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { background:#06060f; overflow:hidden; width:100vw; height:100vh; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; }
-  #toolbar { position:fixed; top:14px; left:50%; transform:translateX(-50%); z-index:100; display:flex; align-items:center; gap:8px; background:rgba(255,255,255,0.05); backdrop-filter:blur(14px); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:7px 14px; white-space:nowrap; }
-  #ttl { background:transparent; border:none; color:rgba(255,255,255,0.85); font-size:13px; font-weight:700; outline:none; width:260px; }
-  .sp { width:1px; height:18px; background:rgba(255,255,255,0.12); }
-  button { background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.12); color:rgba(255,255,255,0.65); padding:4px 12px; border-radius:7px; cursor:pointer; font-size:11px; transition:all .15s; }
-  button:hover { background:rgba(255,255,255,0.14); color:#fff; }
-  svg { cursor:grab; display:block; } svg:active { cursor:grabbing; }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prime Manufacturing | Premium Peptide Manufacturing &amp; Private Label Solutions</title>
+  <meta name="description" content="Prime Manufacturing supplies research-grade peptides with full Certificate of Analysis (COA) documentation, Janoshik third-party verification, sterility testing, endotoxin testing, and heavy metals testing. Private label, white label and bulk solutions for qualified researchers and resellers." />
+  <meta name="keywords" content="peptide manufacturer, private label peptides, white label peptides, COA peptides, certificate of analysis peptides, Janoshik tested peptides, research grade peptides supplier, bulk peptide supply, peptide manufacturing UK" />
+  <meta property="og:title" content="Prime Manufacturing | Premium Peptide Manufacturing &amp; Private Label" />
+  <meta property="og:description" content="Research-grade peptides with full COA documentation. Janoshik third-party verified. Sterility, endotoxin and heavy metals tested on every batch." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Prime Manufacturing",
+    "description": "Premium research-grade peptide manufacturer and private label supplier with full COA documentation and Janoshik third-party verification.",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "sales",
+      "availableLanguage": "English"
+    }
+  }
+  </script>
+  <style>
+    /* ── Reset & Base ─────────────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: #07070d;
+      color: #eef0f8;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Design Tokens ────────────────────────────────────────────────────────── */
+    :root {
+      --bg:          #07070d;
+      --bg-alt:      #0b0b16;
+      --bg-card:     #0f0f1e;
+      --bg-card2:    #131326;
+      --border:      rgba(255,255,255,0.07);
+      --border-hi:   rgba(255,255,255,0.14);
+      --gold:        #d4920a;
+      --gold-light:  #f0aa2a;
+      --gold-dim:    rgba(212,146,10,0.12);
+      --green:       #0fa96a;
+      --green-dim:   rgba(15,169,106,0.1);
+      --blue:        #4f8eff;
+      --blue-dim:    rgba(79,142,255,0.1);
+      --red:         #e84040;
+      --text-1:      #eef0f8;
+      --text-2:      #8390a4;
+      --text-3:      #454860;
+      --radius:      12px;
+      --radius-lg:   20px;
+      --shadow:      0 2px 24px rgba(0,0,0,0.5);
+    }
+
+    /* ── Typography ───────────────────────────────────────────────────────────── */
+    h1, h2, h3, h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--text-1);
+    }
+    h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; }
+    h2 { font-size: clamp(1.5rem, 3.5vw, 2.4rem); font-weight: 700; }
+    h3 { font-size: 1.2rem; font-weight: 600; }
+    h4 { font-size: 1rem; font-weight: 600; }
+    p { color: var(--text-2); }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Layout Helpers ───────────────────────────────────────────────────────── */
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+    .section { padding: 96px 0; }
+    .section--alt { background: var(--bg-alt); }
+    .section-eyebrow {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+    .section-title { margin-bottom: 16px; }
+    .section-sub { font-size: 1.05rem; max-width: 560px; color: var(--text-2); margin-bottom: 48px; }
+    .section-sub--center { margin-left: auto; margin-right: auto; text-align: center; }
+    .text-center { text-align: center; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+
+    /* ── Buttons ──────────────────────────────────────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 15px;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: var(--gold);
+      color: #07070d;
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-1);
+      border: 1px solid var(--border-hi);
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.25); }
+    .btn-lg { padding: 17px 36px; font-size: 16px; }
+
+    /* ── Disclaimer Banner ────────────────────────────────────────────────────── */
+    .disclaimer-bar {
+      background: rgba(232,64,64,0.1);
+      border-bottom: 1px solid rgba(232,64,64,0.2);
+      text-align: center;
+      padding: 9px 24px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #e84040;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── Navigation ───────────────────────────────────────────────────────────── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(7,7,13,0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+      gap: 24px;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .nav-logo-mark {
+      width: 36px;
+      height: 36px;
+      background: var(--gold);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: #07070d;
+      flex-shrink: 0;
+    }
+    .nav-logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+    .nav-logo-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--text-1);
+      letter-spacing: -0.01em;
+    }
+    .nav-logo-sub {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-3);
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      list-style: none;
+    }
+    .nav-links a {
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--text-2);
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--text-1); }
+    .nav-actions { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+    .nav-cta { padding: 9px 20px; font-size: 13.5px; }
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text-1);
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      padding: 12px 24px 20px;
+      border-top: 1px solid var(--border);
+    }
+    .mobile-menu a {
+      padding: 10px 4px;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text-2);
+      border-bottom: 1px solid var(--border);
+    }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu .btn { margin-top: 8px; width: 100%; justify-content: center; }
+    .mobile-menu.open { display: flex; }
+
+    /* ── Hero ─────────────────────────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      padding: 100px 0 96px;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% -10%, rgba(212,146,10,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 80% 50%, rgba(79,142,255,0.04) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 70% at 50% 0%, black 20%, transparent 80%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      position: relative;
+      max-width: 760px;
+    }
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gold-dim);
+      border: 1px solid rgba(212,146,10,0.25);
+      border-radius: 100px;
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--gold-light);
+      letter-spacing: 0.04em;
+      margin-bottom: 28px;
+    }
+    .hero-tag::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.3); }
+    }
+    .hero h1 { margin-bottom: 24px; }
+    .hero h1 em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: var(--text-2);
+      margin-bottom: 36px;
+      max-width: 600px;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 64px;
+    }
+    .hero-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--bg-card);
+    }
+    .hero-stat {
+      flex: 1;
+      min-width: 120px;
+      padding: 18px 20px;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .hero-stat:last-child { border-right: none; }
+    .hero-stat-value {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--green);
+    }
+    .hero-stat-label {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-3);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── Problem Section ──────────────────────────────────────────────────────── */
+    .problem-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+    .problem-quote {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 28px;
+      margin-bottom: 28px;
+    }
+    .problem-quote p {
+      font-size: 1.05rem;
+      font-style: italic;
+      color: var(--text-1);
+      line-height: 1.7;
+    }
+    .problem-quote cite {
+      display: block;
+      margin-top: 12px;
+      font-style: normal;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-3);
+    }
+    .stat-block {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .stat-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .stat-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .stat-icon--red { background: rgba(232,64,64,0.12); }
+    .stat-icon--gold { background: var(--gold-dim); }
+    .stat-icon--green { background: var(--green-dim); }
+    .stat-text h4 { margin-bottom: 4px; color: var(--text-1); }
+    .stat-text p { font-size: 14px; }
+
+    /* ── Standards Section ────────────────────────────────────────────────────── */
+    .standards-header { margin-bottom: 56px; }
+    .standards-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .standard-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .standard-card:hover { border-color: var(--border-hi); transform: translateY(-2px); }
+    .standard-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      background: var(--gold-dim);
+      border: 1px solid rgba(212,146,10,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    .standard-card h3 { margin-bottom: 10px; }
+    .standard-card p { font-size: 14.5px; line-height: 1.65; }
+    .standard-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 16px;
+      background: var(--green-dim);
+      border: 1px solid rgba(15,169,106,0.2);
+      border-radius: 100px;
+      padding: 5px 12px;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--green);
+    }
+    .standard-badge::before {
+      content: '✓';
+      font-weight: 800;
+    }
+
+    /* ── Services Section ─────────────────────────────────────────────────────── */
+    .services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .service-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .service-card:hover { border-color: var(--border-hi); transform: translateY(-2px); }
+    .service-card.featured {
+      border-color: rgba(212,146,10,0.3);
+      background: linear-gradient(135deg, var(--bg-card), rgba(212,146,10,0.04));
+    }
+    .service-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: var(--gold-dim);
+      color: var(--gold-light);
+      border-radius: 4px;
+      padding: 3px 8px;
+      margin-bottom: 16px;
+    }
+    .service-tag--blue {
+      background: var(--blue-dim);
+      color: var(--blue);
+    }
+    .service-card h3 { font-size: 1.3rem; margin-bottom: 10px; }
+    .service-card p { font-size: 14.5px; }
+    .service-list {
+      margin-top: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .service-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13.5px;
+      color: var(--text-2);
+      list-style: none;
+    }
+    .service-list li::before {
+      content: '→';
+      color: var(--gold);
+      font-size: 12px;
+      flex-shrink: 0;
+    }
+    .service-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 24px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gold);
+      transition: gap 0.15s;
+    }
+    .service-cta:hover { gap: 10px; }
+
+    /* ── Process Section ──────────────────────────────────────────────────────── */
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .process-step {
+      background: var(--bg-card);
+      padding: 36px 28px;
+      position: relative;
+    }
+    .process-step:hover { background: var(--bg-card2); }
+    .process-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--text-3);
+      line-height: 1;
+      margin-bottom: 14px;
+    }
+    .process-step h3 { font-size: 1.05rem; margin-bottom: 8px; color: var(--text-1); }
+    .process-step p { font-size: 13.5px; color: var(--text-2); line-height: 1.6; }
+    .process-step-icon {
+      position: absolute;
+      top: 28px;
+      right: 28px;
+      font-size: 22px;
+      opacity: 0.4;
+    }
+
+    /* ── Why Prime ────────────────────────────────────────────────────────────── */
+    .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 48px; }
+    .why-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+    .why-card:hover { border-color: var(--border-hi); }
+    .why-icon { font-size: 28px; margin-bottom: 14px; }
+    .why-card h4 { margin-bottom: 8px; font-size: 1rem; }
+    .why-card p { font-size: 13.5px; }
+
+    /* ── FAQ Section ──────────────────────────────────────────────────────────── */
+    .faq-list { display: flex; flex-direction: column; gap: 0; }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+    }
+    .faq-item:first-child { border-top: 1px solid var(--border); }
+    .faq-question {
+      width: 100%;
+      text-align: left;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 22px 0;
+      color: var(--text-1);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: color 0.15s;
+    }
+    .faq-question:hover { color: var(--gold-light); }
+    .faq-chevron {
+      width: 22px;
+      height: 22px;
+      border: 1.5px solid var(--border-hi);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: var(--text-2);
+      flex-shrink: 0;
+      transition: transform 0.25s, border-color 0.15s;
+    }
+    .faq-item.open .faq-chevron {
+      transform: rotate(180deg);
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    .faq-answer-inner {
+      padding: 0 0 22px;
+      font-size: 14.5px;
+      color: var(--text-2);
+      line-height: 1.75;
+      max-width: 680px;
+    }
+    .faq-answer-inner strong { color: var(--text-1); }
+
+    /* ── CTA Section ──────────────────────────────────────────────────────────── */
+    .cta-section {
+      padding: 96px 0;
+      background: var(--bg-alt);
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(212,146,10,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cta-card {
+      position: relative;
+      background: var(--bg-card);
+      border: 1px solid rgba(212,146,10,0.2);
+      border-radius: 24px;
+      padding: 64px 48px;
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .cta-card h2 { margin-bottom: 16px; }
+    .cta-card p { font-size: 1.05rem; margin-bottom: 36px; max-width: 480px; margin-left: auto; margin-right: auto; }
+    .cta-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .cta-note {
+      margin-top: 20px;
+      font-size: 12px;
+      color: var(--text-3);
+    }
+
+    /* ── Footer ───────────────────────────────────────────────────────────────── */
+    .footer {
+      background: #040408;
+      border-top: 1px solid var(--border);
+      padding: 64px 0 40px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer-brand p {
+      font-size: 13.5px;
+      line-height: 1.65;
+      margin-top: 16px;
+      max-width: 280px;
+    }
+    .footer-col h5 {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 14px;
+    }
+    .footer-links { display: flex; flex-direction: column; gap: 8px; }
+    .footer-links a {
+      font-size: 13.5px;
+      color: var(--text-2);
+      transition: color 0.15s;
+    }
+    .footer-links a:hover { color: var(--text-1); }
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .footer-disclaimer {
+      background: rgba(232,64,64,0.06);
+      border: 1px solid rgba(232,64,64,0.15);
+      border-radius: 8px;
+      padding: 16px 20px;
+      font-size: 12px;
+      color: rgba(232,64,64,0.8);
+      line-height: 1.6;
+    }
+    .footer-disclaimer strong { color: #e84040; }
+    .footer-copy {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--text-3);
+    }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a { color: var(--text-3); transition: color 0.15s; }
+    .footer-legal a:hover { color: var(--text-2); }
+
+    /* ── Responsive ───────────────────────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .grid-4 { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .process-steps { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .section { padding: 64px 0; }
+      .nav-links, .nav-actions .btn-secondary { display: none; }
+      .nav-hamburger { display: flex; }
+      .hero { padding: 64px 0 72px; }
+      .hero-stats { flex-direction: column; }
+      .hero-stat { border-right: none; border-bottom: 1px solid var(--border); }
+      .hero-stat:last-child { border-bottom: none; }
+      .problem-grid { grid-template-columns: 1fr; gap: 40px; }
+      .standards-grid { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: 1fr; }
+      .grid-2 { grid-template-columns: 1fr; }
+      .grid-3 { grid-template-columns: 1fr; }
+      .process-steps { grid-template-columns: 1fr; }
+      .why-grid { grid-template-columns: 1fr 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .footer-brand p { max-width: 100%; }
+      .cta-card { padding: 40px 24px; }
+      .cta-actions { flex-direction: column; }
+      .cta-actions .btn { justify-content: center; }
+      .footer-copy { flex-direction: column; }
+    }
+    @media (max-width: 480px) {
+      .hero-actions { flex-direction: column; }
+      .hero-actions .btn { width: 100%; justify-content: center; }
+      .why-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
-<div id="toolbar">
-  <input id="ttl" value="Prime Concierge — Protocol Quiz Funnel Map" />
-  <div class="sp"></div>
-  <button onclick="fit()">⟳ Fit Screen</button>
-  <button onclick="exportPNG()">↓ Export</button>
+
+<!-- ── Research Disclaimer Bar ─────────────────────────────────────────────── -->
+<div class="disclaimer-bar">
+  ⚠ &nbsp;FOR RESEARCH PURPOSES ONLY — NOT FOR HUMAN CONSUMPTION
 </div>
-<svg id="svg"></svg>
+
+<!-- ── Navigation ──────────────────────────────────────────────────────────── -->
+<nav class="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo" aria-label="Prime Manufacturing Home">
+        <div class="nav-logo-mark">P</div>
+        <div class="nav-logo-text">
+          <span class="nav-logo-name">PRIME</span>
+          <span class="nav-logo-sub">Manufacturing</span>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#standards">Quality Standards</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#about">Why Prime</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="#contact" class="btn btn-secondary nav-cta">Contact</a>
+        <a href="#book-a-call" class="btn btn-primary nav-cta">Book a Call</a>
+      </div>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#standards">Quality Standards</a>
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#about">Why Prime</a>
+      <a href="#faq">FAQ</a>
+      <a href="#book-a-call" class="btn btn-primary">Book a Discovery Call</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ── Hero ────────────────────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-tag">B2B Peptide Manufacturing &amp; Private Label</div>
+      <h1>The Peptide Manufacturer<br/>That <em>Shows Its Work</em></h1>
+      <p class="hero-sub">
+        We supply research-grade peptides with comprehensive Certificate of Analysis documentation, Janoshik third-party verification, and testing across purity, sterility, endotoxins, and heavy metals — because if you can't prove it, it doesn't count.
+      </p>
+      <div class="hero-actions">
+        <a href="#book-a-call" class="btn btn-primary btn-lg">Book a Discovery Call →</a>
+        <a href="#standards" class="btn btn-secondary btn-lg">Our Quality Standards</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="hero-stat-value">99%+</span>
+          <span class="hero-stat-label">Purity Verified</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-value">Janoshik</span>
+          <span class="hero-stat-label">3rd-Party Tested</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-value">Full COA</span>
+          <span class="hero-stat-label">QR-Verified Docs</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-value">Sterility</span>
+          <span class="hero-stat-label">Tested Every Batch</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-value">Endotoxins</span>
+          <span class="hero-stat-label">LAL Tested</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-value">Heavy Metals</span>
+          <span class="hero-stat-label">Full Panel</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── The Industry Problem ─────────────────────────────────────────────────── -->
+<section class="section section--alt" id="problem">
+  <div class="container">
+    <div class="problem-grid">
+      <div>
+        <span class="section-eyebrow">The Industry Problem</span>
+        <h2 class="section-title">Most Suppliers Can't Prove What They're Selling</h2>
+        <p style="margin-bottom: 24px;">
+          After sourcing peptides for a health performance business with the highest possible standards, we spent eight months and thousands of outreach attempts — VA teams working four hours a day each — just to find suppliers who could actually back their claims with documentation.
+        </p>
+        <p>
+          Every supplier promised a Certificate of Analysis. Almost none could deliver one that was genuine, complete, and QR-verified. If most manufacturers aren't even running third-party testing, it means they genuinely don't know what they're selling — and neither do you.
+        </p>
+        <div class="problem-quote" style="margin-top: 32px;">
+          <p>"If a company chops off the QR code, they're using someone else's certificate. They either know they don't have good stuff or they're cutting costs and not testing their own."</p>
+          <cite>— 8 months of supplier vetting, thousands of contacts</cite>
+        </div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-item">
+          <div class="stat-icon stat-icon--red">✗</div>
+          <div class="stat-text">
+            <h4>No COA = No Accountability</h4>
+            <p>A supplier without a Certificate of Analysis has no independent proof their product is what they claim it is. They simply don't deserve a place in the market.</p>
+          </div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-icon stat-icon--red">⚠</div>
+          <div class="stat-text">
+            <h4>Cropped QR Codes = Borrowed Certificates</h4>
+            <p>Every genuine Janoshik COA has a QR code linking to the live certificate. A missing or cropped QR code is a red flag that the document has been repurposed from another batch.</p>
+          </div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-icon stat-icon--gold">⚗</div>
+          <div class="stat-text">
+            <h4>Purity Alone Isn't Enough</h4>
+            <p>Many suppliers only test for purity. But sterility failures, endotoxin contamination, and heavy metals are invisible to a purity HPLC — and they're the real safety risks.</p>
+          </div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-icon stat-icon--green">✓</div>
+          <div class="stat-text">
+            <h4>Prime Does All Five</h4>
+            <p>Purity, identity, sterility, endotoxins, and heavy metals — tested, documented, and QR-verified on every single batch we supply.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Quality Standards ─────────────────────────────────────────────────────── -->
+<section class="section" id="standards">
+  <div class="container">
+    <div class="standards-header text-center">
+      <span class="section-eyebrow">Our Quality Standards</span>
+      <h2 class="section-title">Five Tests. Every Batch. No Exceptions.</h2>
+      <p class="section-sub section-sub--center">
+        We don't pick and choose which tests are convenient. Every batch we supply passes all five quality criteria before it leaves the lab — and you receive full documentation to prove it.
+      </p>
+    </div>
+    <div class="standards-grid">
+      <div class="standard-card">
+        <div class="standard-icon">📄</div>
+        <h3>Certificate of Analysis (COA)</h3>
+        <p>Every batch ships with a complete Certificate of Analysis from Janoshik, the most recognised third-party peptide testing laboratory. Your COA covers all tested parameters in a single verified document.</p>
+        <div class="standard-badge">Janoshik Issued</div>
+      </div>
+      <div class="standard-card">
+        <div class="standard-icon">🔬</div>
+        <h3>QR-Verified Third-Party Testing</h3>
+        <p>Each Janoshik COA carries a unique QR code linking directly to the live certificate on their website — confirming the test was conducted specifically for your batch, not copied or modified from another supplier's results.</p>
+        <div class="standard-badge">QR Code Verified</div>
+      </div>
+      <div class="standard-card">
+        <div class="standard-icon">🧫</div>
+        <h3>Sterility &amp; Endotoxin Testing</h3>
+        <p>Beyond purity, we test every batch for microbial sterility and endotoxin levels (via LAL assay). These are the tests most manufacturers skip — and the ones that matter most for research integrity.</p>
+        <div class="standard-badge">LAL Endotoxin Tested</div>
+      </div>
+      <div class="standard-card">
+        <div class="standard-icon">⚗️</div>
+        <h3>Heavy Metals Analysis</h3>
+        <p>A full heavy metals panel is included in every documentation package. ICP-MS analysis screens for lead, arsenic, mercury, cadmium, and other metals — the complete picture, not a partial one.</p>
+        <div class="standard-badge">Full Metals Panel</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Services ──────────────────────────────────────────────────────────────── -->
+<section class="section section--alt" id="services">
+  <div class="container">
+    <div style="margin-bottom: 48px;">
+      <span class="section-eyebrow">What We Offer</span>
+      <h2 class="section-title">Manufacturing &amp; Supply Solutions</h2>
+      <p class="section-sub">From private label to bulk supply and custom formulations, we support businesses at every stage of building a peptide product line.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card featured">
+        <span class="service-tag">Most Popular</span>
+        <h3>Private Label</h3>
+        <p>Your brand identity on our proven, fully-tested peptide formulas. We handle manufacturing and quality control — you get a premium product that's already documented and verified.</p>
+        <ul class="service-list">
+          <li>Your branding, labels &amp; packaging</li>
+          <li>Our tested formulas &amp; quality docs</li>
+          <li>Full COA included with every order</li>
+          <li>Scalable from starter volumes</li>
+        </ul>
+        <a href="#book-a-call" class="service-cta">Enquire about Private Label →</a>
+      </div>
+      <div class="service-card">
+        <span class="service-tag service-tag--blue">White Label</span>
+        <h3>White Label Supply</h3>
+        <p>Ready-formulated peptide products available for immediate labelling with your brand. Ideal for resellers and distributors who need a fast, reliable supply chain with documentation already in place.</p>
+        <ul class="service-list">
+          <li>Pre-formulated, QC-passed batches</li>
+          <li>Quick turnaround for established SKUs</li>
+          <li>COA documentation ready to go</li>
+        </ul>
+        <a href="#book-a-call" class="service-cta">Enquire about White Label →</a>
+      </div>
+      <div class="service-card">
+        <span class="service-tag service-tag--blue">Bulk</span>
+        <h3>Bulk Manufacturing</h3>
+        <p>Large-volume peptide supply for established businesses and distributors. Consistent batch quality with comprehensive documentation at every order size.</p>
+        <ul class="service-list">
+          <li>Flexible order quantities</li>
+          <li>Volume pricing available</li>
+          <li>Full batch documentation</li>
+          <li>Reliable lead times</li>
+        </ul>
+        <a href="#book-a-call" class="service-cta">Enquire about Bulk Supply →</a>
+      </div>
+      <div class="service-card">
+        <span class="service-tag">Custom</span>
+        <h3>Custom Formulations</h3>
+        <p>Need a bespoke peptide formula or combination that isn't in our standard range? We work with you to source and manufacture custom specifications — with full documentation from day one.</p>
+        <ul class="service-list">
+          <li>Bespoke peptide combinations</li>
+          <li>Specification-matched manufacturing</li>
+          <li>R&amp;D support available</li>
+          <li>Custom documentation package</li>
+        </ul>
+        <a href="#book-a-call" class="service-cta">Discuss Custom Formulations →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Process ───────────────────────────────────────────────────────────────── -->
+<section class="section" id="process">
+  <div class="container">
+    <div class="text-center" style="margin-bottom: 56px;">
+      <span class="section-eyebrow">How It Works</span>
+      <h2 class="section-title">From Enquiry to Delivery</h2>
+      <p class="section-sub section-sub--center">
+        A transparent, six-step process designed around your needs — with documentation and quality checks at every stage.
+      </p>
+    </div>
+    <div class="process-steps">
+      <div class="process-step">
+        <span class="process-num">01</span>
+        <span class="process-step-icon">📞</span>
+        <h3>Book a Discovery Call</h3>
+        <p>A 30-minute consultation to understand your product requirements, volumes, and timeline. No obligation — just a direct conversation.</p>
+      </div>
+      <div class="process-step">
+        <span class="process-num">02</span>
+        <span class="process-step-icon">🧪</span>
+        <h3>Product &amp; Formula Selection</h3>
+        <p>Choose from our established range or brief us on a custom formula. We'll confirm availability, specifications, and pricing.</p>
+      </div>
+      <div class="process-step">
+        <span class="process-num">03</span>
+        <span class="process-step-icon">📋</span>
+        <h3>Review Documentation</h3>
+        <p>We provide sample COAs and quality documentation upfront so you can verify our standards before committing to an order.</p>
+      </div>
+      <div class="process-step">
+        <span class="process-num">04</span>
+        <span class="process-step-icon">✅</span>
+        <h3>Order Confirmation</h3>
+        <p>Finalise quantities, labelling specifications, and delivery requirements. We agree timelines and confirm your documentation package.</p>
+      </div>
+      <div class="process-step">
+        <span class="process-num">05</span>
+        <span class="process-step-icon">⚗</span>
+        <h3>Manufacturing &amp; QC</h3>
+        <p>Your order is produced and each batch undergoes all five quality tests. Third-party COA documentation is generated before dispatch.</p>
+      </div>
+      <div class="process-step">
+        <span class="process-num">06</span>
+        <span class="process-step-icon">📦</span>
+        <h3>Delivery with Full Docs</h3>
+        <p>Your order ships with the complete documentation package — COA, QR-verified Janoshik certificates, and all relevant test reports.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Why Prime ─────────────────────────────────────────────────────────────── -->
+<section class="section section--alt" id="about">
+  <div class="container">
+    <div class="text-center">
+      <span class="section-eyebrow">Why Prime Manufacturing</span>
+      <h2 class="section-title">We Built This Because Most Suppliers Couldn't</h2>
+      <p class="section-sub section-sub--center">
+        Eight months. Thousands of supplier contacts. Two full-time VAs. That's what it took to find a supply chain that could actually meet our standards — so we built a business around it.
+      </p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">🔍</div>
+        <h4>8 Months of Supplier Research</h4>
+        <p>We didn't settle. We tested thousands of suppliers to find the handful who could provide genuine, QR-verified documentation across all five quality parameters.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">📄</div>
+        <h4>Full Documentation, Always</h4>
+        <p>Every order comes with the complete documentation package. You'll never have to chase us for paperwork — it ships with your product.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🔗</div>
+        <h4>QR-Linked Certificates</h4>
+        <p>Every Janoshik COA we provide has a live QR code. Scan it and it takes you directly to the certificate on Janoshik's website — no ambiguity, no forgeries.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🤝</div>
+        <h4>B2B Focused</h4>
+        <p>We work exclusively with qualified researchers, resellers, and businesses. Every enquiry is handled directly — no automated runaround.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">⚡</div>
+        <h4>24-Hour Response Time</h4>
+        <p>We understand that sourcing decisions are time-sensitive. Expect a direct response within 24 hours of any enquiry — usually sooner.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">📈</div>
+        <h4>Scalable from Day One</h4>
+        <p>Whether you're launching a new product line or scaling an existing one, our supply chain is built to grow with your business without compromising on quality or documentation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ───────────────────────────────────────────────────────────────────── -->
+<section class="section" id="faq">
+  <div class="container" style="max-width: 800px;">
+    <div class="text-center" style="margin-bottom: 48px;">
+      <span class="section-eyebrow">FAQ</span>
+      <h2 class="section-title">Common Questions</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question">
+          What is a Certificate of Analysis (COA)?
+          <span class="faq-chevron">↓</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            A Certificate of Analysis is a document issued by an <strong>independent third-party laboratory</strong> confirming the identity, purity, and quality of a compound. It is the fundamental proof that a product has been tested and meets stated specifications. Without a COA, you have only the supplier's word — and that isn't good enough for research-grade supply.
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          How do I verify your COAs are genuine?
+          <span class="faq-chevron">↓</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Every COA we provide is issued by <strong>Janoshik</strong>, the industry's most recognised peptide testing laboratory. Each certificate includes a <strong>unique QR code</strong> at the bottom that links directly to the live certificate on Janoshik's website. Simply scan the QR code and you'll see the original certificate — confirming it was genuinely issued for our specific batch, not copied from another source. If a supplier's COA doesn't have a QR code, or the QR code has been cropped off, treat that as a serious red flag.
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          What testing is conducted on every batch?
+          <span class="faq-chevron">↓</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Every batch we supply undergoes five quality tests: <strong>HPLC purity analysis</strong> (99%+ standard), <strong>identity confirmation</strong>, <strong>microbial sterility testing</strong>, <strong>endotoxin testing</strong> via LAL assay, and a <strong>full heavy metals panel</strong> via ICP-MS. All results are documented in the COA that ships with your order.
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          What is the minimum order quantity?
+          <span class="faq-chevron">↓</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Minimum order quantities vary depending on the product, formulation, and service type (private label, white label, or bulk). <a href="#book-a-call" style="color: var(--gold);">Book a discovery call</a> to discuss your specific requirements — we work with clients at various stages and can advise on what's realistic for your business.
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          Do you offer private label and white label services?
+          <span class="faq-chevron">↓</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Yes. We offer <strong>private label</strong> (your branding on our proven formulas), <strong>white label</strong> (ready-formulated products for immediate labelling), and <strong>bulk supply</strong>. We also work with clients on <strong>custom formulations</strong> where specific peptide combinations are required. All services include the full documentation package.
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          What peptides do you manufacture and supply?
+          <span class="faq-chevron">↓</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            We supply a comprehensive range of research peptides. Please <a href="#book-a-call" style="color: var(--gold);">contact us directly</a> to enquire about specific compounds, availability, and current documentation. We prefer to discuss requirements individually to ensure we can meet your exact specifications with full supporting documentation.
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          Why does it matter that you're B2B only?
+          <span class="faq-chevron">↓</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Working exclusively with qualified researchers, resellers, and businesses allows us to maintain a consistent quality standard and documentation process across our entire supply chain. It also means every client is a professional with legitimate research or commercial requirements — which keeps our supply network accountable at every level.
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          Do you supply internationally?
+          <span class="faq-chevron">↓</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Please <a href="#book-a-call" style="color: var(--gold);">book a call or contact us</a> to discuss shipping logistics, import requirements, and compliance considerations for your region. We handle each international enquiry individually to ensure the correct documentation and regulatory compliance for your destination.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Book a Call CTA ───────────────────────────────────────────────────────── -->
+<section class="cta-section" id="book-a-call">
+  <div class="container">
+    <div class="cta-card">
+      <span class="section-eyebrow">Get Started</span>
+      <h2>Ready to Source Quality Peptides?</h2>
+      <p>Book a 30-minute discovery call with our team to discuss your requirements, review documentation samples, and get a direct quote — no middlemen, no runaround.</p>
+      <div class="cta-actions">
+        <!-- Replace the href below with your Calendly or booking link -->
+        <a href="mailto:contact@primemfg.com" class="btn btn-primary btn-lg">Book a Discovery Call →</a>
+        <a href="mailto:contact@primemfg.com" class="btn btn-secondary btn-lg">Send an Enquiry</a>
+      </div>
+      <p class="cta-note">We respond to all enquiries within 24 hours.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Contact anchor ────────────────────────────────────────────────────────── -->
+<div id="contact"></div>
+
+<!-- ── Footer ────────────────────────────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="nav-logo" style="display: inline-flex; margin-bottom: 0;">
+          <div class="nav-logo-mark">P</div>
+          <div class="nav-logo-text">
+            <span class="nav-logo-name">PRIME</span>
+            <span class="nav-logo-sub">Manufacturing</span>
+          </div>
+        </a>
+        <p>Premium research-grade peptide manufacturing and private label supply. Full COA documentation, Janoshik third-party verified, on every single batch.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <div class="footer-links">
+          <a href="#services">Private Label</a>
+          <a href="#services">White Label</a>
+          <a href="#services">Bulk Supply</a>
+          <a href="#services">Custom Formulations</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <div class="footer-links">
+          <a href="#standards">Quality Standards</a>
+          <a href="#process">Our Process</a>
+          <a href="#about">Why Prime</a>
+          <a href="#faq">FAQ</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <div class="footer-links">
+          <a href="#book-a-call">Book a Discovery Call</a>
+          <a href="mailto:contact@primemfg.com">contact@primemfg.com</a>
+          <a href="#faq">Support FAQ</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-disclaimer">
+        <strong>Research Purposes Only.</strong> All products supplied by Prime Manufacturing are strictly for research purposes only. They are not intended for human use, consumption, or therapeutic application. By enquiring about or purchasing from Prime Manufacturing, you confirm that you are a qualified researcher, licensed reseller, or business operating within a legitimate research context. Prime Manufacturing accepts no liability for misuse of supplied compounds. All products are supplied in compliance with applicable regulations.
+      </div>
+      <div class="footer-copy">
+        <span>© 2026 Prime Manufacturing. All rights reserved.</span>
+        <div class="footer-legal">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms &amp; Conditions</a>
+          <a href="#">Shipping &amp; Returns</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ── Scripts ────────────────────────────────────────────────────────────────── -->
 <script>
-// ─── Guard ────────────────────────────────────────────────────────────────────
-if (typeof d3 === 'undefined') { document.body.innerHTML += '<div style="color:#f87171;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);font-size:18px">D3 failed to load — check internet connection</div>'; throw 0; }
-
-// ─── Constants ────────────────────────────────────────────────────────────────
-const CW   = 210;   // card width
-const CH_S = 44;    // step block height
-const VG   = 8;     // vertical gap between steps
-const HDR  = 46;    // phase header height
-const HDR_GAP = 10; // gap between header and first step
-const PGAP = 72;    // horizontal gap between phase cards (for arrow)
-const COL  = CW + PGAP; // column stride = 282
-
-// Avatar row layout
-const N_AV     = 7;
-const AV_ROW_H = 138;  // y spacing between avatar rows
-
-// Pre-routing center Y
-const PRE_Y_CTR = 540;
-
-// Avatar row centers (symmetric around PRE_Y_CTR)
-const AV_Y = Array.from({length:N_AV}, (_,i) => PRE_Y_CTR + (i - Math.floor(N_AV/2)) * AV_ROW_H);
-// = [540-414, 540-276, 540-138, 540, 540+138, 540+276, 540+414]
-// = [126, 264, 402, 540, 678, 816, 954]
-
-// Phase x-origins (left edge of card)
-const PRE_X0 = 50;
-const N_PRE  = 9; // number of pre-routing phase columns
-
-// Routing geometry
-const LAST_COL_X  = PRE_X0 + (N_PRE-1)*COL;       // x of last pre-routing card
-const LAST_COL_RX = LAST_COL_X + CW;               // right edge of last pre-routing card
-const ROUTE_MX    = LAST_COL_RX + PGAP/2 + 20;     // x of vertical routing spine
-const POST_X0     = ROUTE_MX + PGAP/2 + 20;        // x of first post-routing card
-
-// Post-routing phases (Sales, Checkout, Post-Purchase)
-const N_POST = 3;
-
-// Avatar card height (single block per avatar per phase)
-const AV_BH  = 74;
-
-// SVG logical size
-const SVG_W = POST_X0 + N_POST*COL + 80;
-const SVG_H = AV_Y[N_AV-1] + AV_BH/2 + 100;
-
-// ─── Color palette ────────────────────────────────────────────────────────────
-const PHASE_COLORS = [
-  '#475569', // 0 Traffic
-  '#7c3aed', // 1 Intro
-  '#4f46e5', // 2 Section 1
-  '#0369a1', // 3 Section 2
-  '#6d28d9', // 4 Section 3
-  '#be185d', // 5 Section 4
-  '#b45309', // 6 Section 5
-  '#c2410c', // 7 Summary
-  '#047857', // 8 Yes Street
-];
-
-const AV_COLORS = [
-  '#f97316', // Fat Loss
-  '#22c55e', // Performance
-  '#38bdf8', // Recovery
-  '#818cf8', // Sleep
-  '#f472b6', // Skin
-  '#2dd4bf', // Gut
-  '#fb7185', // Hormonal
-];
-
-const POST_COLORS = ['#1d4ed8','#4338ca','#065f46'];
-
-// ─── Data ─────────────────────────────────────────────────────────────────────
-const PRE_PHASES = [
-  { label:'TRAFFIC', sub:'Entry Point',
-    steps:['Paid Ads\n(VSSL · Image · Video)','Organic\n(Social · SEO · Referral)'] },
-
-  { label:'INTRO SCREEN', sub:'Quiz Landing',
-    steps:['"Find Your Prime Protocol"','Medically guided · 2-min','7 goal areas previewed','Begin → CTA'] },
-
-  { label:'SECTION 1', sub:'Current Situation',
-    steps:['Q1 — Age\n(Visual Identifier)',
-           'Q2 — Pain Location\n← ROUTING QUESTION',
-           'Q3 — Pain Specification\n(Yes / No per path)',
-           'Q4 — Pain Severity',
-           'Q5 — Pain Timeline'] },
-
-  { label:'SECTION 2', sub:'Desired Situation',
-    steps:['Q6 — Desired Outcome','Info Slide — Social Proof\n(Client count + credibility)'] },
-
-  { label:'SECTION 3', sub:'Individualization',
-    steps:['Q7 — Biological Sex','Q8 — Lifestyle Profile'] },
-
-  { label:'SECTION 4', sub:'Pre-Objection Handling',
-    steps:['Q9 — Daily Protocol Time','Info Card\nObjection Resolved'] },
-
-  { label:'SECTION 5', sub:'Causation',
-    steps:['Q10 — Root Causes\n(Stress · hormones · diet)','Q11 — Previous Solutions\n(Positions peptides as key)'] },
-
-  { label:'SUMMARY', sub:'Profile + Promise',
-    steps:['Screen 1: Diagnosis Card\nSeverity slider · 4 metric cards',
-           'Screen 2: The Promise\nAnimated 6-month bar chart'] },
-
-  { label:'YES STREET', sub:'Commitment',
-    steps:['Q12 — "Ready to fix this for good?"',
-           'Info — Science Hook\n(Avatar-specific stat)',
-           'Q13 — "Protocol sound right?"',
-           'Submit → Protocol Reveal'] },
-];
-
-const AVATARS = [
-  { name:'FAT LOSS\n"The Transformer"',
-    angle:'"Restart your metabolism\nat the source"',
-    route:'Q2: Body composition · Q4: High severity · Q11: Tried everything' },
-  { name:'PERFORMANCE\n"The Optimizer"',
-    angle:'"Unlock performance your\ntraining can\'t reach alone"',
-    route:'Q2: Athletic output · Q8: Athlete · Q3: Strength plateau' },
-  { name:'RECOVERY\n"The Healer"',
-    angle:'"Heal what conventional\ntreatment can\'t"',
-    route:'Q2: Pain / slow recovery · Q4: Holding me back · Q10: Over-training' },
-  { name:'SLEEP\n"The Restorer"',
-    angle:'"Deep sleep is where\neverything heals"',
-    route:'Q2: Sleep & recovery · Q10: High stress / cortisol · Q3: Brain fog' },
-  { name:'SKIN\n"The Revivalist"',
-    angle:'"Turn back the clock\nfrom within"',
-    route:'Q2: Skin & aging · Q1: Age 35-54 · Q7: Female' },
-  { name:'GUT\n"The Foundation"',
-    angle:'"Fix your gut —\nfix everything else"',
-    route:'Q2: Gut & digestion · Q3: Bloating confirmed · Q10: Inflammatory diet' },
-  { name:'HORMONAL\n"The Vitalizer"',
-    angle:'"Reclaim the energy\nyou used to have"',
-    route:'Q2: Hormones / libido · Q1: Age 40+ · Q5: Over a year' },
-];
-
-const POST_PHASES = [
-  { label:'SALES PAGE', sub:'Personalised per Avatar' },
-  { label:'CHECKOUT', sub:'Conversion Optimised' },
-  { label:'POST-PURCHASE', sub:'Retention & Reorder' },
-];
-
-const POST_CONTENT = [
-  // Sales Page
-  ['"Protocol Matched" Banner\n+ Avatar label shown',
-   'Bundle Offer\n(6M Pre-selected · Best Value)',
-   'Testimonials · Medical Trust\nMoney-back guarantee',
-   'FAQ + Second CTA'],
-  // Checkout
-  ['Urgency: Timer\n+ Limited protocol spots',
-   '90→180 Day Guarantee\n(Upgrade shown here only)',
-   '6M Bundle + Subscribe\nPre-selected',
-   'Order Bump: Add-on Stack'],
-  // Post-Purchase
-  ['Welcome Email\n+ Protocol usage guide',
-   '30-Day Concierge\nCheck-in',
-   '90-Day Results Prompt\n→ Reorder CTA'],
-];
-
-// ─── SVG + Zoom setup ─────────────────────────────────────────────────────────
-const svgEl = d3.select('#svg')
-  .attr('width', window.innerWidth)
-  .attr('height', window.innerHeight);
-
-const defs = svgEl.append('defs');
-
-// Arrow markers
-function mkMarker(id, color) {
-  defs.append('marker')
-    .attr('id', id).attr('markerWidth',8).attr('markerHeight',8)
-    .attr('refX',7).attr('refY',4).attr('orient','auto')
-    .append('polygon').attr('points','0 0,8 4,0 8')
-    .attr('fill',color).attr('fill-opacity',0.7);
-}
-mkMarker('aw','rgba(255,255,255,0.55)');
-AV_COLORS.forEach((c,i) => mkMarker('a'+i, c));
-POST_COLORS.forEach((c,i) => mkMarker('p'+i, c));
-
-const canvas = svgEl.append('g').attr('id','canvas');
-
-// Background
-canvas.append('rect').attr('x',-200).attr('y',-200)
-  .attr('width', SVG_W+400).attr('height', SVG_H+400)
-  .attr('fill','#06060f');
-
-// ─── Draw helpers ─────────────────────────────────────────────────────────────
-function addRect(parent, x, y, w, h, fill, stroke, rx, fo, so, sw) {
-  parent.append('rect').attr('x',x).attr('y',y).attr('width',w).attr('height',h)
-    .attr('rx',rx||8).attr('fill',fill).attr('fill-opacity',fo||1)
-    .attr('stroke',stroke||'none').attr('stroke-opacity',so||1)
-    .attr('stroke-width',sw||1);
-}
-
-function addText(parent, x, y, lines, size, fill, anchor, weight, fo) {
-  if (typeof lines === 'string') lines = lines.split('\n');
-  const lh = size * 1.32;
-  const off = -(lines.length-1)*lh/2;
-  lines.forEach((line,i) => {
-    parent.append('text')
-      .attr('x',x).attr('y', y + off + i*lh)
-      .attr('text-anchor', anchor||'middle')
-      .attr('dominant-baseline','central')
-      .attr('font-size', size)
-      .attr('fill', fill||'#fff')
-      .attr('fill-opacity', fo||1)
-      .attr('font-weight', weight||'400')
-      .attr('font-family','-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif')
-      .text(line);
+  // Mobile menu toggle
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
   });
-}
-
-function addArrow(parent, x1, y1, x2, y2, color, marker, sw) {
-  parent.append('line')
-    .attr('x1',x1).attr('y1',y1).attr('x2',x2).attr('y2',y2)
-    .attr('stroke', color||'rgba(255,255,255,0.4)')
-    .attr('stroke-width', sw||1.5)
-    .attr('stroke-opacity',0.6)
-    .attr('marker-end', `url(#${marker||'aw'})`);
-}
-
-// ─── Draw a pre-routing phase column ─────────────────────────────────────────
-function drawPhase(idx, phase) {
-  const x     = PRE_X0 + idx*COL;
-  const color = PHASE_COLORS[idx];
-  const steps = phase.steps;
-  const colH  = steps.length * CH_S + (steps.length-1)*VG;
-  const y0    = PRE_Y_CTR - colH/2;  // top of first step block
-
-  const g = canvas.append('g');
-
-  // Phase header card
-  const hdrY = y0 - HDR_GAP - HDR;
-  addRect(g, x, hdrY, CW, HDR, color, 'none', 8, 0.88);
-  addText(g, x+CW/2, hdrY+14, phase.label, 11, '#fff', 'middle', '800');
-  addText(g, x+CW/2, hdrY+33, phase.sub,   9,  'rgba(255,255,255,0.65)', 'middle', '400');
-
-  // Vertical connector behind steps
-  if (steps.length > 1) {
-    g.append('line')
-      .attr('x1', x+CW/2).attr('y1', y0)
-      .attr('x2', x+CW/2).attr('y2', y0+colH)
-      .attr('stroke', color).attr('stroke-opacity',0.15).attr('stroke-width',1);
-  }
-
-  // Step blocks
-  steps.forEach((step, si) => {
-    const by = y0 + si*(CH_S+VG);
-    addRect(g, x, by, CW, CH_S, color, color, 8, 0.12, 0.45, 1);
-    addText(g, x+CW/2, by+CH_S/2, step, 9.5, '#fff', 'middle', '400', 0.9);
-
-    // Small down-arrow between steps
-    if (si < steps.length-1) {
-      const ay = by+CH_S+1;
-      g.append('line')
-        .attr('x1',x+CW/2).attr('y1',ay).attr('x2',x+CW/2).attr('y2',ay+VG-2)
-        .attr('stroke',color).attr('stroke-opacity',0.45).attr('stroke-width',1)
-        .attr('marker-end','url(#aw)');
-    }
+  // Close mobile menu on link click
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => mobileMenu.classList.remove('open'));
   });
 
-  // Horizontal arrow to next phase
-  if (idx < N_PRE-1) {
-    const ay  = PRE_Y_CTR;
-    const ax1 = x+CW+5;
-    const ax2 = PRE_X0+(idx+1)*COL-5;
-    addArrow(g, ax1, ay, ax2, ay, 'rgba(255,255,255,0.35)', 'aw');
-  }
-
-  // "ROUTING" badge on Q2 block (phase index 2, step index 1)
-  if (idx===2) {
-    const routeBy = y0 + 1*(CH_S+VG);
-    addRect(g, x+CW-64, routeBy+3, 60, 18, '#f59e0b', 'none', 4, 0.9);
-    addText(g, x+CW-34, routeBy+12, 'ROUTING ▸', 8, '#000', 'middle', '700');
-  }
-}
-
-// ─── Draw routing fan-out ─────────────────────────────────────────────────────
-function drawRouting() {
-  const g = canvas.append('g');
-
-  // Line from last pre-routing card to spine
-  addArrow(g, LAST_COL_RX+4, PRE_Y_CTR, ROUTE_MX-4, PRE_Y_CTR,
-    'rgba(255,255,255,0.3)', 'aw');
-
-  // Vertical spine
-  g.append('line')
-    .attr('x1', ROUTE_MX).attr('y1', AV_Y[0])
-    .attr('x2', ROUTE_MX).attr('y2', AV_Y[N_AV-1])
-    .attr('stroke','rgba(255,255,255,0.2)').attr('stroke-width',1.5);
-
-  // ROUTING SPLIT label
-  addRect(g, ROUTE_MX-48, PRE_Y_CTR-42, 96, 22, 'rgba(255,200,0,0.12)', 'rgba(255,200,0,0.4)', 5, 1, 1, 1);
-  addText(g, ROUTE_MX, PRE_Y_CTR-31, 'ROUTING SPLIT', 8, '#fbbf24', 'middle', '700');
-
-  // Fan lines to avatar rows
-  AVATARS.forEach((av, ai) => {
-    const ry = AV_Y[ai];
-    const ac = AV_COLORS[ai];
-
-    g.append('circle').attr('cx', ROUTE_MX).attr('cy', ry).attr('r',3.5)
-      .attr('fill', ac).attr('fill-opacity',0.85);
-
-    addArrow(g, ROUTE_MX+3, ry, POST_X0-6, ry, ac, 'a'+ai, 1.5);
-  });
-}
-
-// ─── Draw post-routing avatar rows ───────────────────────────────────────────
-function drawAvatarRows() {
-  // Post-phase headers (drawn once, above the first avatar row)
-  POST_PHASES.forEach((ph, pi) => {
-    const x    = POST_X0 + pi*COL;
-    const hdrY = AV_Y[0] - AV_BH/2 - HDR_GAP - HDR;
-    const g    = canvas.append('g');
-    addRect(g, x, hdrY, CW, HDR, POST_COLORS[pi], 'none', 8, 0.8);
-    addText(g, x+CW/2, hdrY+14, ph.label, 11, '#fff', 'middle','800');
-    addText(g, x+CW/2, hdrY+33, ph.sub,   9,  'rgba(255,255,255,0.6)', 'middle','400');
-  });
-
-  // Avatar rows
-  AVATARS.forEach((av, ai) => {
-    const ry  = AV_Y[ai];
-    const ac  = AV_COLORS[ai];
-    const g   = canvas.append('g');
-
-    // Horizontal row band (subtle background)
-    addRect(g, POST_X0-4, ry-AV_BH/2-4, N_POST*COL-PGAP+8, AV_BH+8,
-      ac, 'none', 8, 0.04);
-
-    // Avatar label block at left
-    const lblW = 148;
-    const lblX = POST_X0 - lblW - 12;
-    addRect(g, lblX, ry-AV_BH/2, lblW, AV_BH, ac, ac, 8, 0.13, 0.4, 1);
-    addText(g, lblX+lblW/2, ry, av.name, 9.5, ac, 'middle','700');
-
-    // Post-routing phase blocks
-    POST_PHASES.forEach((ph, pi) => {
-      const bx  = POST_X0 + pi*COL;
-      const by  = ry - AV_BH/2;
-      const col = POST_COLORS[pi];
-
-      addRect(g, bx, by, CW, AV_BH, ac, ac, 8, 0.1, 0.35, 1);
-
-      // Phase label at top of block
-      addText(g, bx+CW/2, by+12, ph.label, 8, ac, 'middle','700');
-
-      // Content inside block
-      if (pi===0) {
-        // Sales page: show avatar angle
-        addText(g, bx+CW/2, by+AV_BH/2+6, av.angle, 8.5,
-          'rgba(255,255,255,0.75)', 'middle','400');
-      } else if (pi===1) {
-        addText(g, bx+CW/2, by+AV_BH/2+6,
-          'Timer + Stock Urgency\n90→180 Day Guarantee\n6M Pre-selected · Bump',
-          8, 'rgba(255,255,255,0.7)', 'middle','400');
-      } else {
-        addText(g, bx+CW/2, by+AV_BH/2+6,
-          'Welcome + Guide\n30-day Check-in\n90-day Reorder CTA',
-          8, 'rgba(255,255,255,0.7)', 'middle','400');
-      }
-
-      // Routing qualifier shown on Sales Page
-      if (pi===0) {
-        addText(g, bx+CW/2, by+AV_BH-8, av.route, 7.5,
-          'rgba(255,255,255,0.35)', 'middle','400');
-      }
-
-      // Arrow to next phase
-      if (pi < N_POST-1) {
-        addArrow(g, bx+CW+4, ry, POST_X0+(pi+1)*COL-4, ry, ac, 'a'+ai, 1.5);
+  // FAQ accordion
+  document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const answer = item.querySelector('.faq-answer');
+      const isOpen = item.classList.contains('open');
+      // Close all
+      document.querySelectorAll('.faq-item.open').forEach(openItem => {
+        openItem.classList.remove('open');
+        openItem.querySelector('.faq-answer').style.maxHeight = null;
+      });
+      // Open clicked (if it was closed)
+      if (!isOpen) {
+        item.classList.add('open');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
       }
     });
-
-    // "SALE ✓" badge at end
-    const sx = POST_X0 + N_POST*COL - PGAP + 8;
-    addRect(g, sx, ry-12, 52, 24, ac, 'none', 6, 0.2);
-    addText(g, sx+26, ry, 'SALE ✓', 9, ac, 'middle','700');
   });
-}
 
-// ─── Bottom legend ────────────────────────────────────────────────────────────
-function drawLegend() {
-  const g   = canvas.append('g');
-  const lx  = PRE_X0;
-  const ly  = SVG_H - 36;
-  const items = [
-    ...AVATARS.map((av,i) => ({label:av.name.split('\n')[0], color:AV_COLORS[i]})),
-  ];
-  addText(g, lx, ly, 'Avatar Paths:', 9, 'rgba(255,255,255,0.3)', 'start','600');
-  items.forEach((item,i) => {
-    const ix = lx + 90 + i*128;
-    g.append('circle').attr('cx',ix).attr('cy',ly).attr('r',5)
-      .attr('fill',item.color).attr('fill-opacity',0.8);
-    addText(g, ix+10, ly, item.label, 9, item.color, 'start','400');
-  });
-}
-
-// ─── Render ───────────────────────────────────────────────────────────────────
-PRE_PHASES.forEach((ph,i) => drawPhase(i, ph));
-drawRouting();
-drawAvatarRows();
-drawLegend();
-
-// ─── Zoom & Pan ───────────────────────────────────────────────────────────────
-const zoom = d3.zoom().scaleExtent([0.08,4])
-  .on('zoom', e => canvas.attr('transform', e.transform));
-
-svgEl.call(zoom).on('dblclick.zoom', null);
-
-function fit() {
-  const sx = window.innerWidth  / (SVG_W + 80);
-  const sy = window.innerHeight / (SVG_H + 80);
-  const sc = Math.min(sx, sy) * 0.93;
-  const tx = (window.innerWidth  - SVG_W*sc) / 2;
-  const ty = (window.innerHeight - SVG_H*sc) / 2 + 24;
-  svgEl.transition().duration(450)
-    .call(zoom.transform, d3.zoomIdentity.translate(tx,ty).scale(sc));
-}
-
-// Set initial view immediately (no transition = no blank screen)
-(function initView() {
-  const sx = window.innerWidth  / (SVG_W + 80);
-  const sy = window.innerHeight / (SVG_H + 80);
-  const sc = Math.min(sx, sy) * 0.93;
-  const tx = (window.innerWidth  - SVG_W*sc) / 2;
-  const ty = (window.innerHeight - SVG_H*sc) / 2 + 24;
-  svgEl.call(zoom.transform, d3.zoomIdentity.translate(tx,ty).scale(sc));
-})();
-
-function exportPNG() {
-  // Serialize SVG, open in new tab for saving
-  const clone = document.getElementById('svg').cloneNode(true);
-  clone.setAttribute('width', SVG_W+80);
-  clone.setAttribute('height', SVG_H+80);
-  clone.querySelector('#canvas').setAttribute('transform',
-    `translate(40,40)`);
-  const src = new XMLSerializer().serializeToString(clone);
-  const blob = new Blob([src], {type:'image/svg+xml'});
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'prime-concierge-funnel-map.svg';
-  a.click();
-}
-
-window.addEventListener('resize', () => {
-  svgEl.attr('width', window.innerWidth).attr('height', window.innerHeight);
-});
+  // Sticky nav shadow on scroll
+  const nav = document.querySelector('.nav');
+  window.addEventListener('scroll', () => {
+    nav.style.boxShadow = window.scrollY > 10
+      ? '0 4px 32px rgba(0,0,0,0.6)'
+      : '';
+  }, { passive: true });
 </script>
 </body>
 </html>

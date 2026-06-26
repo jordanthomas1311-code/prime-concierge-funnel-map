@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Prime Concierge — Funnel Map</title>
+<script src="https://unpkg.com/d3@7.9.0/dist/d3.min.js"></script>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#06060f; overflow:hidden; width:100vw; height:100vh; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; }
+  #toolbar { position:fixed; top:14px; left:50%; transform:translateX(-50%); z-index:100; display:flex; align-items:center; gap:8px; background:rgba(255,255,255,0.05); backdrop-filter:blur(14px); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:7px 14px; white-space:nowrap; }
+  #ttl { background:transparent; border:none; color:rgba(255,255,255,0.85); font-size:13px; font-weight:700; outline:none; width:260px; }
+  .sp { width:1px; height:18px; background:rgba(255,255,255,0.12); }
+  button { background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.12); color:rgba(255,255,255,0.65); padding:4px 12px; border-radius:7px; cursor:pointer; font-size:11px; transition:all .15s; }
+  button:hover { background:rgba(255,255,255,0.14); color:#fff; }
+  svg { cursor:grab; display:block; } svg:active { cursor:grabbing; }
+</style>
+</head>
+<body>
+<div id="toolbar">
+  <input id="ttl" value="Prime Concierge — Protocol Quiz Funnel Map" />
+  <div class="sp"></div>
+  <button onclick="fit()">⟳ Fit Screen</button>
+  <button onclick="exportPNG()">↓ Export</button>
+</div>
+<svg id="svg"></svg>
+<script>
+// ─── Guard ────────────────────────────────────────────────────────────────────
+if (typeof d3 === 'undefined') { document.body.innerHTML += '<div style="color:#f87171;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);font-size:18px">D3 failed to load — check internet connection</div>'; throw 0; }
+
+// ─── Constants ────────────────────────────────────────────────────────────────
+const CW   = 210;   // card width
+const CH_S = 44;    // step block height
+const VG   = 8;     // vertical gap between steps
+const HDR  = 46;    // phase header height
+const HDR_GAP = 10; // gap between header and first step
+const PGAP = 72;    // horizontal gap between phase cards (for arrow)
+const COL  = CW + PGAP; // column stride = 282
+
+// Avatar row layout
+const N_AV     = 7;
+const AV_ROW_H = 138;  // y spacing between avatar rows
+
+// Pre-routing center Y
+const PRE_Y_CTR = 540;
+
+// Avatar row centers (symmetric around PRE_Y_CTR)
+const AV_Y = Array.from({length:N_AV}, (_,i) => PRE_Y_CTR + (i - Math.floor(N_AV/2)) * AV_ROW_H);
+// = [540-414, 540-276, 540-138, 540, 540+138, 540+276, 540+414]
+// = [126, 264, 402, 540, 678, 816, 954]
+
+// Phase x-origins (left edge of card)
+const PRE_X0 = 50;
+const N_PRE  = 9; // number of pre-routing phase columns
+
+// Routing geometry
+const LAST_COL_X  = PRE_X0 + (N_PRE-1)*COL;       // x of last pre-routing card
+const LAST_COL_RX = LAST_COL_X + CW;               // right edge of last pre-routing card
+const ROUTE_MX    = LAST_COL_RX + PGAP/2 + 20;     // x of vertical routing spine
+const POST_X0     = ROUTE_MX + PGAP/2 + 20;        // x of first post-routing card
+
+// Post-routing phases (Sales, Checkout, Post-Purchase)
+const N_POST = 3;
+
+// Avatar card height (single block per avatar per phase)
+const AV_BH  = 74;
+
+// SVG logical size
+const SVG_W = POST_X0 + N_POST*COL + 80;
+const SVG_H = AV_Y[N_AV-1] + AV_BH/2 + 100;
+
+// ─── Color palette ────────────────────────────────────────────────────────────
+const PHASE_COLORS = [
+  '#475569', // 0 Traffic
+  '#7c3aed', // 1 Intro
+  '#4f46e5', // 2 Section 1
+  '#0369a1', // 3 Section 2
+  '#6d28d9', // 4 Section 3
+  '#be185d', // 5 Section 4
+  '#b45309', // 6 Section 5
+  '#c2410c', // 7 Summary
+  '#047857', // 8 Yes Street
+];
+
+const AV_COLORS = [
+  '#f97316', // Fat Loss
+  '#22c55e', // Performance
+  '#38bdf8', // Recovery
+  '#818cf8', // Sleep
+  '#f472b6', // Skin
+  '#2dd4bf', // Gut
+  '#fb7185', // Hormonal
+];
+
+const POST_COLORS = ['#1d4ed8','#4338ca','#065f46'];
+
+// ─── Data ─────────────────────────────────────────────────────────────────────
+const PRE_PHASES = [
+  { label:'TRAFFIC', sub:'Entry Point',
+    steps:['Paid Ads\n(VSSL · Image · Video)','Organic\n(Social · SEO · Referral)'] },
+
+  { label:'INTRO SCREEN', sub:'Quiz Landing',
+    steps:['"Find Your Prime Protocol"','Medically guided · 2-min','7 goal areas previewed','Begin → CTA'] },
+
+  { label:'SECTION 1', sub:'Current Situation',
+    steps:['Q1 — Age\n(Visual Identifier)',
+           'Q2 — Pain Location\n← ROUTING QUESTION',
+           'Q3 — Pain Specification\n(Yes / No per path)',
+           'Q4 — Pain Severity',
+           'Q5 — Pain Timeline'] },
+
+  { label:'SECTION 2', sub:'Desired Situation',
+    steps:['Q6 — Desired Outcome','Info Slide — Social Proof\n(Client count + credibility)'] },
+
+  { label:'SECTION 3', sub:'Individualization',
+    steps:['Q7 — Biological Sex','Q8 — Lifestyle Profile'] },
+
+  { label:'SECTION 4', sub:'Pre-Objection Handling',
+    steps:['Q9 — Daily Protocol Time','Info Card\nObjection Resolved'] },
+
+  { label:'SECTION 5', sub:'Causation',
+    steps:['Q10 — Root Causes\n(Stress · hormones · diet)','Q11 — Previous Solutions\n(Positions peptides as key)'] },
+
+  { label:'SUMMARY', sub:'Profile + Promise',
+    steps:['Screen 1: Diagnosis Card\nSeverity slider · 4 metric cards',
+           'Screen 2: The Promise\nAnimated 6-month bar chart'] },
+
+  { label:'YES STREET', sub:'Commitment',
+    steps:['Q12 — "Ready to fix this for good?"',
+           'Info — Science Hook\n(Avatar-specific stat)',
+           'Q13 — "Protocol sound right?"',
+           'Submit → Protocol Reveal'] },
+];
+
+const AVATARS = [
+  { name:'FAT LOSS\n"The Transformer"',
+    angle:'"Restart your metabolism\nat the source"',
+    route:'Q2: Body composition · Q4: High severity · Q11: Tried everything' },
+  { name:'PERFORMANCE\n"The Optimizer"',
+    angle:'"Unlock performance your\ntraining can\'t reach alone"',
+    route:'Q2: Athletic output · Q8: Athlete · Q3: Strength plateau' },
+  { name:'RECOVERY\n"The Healer"',
+    angle:'"Heal what conventional\ntreatment can\'t"',
+    route:'Q2: Pain / slow recovery · Q4: Holding me back · Q10: Over-training' },
+  { name:'SLEEP\n"The Restorer"',
+    angle:'"Deep sleep is where\neverything heals"',
+    route:'Q2: Sleep & recovery · Q10: High stress / cortisol · Q3: Brain fog' },
+  { name:'SKIN\n"The Revivalist"',
+    angle:'"Turn back the clock\nfrom within"',
+    route:'Q2: Skin & aging · Q1: Age 35-54 · Q7: Female' },
+  { name:'GUT\n"The Foundation"',
+    angle:'"Fix your gut —\nfix everything else"',
+    route:'Q2: Gut & digestion · Q3: Bloating confirmed · Q10: Inflammatory diet' },
+  { name:'HORMONAL\n"The Vitalizer"',
+    angle:'"Reclaim the energy\nyou used to have"',
+    route:'Q2: Hormones / libido · Q1: Age 40+ · Q5: Over a year' },
+];
+
+const POST_PHASES = [
+  { label:'SALES PAGE', sub:'Personalised per Avatar' },
+  { label:'CHECKOUT', sub:'Conversion Optimised' },
+  { label:'POST-PURCHASE', sub:'Retention & Reorder' },
+];
+
+const POST_CONTENT = [
+  // Sales Page
+  ['"Protocol Matched" Banner\n+ Avatar label shown',
+   'Bundle Offer\n(6M Pre-selected · Best Value)',
+   'Testimonials · Medical Trust\nMoney-back guarantee',
+   'FAQ + Second CTA'],
+  // Checkout
+  ['Urgency: Timer\n+ Limited protocol spots',
+   '90→180 Day Guarantee\n(Upgrade shown here only)',
+   '6M Bundle + Subscribe\nPre-selected',
+   'Order Bump: Add-on Stack'],
+  // Post-Purchase
+  ['Welcome Email\n+ Protocol usage guide',
+   '30-Day Concierge\nCheck-in',
+   '90-Day Results Prompt\n→ Reorder CTA'],
+];
+
+// ─── SVG + Zoom setup ─────────────────────────────────────────────────────────
+const svgEl = d3.select('#svg')
+  .attr('width', window.innerWidth)
+  .attr('height', window.innerHeight);
+
+const defs = svgEl.append('defs');
+
+// Arrow markers
+function mkMarker(id, color) {
+  defs.append('marker')
+    .attr('id', id).attr('markerWidth',8).attr('markerHeight',8)
+    .attr('refX',7).attr('refY',4).attr('orient','auto')
+    .append('polygon').attr('points','0 0,8 4,0 8')
+    .attr('fill',color).attr('fill-opacity',0.7);
+}
+mkMarker('aw','rgba(255,255,255,0.55)');
+AV_COLORS.forEach((c,i) => mkMarker('a'+i, c));
+POST_COLORS.forEach((c,i) => mkMarker('p'+i, c));
+
+const canvas = svgEl.append('g').attr('id','canvas');
+
+// Background
+canvas.append('rect').attr('x',-200).attr('y',-200)
+  .attr('width', SVG_W+400).attr('height', SVG_H+400)
+  .attr('fill','#06060f');
+
+// ─── Draw helpers ─────────────────────────────────────────────────────────────
+function addRect(parent, x, y, w, h, fill, stroke, rx, fo, so, sw) {
+  parent.append('rect').attr('x',x).attr('y',y).attr('width',w).attr('height',h)
+    .attr('rx',rx||8).attr('fill',fill).attr('fill-opacity',fo||1)
+    .attr('stroke',stroke||'none').attr('stroke-opacity',so||1)
+    .attr('stroke-width',sw||1);
+}
+
+function addText(parent, x, y, lines, size, fill, anchor, weight, fo) {
+  if (typeof lines === 'string') lines = lines.split('\n');
+  const lh = size * 1.32;
+  const off = -(lines.length-1)*lh/2;
+  lines.forEach((line,i) => {
+    parent.append('text')
+      .attr('x',x).attr('y', y + off + i*lh)
+      .attr('text-anchor', anchor||'middle')
+      .attr('dominant-baseline','central')
+      .attr('font-size', size)
+      .attr('fill', fill||'#fff')
+      .attr('fill-opacity', fo||1)
+      .attr('font-weight', weight||'400')
+      .attr('font-family','-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif')
+      .text(line);
+  });
+}
+
+function addArrow(parent, x1, y1, x2, y2, color, marker, sw) {
+  parent.append('line')
+    .attr('x1',x1).attr('y1',y1).attr('x2',x2).attr('y2',y2)
+    .attr('stroke', color||'rgba(255,255,255,0.4)')
+    .attr('stroke-width', sw||1.5)
+    .attr('stroke-opacity',0.6)
+    .attr('marker-end', `url(#${marker||'aw'})`);
+}
+
+// ─── Draw a pre-routing phase column ─────────────────────────────────────────
+function drawPhase(idx, phase) {
+  const x     = PRE_X0 + idx*COL;
+  const color = PHASE_COLORS[idx];
+  const steps = phase.steps;
+  const colH  = steps.length * CH_S + (steps.length-1)*VG;
+  const y0    = PRE_Y_CTR - colH/2;  // top of first step block
+
+  const g = canvas.append('g');
+
+  // Phase header card
+  const hdrY = y0 - HDR_GAP - HDR;
+  addRect(g, x, hdrY, CW, HDR, color, 'none', 8, 0.88);
+  addText(g, x+CW/2, hdrY+14, phase.label, 11, '#fff', 'middle', '800');
+  addText(g, x+CW/2, hdrY+33, phase.sub,   9,  'rgba(255,255,255,0.65)', 'middle', '400');
+
+  // Vertical connector behind steps
+  if (steps.length > 1) {
+    g.append('line')
+      .attr('x1', x+CW/2).attr('y1', y0)
+      .attr('x2', x+CW/2).attr('y2', y0+colH)
+      .attr('stroke', color).attr('stroke-opacity',0.15).attr('stroke-width',1);
+  }
+
+  // Step blocks
+  steps.forEach((step, si) => {
+    const by = y0 + si*(CH_S+VG);
+    addRect(g, x, by, CW, CH_S, color, color, 8, 0.12, 0.45, 1);
+    addText(g, x+CW/2, by+CH_S/2, step, 9.5, '#fff', 'middle', '400', 0.9);
+
+    // Small down-arrow between steps
+    if (si < steps.length-1) {
+      const ay = by+CH_S+1;
+      g.append('line')
+        .attr('x1',x+CW/2).attr('y1',ay).attr('x2',x+CW/2).attr('y2',ay+VG-2)
+        .attr('stroke',color).attr('stroke-opacity',0.45).attr('stroke-width',1)
+        .attr('marker-end','url(#aw)');
+    }
+  });
+
+  // Horizontal arrow to next phase
+  if (idx < N_PRE-1) {
+    const ay  = PRE_Y_CTR;
+    const ax1 = x+CW+5;
+    const ax2 = PRE_X0+(idx+1)*COL-5;
+    addArrow(g, ax1, ay, ax2, ay, 'rgba(255,255,255,0.35)', 'aw');
+  }
+
+  // "ROUTING" badge on Q2 block (phase index 2, step index 1)
+  if (idx===2) {
+    const routeBy = y0 + 1*(CH_S+VG);
+    addRect(g, x+CW-64, routeBy+3, 60, 18, '#f59e0b', 'none', 4, 0.9);
+    addText(g, x+CW-34, routeBy+12, 'ROUTING ▸', 8, '#000', 'middle', '700');
+  }
+}
+
+// ─── Draw routing fan-out ─────────────────────────────────────────────────────
+function drawRouting() {
+  const g = canvas.append('g');
+
+  // Line from last pre-routing card to spine
+  addArrow(g, LAST_COL_RX+4, PRE_Y_CTR, ROUTE_MX-4, PRE_Y_CTR,
+    'rgba(255,255,255,0.3)', 'aw');
+
+  // Vertical spine
+  g.append('line')
+    .attr('x1', ROUTE_MX).attr('y1', AV_Y[0])
+    .attr('x2', ROUTE_MX).attr('y2', AV_Y[N_AV-1])
+    .attr('stroke','rgba(255,255,255,0.2)').attr('stroke-width',1.5);
+
+  // ROUTING SPLIT label
+  addRect(g, ROUTE_MX-48, PRE_Y_CTR-42, 96, 22, 'rgba(255,200,0,0.12)', 'rgba(255,200,0,0.4)', 5, 1, 1, 1);
+  addText(g, ROUTE_MX, PRE_Y_CTR-31, 'ROUTING SPLIT', 8, '#fbbf24', 'middle', '700');
+
+  // Fan lines to avatar rows
+  AVATARS.forEach((av, ai) => {
+    const ry = AV_Y[ai];
+    const ac = AV_COLORS[ai];
+
+    g.append('circle').attr('cx', ROUTE_MX).attr('cy', ry).attr('r',3.5)
+      .attr('fill', ac).attr('fill-opacity',0.85);
+
+    addArrow(g, ROUTE_MX+3, ry, POST_X0-6, ry, ac, 'a'+ai, 1.5);
+  });
+}
+
+// ─── Draw post-routing avatar rows ───────────────────────────────────────────
+function drawAvatarRows() {
+  // Post-phase headers (drawn once, above the first avatar row)
+  POST_PHASES.forEach((ph, pi) => {
+    const x    = POST_X0 + pi*COL;
+    const hdrY = AV_Y[0] - AV_BH/2 - HDR_GAP - HDR;
+    const g    = canvas.append('g');
+    addRect(g, x, hdrY, CW, HDR, POST_COLORS[pi], 'none', 8, 0.8);
+    addText(g, x+CW/2, hdrY+14, ph.label, 11, '#fff', 'middle','800');
+    addText(g, x+CW/2, hdrY+33, ph.sub,   9,  'rgba(255,255,255,0.6)', 'middle','400');
+  });
+
+  // Avatar rows
+  AVATARS.forEach((av, ai) => {
+    const ry  = AV_Y[ai];
+    const ac  = AV_COLORS[ai];
+    const g   = canvas.append('g');
+
+    // Horizontal row band (subtle background)
+    addRect(g, POST_X0-4, ry-AV_BH/2-4, N_POST*COL-PGAP+8, AV_BH+8,
+      ac, 'none', 8, 0.04);
+
+    // Avatar label block at left
+    const lblW = 148;
+    const lblX = POST_X0 - lblW - 12;
+    addRect(g, lblX, ry-AV_BH/2, lblW, AV_BH, ac, ac, 8, 0.13, 0.4, 1);
+    addText(g, lblX+lblW/2, ry, av.name, 9.5, ac, 'middle','700');
+
+    // Post-routing phase blocks
+    POST_PHASES.forEach((ph, pi) => {
+      const bx  = POST_X0 + pi*COL;
+      const by  = ry - AV_BH/2;
+      const col = POST_COLORS[pi];
+
+      addRect(g, bx, by, CW, AV_BH, ac, ac, 8, 0.1, 0.35, 1);
+
+      // Phase label at top of block
+      addText(g, bx+CW/2, by+12, ph.label, 8, ac, 'middle','700');
+
+      // Content inside block
+      if (pi===0) {
+        // Sales page: show avatar angle
+        addText(g, bx+CW/2, by+AV_BH/2+6, av.angle, 8.5,
+          'rgba(255,255,255,0.75)', 'middle','400');
+      } else if (pi===1) {
+        addText(g, bx+CW/2, by+AV_BH/2+6,
+          'Timer + Stock Urgency\n90→180 Day Guarantee\n6M Pre-selected · Bump',
+          8, 'rgba(255,255,255,0.7)', 'middle','400');
+      } else {
+        addText(g, bx+CW/2, by+AV_BH/2+6,
+          'Welcome + Guide\n30-day Check-in\n90-day Reorder CTA',
+          8, 'rgba(255,255,255,0.7)', 'middle','400');
+      }
+
+      // Routing qualifier shown on Sales Page
+      if (pi===0) {
+        addText(g, bx+CW/2, by+AV_BH-8, av.route, 7.5,
+          'rgba(255,255,255,0.35)', 'middle','400');
+      }
+
+      // Arrow to next phase
+      if (pi < N_POST-1) {
+        addArrow(g, bx+CW+4, ry, POST_X0+(pi+1)*COL-4, ry, ac, 'a'+ai, 1.5);
+      }
+    });
+
+    // "SALE ✓" badge at end
+    const sx = POST_X0 + N_POST*COL - PGAP + 8;
+    addRect(g, sx, ry-12, 52, 24, ac, 'none', 6, 0.2);
+    addText(g, sx+26, ry, 'SALE ✓', 9, ac, 'middle','700');
+  });
+}
+
+// ─── Bottom legend ────────────────────────────────────────────────────────────
+function drawLegend() {
+  const g   = canvas.append('g');
+  const lx  = PRE_X0;
+  const ly  = SVG_H - 36;
+  const items = [
+    ...AVATARS.map((av,i) => ({label:av.name.split('\n')[0], color:AV_COLORS[i]})),
+  ];
+  addText(g, lx, ly, 'Avatar Paths:', 9, 'rgba(255,255,255,0.3)', 'start','600');
+  items.forEach((item,i) => {
+    const ix = lx + 90 + i*128;
+    g.append('circle').attr('cx',ix).attr('cy',ly).attr('r',5)
+      .attr('fill',item.color).attr('fill-opacity',0.8);
+    addText(g, ix+10, ly, item.label, 9, item.color, 'start','400');
+  });
+}
+
+// ─── Render ───────────────────────────────────────────────────────────────────
+PRE_PHASES.forEach((ph,i) => drawPhase(i, ph));
+drawRouting();
+drawAvatarRows();
+drawLegend();
+
+// ─── Zoom & Pan ───────────────────────────────────────────────────────────────
+const zoom = d3.zoom().scaleExtent([0.08,4])
+  .on('zoom', e => canvas.attr('transform', e.transform));
+
+svgEl.call(zoom).on('dblclick.zoom', null);
+
+function fit() {
+  const sx = window.innerWidth  / (SVG_W + 80);
+  const sy = window.innerHeight / (SVG_H + 80);
+  const sc = Math.min(sx, sy) * 0.93;
+  const tx = (window.innerWidth  - SVG_W*sc) / 2;
+  const ty = (window.innerHeight - SVG_H*sc) / 2 + 24;
+  svgEl.transition().duration(450)
+    .call(zoom.transform, d3.zoomIdentity.translate(tx,ty).scale(sc));
+}
+
+// Set initial view immediately (no transition = no blank screen)
+(function initView() {
+  const sx = window.innerWidth  / (SVG_W + 80);
+  const sy = window.innerHeight / (SVG_H + 80);
+  const sc = Math.min(sx, sy) * 0.93;
+  const tx = (window.innerWidth  - SVG_W*sc) / 2;
+  const ty = (window.innerHeight - SVG_H*sc) / 2 + 24;
+  svgEl.call(zoom.transform, d3.zoomIdentity.translate(tx,ty).scale(sc));
+})();
+
+function exportPNG() {
+  // Serialize SVG, open in new tab for saving
+  const clone = document.getElementById('svg').cloneNode(true);
+  clone.setAttribute('width', SVG_W+80);
+  clone.setAttribute('height', SVG_H+80);
+  clone.querySelector('#canvas').setAttribute('transform',
+    `translate(40,40)`);
+  const src = new XMLSerializer().serializeToString(clone);
+  const blob = new Blob([src], {type:'image/svg+xml'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'prime-concierge-funnel-map.svg';
+  a.click();
+}
+
+window.addEventListener('resize', () => {
+  svgEl.attr('width', window.innerWidth).attr('height', window.innerHeight);
+});
+</script>
+</body>
+</html>
