@@ -514,7 +514,8 @@
     .foot-legal a:hover { color: rgba(244,239,227,0.6); }
 
     /* ── Mobile sticky ────────────────────────────────────────────── */
-    .mob-sticky { display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 999; padding: 12px 16px; background: rgba(244,239,227,0.97); backdrop-filter: blur(12px); border-top: 1px solid var(--border); }
+    .mob-sticky { display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 999; padding: 12px 16px; background: rgba(244,239,227,0.97); backdrop-filter: blur(12px); border-top: 1px solid var(--border); opacity: 0; pointer-events: none; transition: opacity .25s; }
+    .mob-sticky.visible { opacity: 1; pointer-events: auto; }
     .mob-sticky .btn { width: 100%; justify-content: center; }
 
     /* ── Back to top ──────────────────────────────────────────────── */
@@ -539,7 +540,7 @@
     }
     @media (max-width: 768px) {
       .sec { padding: 60px 0; }
-      .nav-links, .nav-actions .btn-outline { display: none; }
+      .nav-links, .nav-actions { display: none; }
       .burger { display: flex; }
       .hero { padding: 56px 0 60px; }
       .stats-row { flex-wrap: wrap; }
@@ -1136,12 +1137,15 @@
 <button id="btt" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
 <script>
-  // Nav scroll
-  const navEl = document.getElementById('nav');
-  const bttEl = document.getElementById('btt');
+  // Nav scroll + sticky bar + back-to-top
+  const navEl    = document.getElementById('nav');
+  const bttEl    = document.getElementById('btt');
+  const stickyEl = document.querySelector('.mob-sticky');
   window.addEventListener('scroll', () => {
     navEl.classList.toggle('scrolled', window.scrollY > 8);
     bttEl.classList.toggle('show', window.scrollY > 400);
+    // Sticky CTA only appears after hero is scrolled past (~600px)
+    if (stickyEl) stickyEl.classList.toggle('visible', window.scrollY > 600);
   }, { passive: true });
 
   // Burger
