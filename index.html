@@ -563,6 +563,39 @@
       .why-grid { grid-template-columns: 1fr; }
       .form-card { padding: 28px 20px; }
     }
+
+    /* ── Peptide Range ────────────────────────────────────────────────── */
+    .range-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+    .range-cat {
+      background: var(--cream-card); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 20px 22px;
+    }
+    .range-cat-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--t3);
+      margin-bottom: 12px; font-family: 'Inter', sans-serif;
+    }
+    .range-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+    .range-pill {
+      display: inline-block;
+      background: var(--cream); border: 1px solid var(--border-hi);
+      border-radius: 100px; padding: 4px 12px;
+      font-family: 'Space Mono', monospace; font-size: 11.5px;
+      color: var(--t1);
+    }
+    @media (max-width: 768px) { .range-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 480px) { .range-grid { grid-template-columns: 1fr; } }
+
+    /* ── Mobile sticky body offset ────────────────────────────────────── */
+    @media (max-width: 768px) { body { padding-bottom: 72px; } }
+
+    /* ── Print: reveal all animated elements ─────────────────────────── */
+    @media print {
+      .ai, .coa-pass { opacity: 1 !important; transform: none !important; }
+      .coa-pass { opacity: 1 !important; }
+      .mob-sticky { display: none !important; }
+      .disc-bar, .brand-bar { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
   </style>
 </head>
 <body>
@@ -591,6 +624,7 @@
       <ul class="nav-links">
         <li><a href="#story">Our Story</a></li>
         <li><a href="#standards">Quality</a></li>
+        <li><a href="#range">Range</a></li>
         <li><a href="#services">Services</a></li>
         <li><a href="#process">Process</a></li>
         <li><a href="#faq">FAQ</a></li>
@@ -606,6 +640,7 @@
     <div class="mob-menu" id="mobMenu">
       <a href="#story">Our Story</a>
       <a href="#standards">Quality Standards</a>
+      <a href="#range">Peptide Range</a>
       <a href="#services">Services</a>
       <a href="#process">Process</a>
       <a href="#faq">FAQ</a>
@@ -676,7 +711,7 @@
     <div class="stats-row">
       <div class="stat-item ai"><span class="stat-num">≥99%</span><span class="stat-label">Purity standard</span></div>
       <div class="stat-item ai ai-d1"><span class="stat-num">5</span><span class="stat-label">Tests per batch</span></div>
-      <div class="stat-item ai ai-d2"><span class="stat-num">6+</span><span class="stat-label">Months sourcing research</span></div>
+      <div class="stat-item ai ai-d2"><span class="stat-num">48hr</span><span class="stat-label">Quote turnaround</span></div>
       <div class="stat-item ai ai-d3"><span class="stat-num">24h</span><span class="stat-label">Response time</span></div>
     </div>
   </div>
@@ -775,6 +810,78 @@
 </section>
 <div class="divider"></div>
 
+<!-- ── Peptide Range ──────────────────────────────────────────────────────── -->
+<section class="sec sec--card" id="range" aria-labelledby="range-heading">
+  <div class="wrap">
+    <div class="text-center" style="margin-bottom:40px;">
+      <span class="eye">What We Supply</span>
+      <h2 id="range-heading" class="ai">A broad catalogue. Everything documented.</h2>
+      <p class="lead ai" style="max-width:520px;margin:12px auto 0;">We carry a wide range of research peptides — all with full Janoshik COA on every batch. Don't see what you need? Custom sourcing is available on enquiry.</p>
+    </div>
+    <div class="range-grid">
+      <div class="range-cat ai">
+        <div class="range-cat-label">Recovery &amp; Repair</div>
+        <div class="range-pills">
+          <span class="range-pill">BPC-157</span>
+          <span class="range-pill">TB-500</span>
+          <span class="range-pill">GHK-Cu</span>
+          <span class="range-pill">Thymosin Alpha-1</span>
+          <span class="range-pill">KPV</span>
+        </div>
+      </div>
+      <div class="range-cat ai ai-d1">
+        <div class="range-cat-label">GLP-1 &amp; Metabolic</div>
+        <div class="range-pills">
+          <span class="range-pill">Semaglutide</span>
+          <span class="range-pill">Tirzepatide</span>
+          <span class="range-pill">Retatrutide</span>
+          <span class="range-pill">AOD-9604</span>
+          <span class="range-pill">MOTS-c</span>
+        </div>
+      </div>
+      <div class="range-cat ai ai-d2">
+        <div class="range-cat-label">Growth Hormone</div>
+        <div class="range-pills">
+          <span class="range-pill">CJC-1295</span>
+          <span class="range-pill">Ipamorelin</span>
+          <span class="range-pill">Tesamorelin</span>
+          <span class="range-pill">GHRP-6</span>
+          <span class="range-pill">Sermorelin</span>
+        </div>
+      </div>
+      <div class="range-cat ai">
+        <div class="range-cat-label">Cognitive &amp; Wellbeing</div>
+        <div class="range-pills">
+          <span class="range-pill">Selank</span>
+          <span class="range-pill">Semax</span>
+          <span class="range-pill">Dihexa</span>
+          <span class="range-pill">PE-22-28</span>
+        </div>
+      </div>
+      <div class="range-cat ai ai-d1">
+        <div class="range-cat-label">Longevity &amp; Performance</div>
+        <div class="range-pills">
+          <span class="range-pill">Epithalon</span>
+          <span class="range-pill">5-Amino-1MQ</span>
+          <span class="range-pill">Humanin</span>
+          <span class="range-pill">SS-31</span>
+        </div>
+      </div>
+      <div class="range-cat ai ai-d2">
+        <div class="range-cat-label">Sexual Health &amp; Other</div>
+        <div class="range-pills">
+          <span class="range-pill">PT-141</span>
+          <span class="range-pill">Kisspeptin-10</span>
+          <span class="range-pill">DSIP</span>
+          <span class="range-pill">Pinealon</span>
+        </div>
+      </div>
+    </div>
+    <p class="lead ai" style="text-align:center;margin-top:28px;font-size:13px;color:var(--t3);">Representative selection — not exhaustive. All products for research purposes only. Minimum 100 units per product. <a href="#enquire" style="color:var(--green-soft);text-decoration:underline;text-underline-offset:3px;">Enquire about custom or unlisted peptides →</a></p>
+  </div>
+</section>
+<div class="divider"></div>
+
 <!-- ── Services ───────────────────────────────────────────────────────────── -->
 <section class="sec sec--card" id="services" aria-labelledby="svc-heading">
   <div class="wrap">
@@ -792,9 +899,9 @@
           <li>Your branding, labels &amp; packaging</li>
           <li>Our tested formulas &amp; documentation</li>
           <li>Full Janoshik COA with every order</li>
-          <li>Scalable order volumes</li>
+          <li>From 100 units per product</li>
         </ul>
-        <a href="#enquire" class="svc-link">Enquire →</a>
+        <a href="#enquire" class="svc-link" style="color:rgba(244,239,227,0.9);font-weight:700;">Enquire →</a>
       </div>
       <div class="svc-card ai ai-d1">
         <span class="svc-tag svc-tag--sage">White Label</span>
@@ -812,7 +919,7 @@
         <h3>Bulk Manufacturing</h3>
         <p>Large-volume peptide supply for established businesses and distributors. Consistent quality and full documentation at every order size.</p>
         <ul class="svc-list">
-          <li>Flexible order quantities</li>
+          <li>100 unit minimum per product</li>
           <li>Volume pricing on request</li>
           <li>Batch documentation on every order</li>
         </ul>
@@ -937,7 +1044,7 @@
           <div class="form-group"><label for="fvolume">Monthly Volume</label>
             <select id="fvolume" name="volume">
               <option value="" disabled selected>Select…</option>
-              <option>Under 500 units</option>
+              <option>100 – 500 units</option>
               <option>500 – 2,000 units</option>
               <option>2,000 – 10,000 units</option>
               <option>10,000+ units</option>
@@ -959,8 +1066,8 @@
   <div class="wrap">
     <div class="cta-box ai">
       <span class="eye">Ready?</span>
-      <h2>Source peptides you can actually prove are good.</h2>
-      <p>Book a 30-minute call. No runaround — just a direct conversation about your requirements.</p>
+      <h2>The supply chain your brand can stand behind.</h2>
+      <p>Book a 30-minute call. A direct conversation about your requirements, volumes, and how we work together.</p>
       <div class="cta-actions">
         <a href="#enquire" class="btn btn-cream btn-lg">Book a Discovery Call →</a>
         <a href="mailto:hello@primeconcierge.com" class="btn btn-cream-outline btn-lg">Email Us</a>
@@ -1044,13 +1151,18 @@
   mobMenuEl.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobMenuEl.classList.remove('open')));
   window.addEventListener('resize', () => { if (window.innerWidth > 768) mobMenuEl.classList.remove('open'); });
 
-  // Animate in
+  // Animate in — trigger early (200px before entering viewport) and on any pixel visible
   const animObs = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); animObs.unobserve(e.target); } });
-  }, { threshold: 0.08 });
+  }, { threshold: 0, rootMargin: '0px 0px 200px 0px' });
   document.querySelectorAll('.ai').forEach(el => animObs.observe(el));
 
-  // COA badge stagger
+  // Hard fallback: reveal anything still hidden after 1.5s (fast scrollers, bots, etc.)
+  setTimeout(() => {
+    document.querySelectorAll('.ai:not(.vis)').forEach(el => el.classList.add('vis'));
+  }, 1500);
+
+  // COA badge stagger — lower threshold for mobile where card may only partially show
   const coaObs = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (!e.isIntersecting) return;
@@ -1059,7 +1171,7 @@
       setTimeout(() => e.target.classList.add('qr-active'), 700 + badges.length * 200 + 200);
       coaObs.unobserve(e.target);
     });
-  }, { threshold: 0.4 });
+  }, { threshold: 0.15 });
   document.querySelectorAll('.coa-card').forEach(el => coaObs.observe(el));
 
   // FAQ
